@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'a-jira';
+  products = [
+    {name: "RMAD/FE"},
+    {name: "RMAZ"},
+    {name: "QMMP"}
+  ]  
 }
