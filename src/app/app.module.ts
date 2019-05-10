@@ -8,10 +8,13 @@ import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
+import { ProductActionsComponent } from './product-actions/product-actions.component';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProductActionsComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +22,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatListModule,
     MatIconModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    MatBottomSheetModule
   ],
   providers: [],
   bootstrap: [AppComponent]
