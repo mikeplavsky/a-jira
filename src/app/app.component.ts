@@ -8,17 +8,4 @@ import {ProductActionsComponent} from './product-actions/product-actions.compone
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  products = [
-    "RMAD/FE",
-    "RMAZ",
-    "QMMP"
-  ]  
-
-  constructor(private sheet: MatBottomSheet){}
-
-  openBottomSheet(){
-    this.sheet.open(ProductActionsComponent);
-  }
-
 }

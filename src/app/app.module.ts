@@ -12,12 +12,14 @@ import { ProductActionsComponent } from './product-actions/product-actions.compo
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { ReleasesComponent } from './releases/releases.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductActionsComponent,
-    ReleasesComponent
+    ReleasesComponent,
+    ProductsComponent
   ],
   entryComponents: [
     ProductActionsComponent
