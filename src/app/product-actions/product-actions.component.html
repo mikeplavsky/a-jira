@@ -1,7 +1,7 @@
 <mat-nav-list>
-  <mat-list-item *ngFor="let action of actions">
+  <a mat-list-item *ngFor="let action of actions" href="/releases">
     <mat-icon mat-list-icon>{{action.icon}}</mat-icon>
     <span mat-line>{{action.name}}</span>
     <mat-divider></mat-divider>
-  </mat-list-item>
+  </a>
 </mat-nav-list>

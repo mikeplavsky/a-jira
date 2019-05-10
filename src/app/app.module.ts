@@ -10,11 +10,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import { ProductActionsComponent } from './product-actions/product-actions.component';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import { ReleasesComponent } from './releases/releases.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductActionsComponent
+    ProductActionsComponent,
+    ReleasesComponent
   ],
   entryComponents: [
     ProductActionsComponent
@@ -26,7 +29,8 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
