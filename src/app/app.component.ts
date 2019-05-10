@@ -10,9 +10,9 @@ import {ProductActionsComponent} from './product-actions/product-actions.compone
 export class AppComponent {
 
   products = [
-    {name: "RMAD/FE"},
-    {name: "RMAZ"},
-    {name: "QMMP"}
+    "RMAD/FE",
+    "RMAZ",
+    "QMMP"
   ]  
 
   constructor(private sheet: MatBottomSheet){}

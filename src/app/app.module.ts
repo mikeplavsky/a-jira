@@ -16,6 +16,9 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
     AppComponent,
     ProductActionsComponent
   ],
+  entryComponents: [
+    ProductActionsComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

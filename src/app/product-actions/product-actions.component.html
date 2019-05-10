@@ -1,3 +1,7 @@
-<p>
-  product-actions works!
-</p>
+<mat-nav-list>
+  <mat-list-item *ngFor="let action of actions">
+    <mat-icon mat-list-icon>{{action.icon}}</mat-icon>
+    <span mat-line>{{action.name}}</span>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-nav-list>
