@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {MatBottomSheet} from '@angular/material';
 import {ProductActionsComponent} from '../product-actions/product-actions.component';
+import {ProductsService} from '../products.service'
 
 @Component({
   selector: 'app-products',
@@ -10,20 +11,20 @@ import {ProductActionsComponent} from '../product-actions/product-actions.compon
 })
 export class ProductsComponent implements OnInit {
 
-  products = [
-    "RMAD/FE",
-    "RMAZ",
-    "QMMP"
-  ]  
+  products: any[];
 
-  constructor(private sheet: MatBottomSheet){}
+  constructor(
+    private sheet: MatBottomSheet,
+    private productsSvc: ProductsService){}
 
-  openBottomSheet(product: string){
+  openBottomSheet(product:any){
     this.sheet.open(
       ProductActionsComponent,
-      {data: {product}});
+      {data: {...product}});
   }
 
-  ngOnInit(){}
+  ngOnInit(){
+    this.products = this.productsSvc.getProducts();
+  }
 
 }
