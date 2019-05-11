@@ -1,5 +1,5 @@
 <mat-nav-list>
-  <mat-list-item *ngFor="let product of products" (click)="openBottomSheet()">
+  <mat-list-item *ngFor="let product of products" (click)="openBottomSheet(product)">
     <mat-icon mat-list-icon>folder</mat-icon>
     <span mat-line>{{product}}</span>
   </mat-list-item>

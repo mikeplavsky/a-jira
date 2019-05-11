@@ -18,8 +18,10 @@ export class ProductsComponent implements OnInit {
 
   constructor(private sheet: MatBottomSheet){}
 
-  openBottomSheet(){
-    this.sheet.open(ProductActionsComponent);
+  openBottomSheet(product: string){
+    this.sheet.open(
+      ProductActionsComponent,
+      {data: {product}});
   }
 
   ngOnInit(){}
