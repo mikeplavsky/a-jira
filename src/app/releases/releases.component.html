@@ -1,3 +1,6 @@
-<p>
- {{product.name}}
-</p>
+<mat-nav-list>
+  <mat-list-item *ngFor="let release of releases">
+    <mat-icon mat-list-icon>build</mat-icon>
+    <span mat-line>{{release.name}}</span>
+  </mat-list-item>
+</mat-nav-list>

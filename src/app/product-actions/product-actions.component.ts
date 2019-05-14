@@ -22,7 +22,11 @@ export class ProductActionsComponent implements OnInit {
   getActions(){
     return this.actions.map(
       x => {
-        return {...x,id:this.data.id}});
+        return {...x,id:this.data.name}});
+  }
+
+  click(ev){
+    console.log(ev);
   }
 
 }

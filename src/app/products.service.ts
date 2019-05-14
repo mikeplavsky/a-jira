@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class ProductsService {
 
   products = [
-    {id:1,name:"RMAD/FE"},
+    {id:1,name:"RMADFE"},
     {id:2,name:"RMAZ"},
     {id:3,name:"QMMP"}
   ]  

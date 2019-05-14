@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from '../products.service'
+import { JiraService } from '../jira.service'
 import { ActivatedRoute } from '@angular/router'
 
 @Component({
@@ -10,16 +10,18 @@ import { ActivatedRoute } from '@angular/router'
 export class ReleasesComponent implements OnInit {
 
   product:any;
+  releases:any;
 
   constructor(
-    private productsSvc: ProductsService,
+    private jiraSvc: JiraService,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const id = +this.route.snapshot.paramMap.get("id");
-    this.product = this.productsSvc.getProducts().filter(
-      x => x.id == id
-    );
+    const id = this.route.snapshot.paramMap.get("id");
+    this.jiraSvc.getVersions(id).subscribe(
+      releases => {
+        console.log(releases);
+        this.releases = releases;});
   }
 
 }
