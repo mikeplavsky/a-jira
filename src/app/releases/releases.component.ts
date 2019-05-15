@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { JiraService } from '../jira.service'
+
 import { ActivatedRoute } from '@angular/router'
+import {Router, NavigationEnd} from '@angular/router';
+import {filter} from 'rxjs/operators';
+
+import {MatBottomSheet} from '@angular/material';
+import {ReleaseActionsComponent} from '../release-actions/release-actions.component';
 
 @Component({
   selector: 'app-releases',
@@ -13,7 +19,9 @@ export class ReleasesComponent implements OnInit {
   releases:any;
 
   constructor(
+    private router: Router,
     private jiraSvc: JiraService,
+    private sheet: MatBottomSheet,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -22,6 +30,18 @@ export class ReleasesComponent implements OnInit {
       releases => {
         console.log(releases);
         this.releases = releases;});
+  }
+
+  openBottomSheet(product:any){
+
+    let ref = this.sheet.open(
+      ReleaseActionsComponent,
+      {data: {...product}});
+
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd)).subscribe(
+        e => ref.dismiss());
+
   }
 
 }

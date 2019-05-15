@@ -1,5 +1,5 @@
 <mat-nav-list>
-  <mat-list-item *ngFor="let release of releases">
+  <mat-list-item *ngFor="let release of releases" (click)='openBottomSheet(release)'>
     <mat-icon mat-list-icon>build</mat-icon>
     <span mat-line>{{release.name}}</span>
   </mat-list-item>

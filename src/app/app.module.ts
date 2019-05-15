@@ -13,17 +13,20 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { ReleasesComponent } from './releases/releases.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProductsComponent } from './products/products.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { ReleaseActionsComponent } from './release-actions/release-actions.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductActionsComponent,
     ReleasesComponent,
-    ProductsComponent
+    ProductsComponent,
+    ReleaseActionsComponent
   ],
   entryComponents: [
-    ProductActionsComponent
+    ProductActionsComponent,
+    ReleaseActionsComponent
   ],
   imports: [
     BrowserModule,
