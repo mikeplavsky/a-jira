@@ -14,7 +14,8 @@ import { ReleasesComponent } from './releases/releases.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProductsComponent } from './products/products.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReleaseActionsComponent } from './release-actions/release-actions.component'
+import { ReleaseActionsComponent } from './release-actions/release-actions.component';
+import { ProductComponent } from './product/product.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ReleaseActionsComponent } from './release-actions/release-actions.compo
     ProductActionsComponent,
     ReleasesComponent,
     ProductsComponent,
-    ReleaseActionsComponent
+    ReleaseActionsComponent,
+    ProductComponent
   ],
   entryComponents: [
     ProductActionsComponent,
