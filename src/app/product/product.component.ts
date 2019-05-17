@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {JiraService} from '../jira.service';
 
 @Component({
   selector: 'app-product',
@@ -8,9 +9,13 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProductComponent implements OnInit {
 
   @Input() product:any;
+  velocity:any;
 
-  constructor() { }
+  constructor(private jiraSvc: JiraService) { }
   ngOnInit() {
+    this.jiraSvc.getVelocity(this.product.name).subscribe(v => {
+      this.velocity = v;
+    });
   }
 
 }

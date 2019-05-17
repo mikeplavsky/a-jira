@@ -10,7 +10,6 @@ export class ProductActionsComponent implements OnInit {
 
   actions = [
    {name:"Sprint", icon: "rowing"},
-   {name:"Velocity", icon: "motorcycle"},
    {name:"Epics", icon: "track_changes"},
    {name:"Releases", icon: "build"}]
 

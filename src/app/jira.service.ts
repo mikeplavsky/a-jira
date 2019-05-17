@@ -11,5 +11,9 @@ export class JiraService {
   getVersions(product: string){
     return this.http.get(`api/product/${product}/versions`);
   }
+
+  getVelocity(product: string){
+    return this.http.get(`api/product/${product}/features/done`);
+  }
   
 }

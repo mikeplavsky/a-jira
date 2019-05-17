@@ -16,6 +16,7 @@ import { ProductsComponent } from './products/products.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReleaseActionsComponent } from './release-actions/release-actions.component';
 import { ProductComponent } from './product/product.component'
+import {MatCardModule} from '@angular/material/card'
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ProductComponent } from './product/product.component'
     MatMenuModule,
     MatBottomSheetModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
