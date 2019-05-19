@@ -18,7 +18,6 @@ import { ReleaseActionsComponent } from './release-actions/release-actions.compo
 import { ProductComponent } from './product/product.component'
 import {MatCardModule} from '@angular/material/card';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects'
 import { productReducer } from './product-reducer'
@@ -47,7 +46,7 @@ import { productReducer } from './product-reducer'
     AppRoutingModule,
     HttpClientModule,
     MatCardModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({products:productReducer}),
     EffectsModule.forRoot([AppEffects])
   ],
   providers: [],

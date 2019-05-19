@@ -1,18 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import {map} from 'rxjs/operators'
+import { ProductActionTypes, FetchProduct } from './product-reducer'
+import {map, mergeMap} from 'rxjs/operators'
+import {JiraService} from './jira.service'
 
 @Injectable()
 export class AppEffects {
 
+  constructor(
+    private actions$: Actions,
+    private jiraSvc: JiraService) {}
+
   @Effect()
   loadProduct$ = this.actions$.pipe( 
-    ofType('Fetch Product'),
-    map(v => {
-      return {type: 'Fetch Product Done', payload: {a:12}}
-    }));
-
-  constructor(private actions$: Actions) {}
+    ofType(ProductActionTypes.Fetch),
+    mergeMap((a:FetchProduct) => {
+      return this.jiraSvc.getVelocity(a.name).pipe(
+        map(v => { 
+          return {
+            name: a.name,
+            type: ProductActionTypes.FetchDone, 
+            payload: v}}))}));
 
 }

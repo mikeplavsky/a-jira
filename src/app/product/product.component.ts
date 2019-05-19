@@ -5,6 +5,7 @@ import {Store, select} from '@ngrx/store'
 import { Observable } from 'rxjs';
 
 import { FetchProduct } from '../product-reducer'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-product',
@@ -21,17 +22,14 @@ export class ProductComponent implements OnInit {
   constructor(
     private jiraSvc: JiraService,
     private store: Store<{}>) {
-      this.products$ = store.pipe(select('products'));
+      this.products$ = store.pipe(
+        select('products'));
   };
 
   ngOnInit() {
     
-    this.store.dispatch(new FetchProduct());
-
-    /*this.jiraSvc.getVelocity(this.product.name).subscribe(v => {
-      this.velocity = v;
-      //
-    });*/
+    this.store.dispatch(
+      new FetchProduct(this.product.name));
   }
 
 }
