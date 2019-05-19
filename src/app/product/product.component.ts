@@ -1,6 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {JiraService} from '../jira.service';
 
+import {Store, select} from '@ngrx/store'
+import { Observable } from 'rxjs';
+
+import { Fetch } from '../product-reducer'
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -9,12 +14,21 @@ import {JiraService} from '../jira.service';
 export class ProductComponent implements OnInit {
 
   @Input() product:any;
-  velocity:any;
 
-  constructor(private jiraSvc: JiraService) { }
+  velocity:any;
+  products$: Observable<{}>;
+
+  constructor(
+    private jiraSvc: JiraService,
+    private store: Store<{}>) {
+      this.products$ = store.pipe(select('products'));
+  };
+
   ngOnInit() {
+
     this.jiraSvc.getVelocity(this.product.name).subscribe(v => {
       this.velocity = v;
+      this.store.dispatch(new Fetch());
     });
   }
 

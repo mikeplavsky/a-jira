@@ -21,6 +21,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects'
+import { productReducer } from './product-reducer'
 
 @NgModule({
   declarations: [
@@ -46,8 +47,7 @@ import { AppEffects } from './app.effects'
     AppRoutingModule,
     HttpClientModule,
     MatCardModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([AppEffects])
+    StoreModule.forRoot({products: productReducer})
   ],
   providers: [],
   bootstrap: [AppComponent]
