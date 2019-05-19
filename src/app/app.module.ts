@@ -47,7 +47,8 @@ import { productReducer } from './product-reducer'
     AppRoutingModule,
     HttpClientModule,
     MatCardModule,
-    StoreModule.forRoot({products: productReducer})
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([AppEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

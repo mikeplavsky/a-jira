@@ -4,7 +4,7 @@ import {JiraService} from '../jira.service';
 import {Store, select} from '@ngrx/store'
 import { Observable } from 'rxjs';
 
-import { Fetch } from '../product-reducer'
+import { FetchProduct } from '../product-reducer'
 
 @Component({
   selector: 'app-product',
@@ -25,11 +25,13 @@ export class ProductComponent implements OnInit {
   };
 
   ngOnInit() {
+    
+    this.store.dispatch(new FetchProduct());
 
-    this.jiraSvc.getVelocity(this.product.name).subscribe(v => {
+    /*this.jiraSvc.getVelocity(this.product.name).subscribe(v => {
       this.velocity = v;
-      this.store.dispatch(new Fetch());
-    });
+      //
+    });*/
   }
 
 }
