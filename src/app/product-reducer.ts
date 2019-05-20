@@ -14,7 +14,11 @@ export class FetchProductDone implements Action {
     type: string = ProductActionTypes.FetchDone;
 }
 
-export const initialState = {}
+export const initialState = {
+    RMADFE: {t:1},
+    QMMP: {},
+    RMAZ: {}
+}
 
 export function productReducer(state=initialState, action){
 
