@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {JiraService} from '../jira.service';
 
 import {Store, select, createSelector} from '@ngrx/store'
-import { Observable } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 
 import { FetchProduct } from '../product-reducer'
 
@@ -24,16 +24,17 @@ export class ProductComponent implements OnInit {
   };
 
   ngOnInit() {
+
+    this.store.dispatch(
+      new FetchProduct(this.product.name));
     
-    let getProduct = createSelector((state,props) => {
-      return state.products[props.name];
-    });
+    let getProduct = createSelector(
+      (state: {products},props: {name}) => {
+        return state.products[props.name];});
 
     this.products$ = this.store.pipe(
       select(getProduct,{name: this.product.name}));
 
-    this.store.dispatch(
-      new FetchProduct(this.product.name));
   }
 
 }

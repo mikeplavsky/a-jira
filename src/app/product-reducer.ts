@@ -15,16 +15,14 @@ export class FetchProductDone implements Action {
 }
 
 export const initialState = {
-    RMADFE: {t:1},
-    QMMP: {},
-    RMAZ: {}
 }
 
 export function productReducer(state=initialState, action){
 
     if (action.type == ProductActionTypes.FetchDone) {
-        state[action.name] = action.payload;
-    }
+        return { 
+            ...state, 
+            [action.name]: action.payload};}
 
     return state;
 

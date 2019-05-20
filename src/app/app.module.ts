@@ -20,7 +20,9 @@ import {MatCardModule} from '@angular/material/card';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects'
-import { productReducer } from './product-reducer'
+import { productReducer } from './product-reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment'
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { productReducer } from './product-reducer'
     HttpClientModule,
     MatCardModule,
     StoreModule.forRoot({products:productReducer}),
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([AppEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

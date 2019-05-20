@@ -5,8 +5,8 @@
       {{product.name}}
     </mat-card-title>
     
-    <mat-card-subtitle mat-line>(products$ | async)[product.name]?.velocity</mat-card-subtitle>
-    <mat-card-subtitle mat-line>{{(products$ | async).velocity}}</mat-card-subtitle>
+    <mat-card-subtitle mat-line>{{(products$ | async)?.velocity}}</mat-card-subtitle>
+
   </mat-card-header>
 
 </mat-card>
