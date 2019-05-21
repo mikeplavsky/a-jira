@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {JiraService} from '../jira.service';
 
 import {Store, select, createSelector} from '@ngrx/store'
-import { Observable, EMPTY } from 'rxjs';
-
 import { FetchProduct } from '../product-reducer'
 
 @Component({
@@ -16,10 +13,7 @@ export class ProductComponent implements OnInit {
   @Input() product:any;
   product$: any;
 
-  constructor(
-    private jiraSvc: JiraService,
-    private store: Store<{}>) {
-  };
+  constructor(private store: Store<{}>){};
 
   ngOnInit() {
 

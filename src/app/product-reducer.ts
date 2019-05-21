@@ -5,6 +5,11 @@ export enum ProductActionTypes {
     FetchDone = "Fetch Product Done"    
 }
 
+export enum ReleasesActionTypes {
+    Fetch = "Fetch Releases",
+    FetchDone = "Fetch Releases Done"    
+}
+
 export class FetchProduct implements Action {
     type: string = ProductActionTypes.Fetch;
     constructor(public name:string){}
@@ -12,6 +17,11 @@ export class FetchProduct implements Action {
 
 export class FetchProductDone implements Action {
     type: string = ProductActionTypes.FetchDone;
+}
+
+export class FetchReleases implements Action {
+    type: string = ReleasesActionTypes.Fetch;
+    constructor(public product:string){}
 }
 
 export const initialState = {

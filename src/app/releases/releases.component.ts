@@ -8,6 +8,9 @@ import {filter} from 'rxjs/operators';
 import {MatBottomSheet} from '@angular/material';
 import {ReleaseActionsComponent} from '../release-actions/release-actions.component';
 
+import {Store, select, createSelector} from '@ngrx/store'
+import { FetchReleases } from '../product-reducer'
+
 @Component({
   selector: 'app-releases',
   templateUrl: './releases.component.html',
@@ -16,18 +19,25 @@ import {ReleaseActionsComponent} from '../release-actions/release-actions.compon
 export class ReleasesComponent implements OnInit {
 
   releases:any;
+  releases$:any;
 
-  constructor(
+  constructor(private store: Store<{}>,
     private router: Router,
     private jiraSvc: JiraService,
     private sheet: MatBottomSheet,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get("id");
-    this.jiraSvc.getVersions(id).subscribe(
+
+    const product = this.route.snapshot.paramMap.get("id");
+
+    this.store.dispatch(
+      new FetchReleases(product));
+
+    this.jiraSvc.getVersions(product).subscribe(
       releases => {
         this.releases = releases;});
+
   }
 
   openBottomSheet(release:any){
