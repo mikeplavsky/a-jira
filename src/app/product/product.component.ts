@@ -14,9 +14,7 @@ import { FetchProduct } from '../product-reducer'
 export class ProductComponent implements OnInit {
 
   @Input() product:any;
-
-  velocity:any;
-  products$: Observable<{velocity}>;
+  product$: any;
 
   constructor(
     private jiraSvc: JiraService,
@@ -32,7 +30,7 @@ export class ProductComponent implements OnInit {
       (state: {products},props: {name}) => {
         return state.products[props.name];});
 
-    this.products$ = this.store.pipe(
+    this.product$ = this.store.pipe(
       select(getProduct,{name: this.product.name}));
 
   }
