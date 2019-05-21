@@ -15,7 +15,6 @@ import {ReleaseActionsComponent} from '../release-actions/release-actions.compon
 })
 export class ReleasesComponent implements OnInit {
 
-  product:any;
   releases:any;
 
   constructor(
@@ -28,15 +27,14 @@ export class ReleasesComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get("id");
     this.jiraSvc.getVersions(id).subscribe(
       releases => {
-        console.log(releases);
         this.releases = releases;});
   }
 
-  openBottomSheet(product:any){
+  openBottomSheet(release:any){
 
     let ref = this.sheet.open(
       ReleaseActionsComponent,
-      {data: {...product}});
+      {data: {...release}});
 
     this.router.events.pipe(
       filter(e => e instanceof NavigationEnd)).subscribe(
