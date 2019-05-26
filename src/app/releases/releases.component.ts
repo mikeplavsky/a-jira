@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { JiraService } from '../jira.service'
 
 import { ActivatedRoute } from '@angular/router'
 import {Router, NavigationEnd} from '@angular/router';
@@ -18,12 +17,10 @@ import { FetchReleases } from '../product-reducer'
 })
 export class ReleasesComponent implements OnInit {
 
-  releases:any;
   releases$:any;
 
   constructor(private store: Store<{}>,
     private router: Router,
-    private jiraSvc: JiraService,
     private sheet: MatBottomSheet,
     private route: ActivatedRoute) {}
 
@@ -40,10 +37,6 @@ export class ReleasesComponent implements OnInit {
 
     this.releases$ = this.store.pipe(
       select(getReleases,{name: product}));
-
-    /*this.jiraSvc.getVersions(product).subscribe(
-      releases => {
-        this.releases = releases;});*/
 
   }
 
