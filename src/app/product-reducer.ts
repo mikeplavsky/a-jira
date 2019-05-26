@@ -45,7 +45,7 @@ export function productReducer(state=initialState, action){
             releases: {
                 ...state.releases,
                 [action.product]: action.payload.reduce((a,v)=>{
-                    a[v.name] = {};
+                    a[v.name] = v;
                     return a;
                 },{})}};}
 

@@ -25,6 +25,24 @@ export class ReleasesComponent implements OnInit {
     private sheet: MatBottomSheet,
     private route: ActivatedRoute) {}
 
+  sorted(v:[any]){
+    return v.sort((a,b) => {
+
+      let a_release = a.value.releaseDate;
+      let b_release = b.value.releaseDate;
+      
+      if (a_release && b_release) { 
+        return <any>new Date(b_release) - <any>new Date(a_release); 
+      }
+
+      if (a_release && !b_release) { return -1; }
+      if (b_release && !a_release) { return 1; }
+
+      return 0;
+      
+    });
+  }
+
   ngOnInit() {
 
     const product = this.route.snapshot.paramMap.get("id");
