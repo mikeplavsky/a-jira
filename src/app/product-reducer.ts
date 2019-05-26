@@ -24,7 +24,13 @@ export class FetchReleases implements Action {
     constructor(public product:string){}
 }
 
+export class FetchReleasesDone implements Action {
+    type: string = ReleasesActionTypes.FetchDone;
+    constructor(public product:string){}
+}
+
 export const initialState = {
+    releases: {}
 }
 
 export function productReducer(state=initialState, action){
@@ -33,6 +39,13 @@ export function productReducer(state=initialState, action){
         return { 
             ...state, 
             [action.name]: action.payload};}
+
+    if (action.type == ReleasesActionTypes.FetchDone) {
+        return { 
+            ...state, 
+            releases: {
+                ...state.releases,
+                [action.name]: action.payload}};}
 
     return state;
 

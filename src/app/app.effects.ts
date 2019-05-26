@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import { ProductActionTypes, FetchProduct } from './product-reducer'
+import { ProductActionTypes, 
+  FetchProduct, 
+  ReleasesActionTypes,
+  FetchReleases } from './product-reducer'
 import {map, mergeMap} from 'rxjs/operators'
 import {JiraService} from './jira.service'
 
@@ -13,6 +16,20 @@ export class AppEffects {
     private jiraSvc: JiraService) {}
 
   @Effect()
+  loadReleases$ = this.actions$.pipe(
+    ofType(ReleasesActionTypes.Fetch),
+    mergeMap((a:FetchReleases)=>{
+
+      return this.jiraSvc.getVersions(a.product).pipe(
+        map( v => {
+          return {
+            name: a.product,
+            type: ReleasesActionTypes.FetchDone,
+            payload: v
+
+  }}));}));
+
+  @Effect()
   loadProduct$ = this.actions$.pipe( 
     ofType(ProductActionTypes.Fetch),
     mergeMap((a:FetchProduct) => {
@@ -21,6 +38,8 @@ export class AppEffects {
           return {
             name: a.name,
             type: ProductActionTypes.FetchDone, 
-            payload: v}}))}));
+            payload: v
+
+  }}))}));
 
 }

@@ -34,9 +34,16 @@ export class ReleasesComponent implements OnInit {
     this.store.dispatch(
       new FetchReleases(product));
 
-    this.jiraSvc.getVersions(product).subscribe(
+    let getReleases = createSelector(
+      (state: {products:{releases}},props:{name}) => {
+        return state.products.releases[props.name];});
+
+    this.releases$ = this.store.pipe(
+      select(getReleases,{name: product}));
+
+    /*this.jiraSvc.getVersions(product).subscribe(
       releases => {
-        this.releases = releases;});
+        this.releases = releases;});*/
 
   }
 
