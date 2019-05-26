@@ -5,18 +5,18 @@ export enum ProductActionTypes {
     FetchDone = "Fetch Product Done"    
 }
 
-export enum ReleasesActionTypes {
-    Fetch = "Fetch Releases",
-    FetchDone = "Fetch Releases Done"    
-}
-
 export class FetchProduct implements Action {
     type: string = ProductActionTypes.Fetch;
-    constructor(public name:string){}
+    constructor(public product:string){}
 }
 
 export class FetchProductDone implements Action {
     type: string = ProductActionTypes.FetchDone;
+}
+
+export enum ReleasesActionTypes {
+    Fetch = "Fetch Releases",
+    FetchDone = "Fetch Releases Done"    
 }
 
 export class FetchReleases implements Action {
@@ -26,7 +26,6 @@ export class FetchReleases implements Action {
 
 export class FetchReleasesDone implements Action {
     type: string = ReleasesActionTypes.FetchDone;
-    constructor(public product:string){}
 }
 
 export const initialState = {
@@ -38,14 +37,17 @@ export function productReducer(state=initialState, action){
     if (action.type == ProductActionTypes.FetchDone) {
         return { 
             ...state, 
-            [action.name]: action.payload};}
+            [action.product]: action.payload};}
 
     if (action.type == ReleasesActionTypes.FetchDone) {
         return { 
             ...state, 
             releases: {
                 ...state.releases,
-                [action.name]: action.payload}};}
+                [action.product]: action.payload.reduce((a,v)=>{
+                    a[v.name] = {};
+                    return a;
+                },{})}};}
 
     return state;
 

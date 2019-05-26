@@ -23,7 +23,7 @@ export class AppEffects {
       return this.jiraSvc.getVersions(a.product).pipe(
         map( v => {
           return {
-            name: a.product,
+            product: a.product,
             type: ReleasesActionTypes.FetchDone,
             payload: v
 
@@ -33,10 +33,10 @@ export class AppEffects {
   loadProduct$ = this.actions$.pipe( 
     ofType(ProductActionTypes.Fetch),
     mergeMap((a:FetchProduct) => {
-      return this.jiraSvc.getVelocity(a.name).pipe(
+      return this.jiraSvc.getVelocity(a.product).pipe(
         map(v => { 
           return {
-            name: a.name,
+            product: a.product,
             type: ProductActionTypes.FetchDone, 
             payload: v
 
