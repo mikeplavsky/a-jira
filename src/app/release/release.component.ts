@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import {Store, select, createSelector} from '@ngrx/store'
+import { FetchReleaseStats } from '../product-reducer'
+
 @Component({
   selector: 'app-release',
   templateUrl: './release.component.html',
@@ -10,8 +13,15 @@ export class ReleaseComponent implements OnInit {
   @Input() release:any;
   @Input() product:any;
 
-  constructor() {}
+  constructor(private store: Store<{}>){};
+
   ngOnInit() {
+
+    this.store.dispatch(
+      new FetchReleaseStats(
+        this.product,
+        this.release.key));
+
   }
 
 }

@@ -28,6 +28,20 @@ export class FetchReleasesDone implements Action {
     type: string = ReleasesActionTypes.FetchDone;
 }
 
+export enum ReleaseStatsActionTypes {
+    Fetch = "Fetch Release Stats",
+    FetchDone = "Fetch Release Stats Done"    
+}
+
+export class FetchReleaseStats implements Action {
+    type: string = ReleaseStatsActionTypes.Fetch;
+    constructor(public product, public release){}
+}
+
+export class FetchReleaseStatsDone implements Action {
+    type: string = ReleaseStatsActionTypes.FetchDone;
+}
+
 export const initialState = {
     releases: {}
 }

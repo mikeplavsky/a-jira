@@ -4,7 +4,9 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { ProductActionTypes, 
   FetchProduct, 
   ReleasesActionTypes,
-  FetchReleases } from './product-reducer'
+  FetchReleases,
+  ReleaseStatsActionTypes,
+  FetchReleaseStats} from './product-reducer'
 import {map, mergeMap} from 'rxjs/operators'
 import {JiraService} from './jira.service'
 
@@ -14,6 +16,20 @@ export class AppEffects {
   constructor(
     private actions$: Actions,
     private jiraSvc: JiraService) {}
+
+  @Effect()
+  loadReleaseStats$ = this.actions$.pipe(
+    ofType(ReleaseStatsActionTypes.Fetch),
+    mergeMap((a:FetchReleaseStats)=>{
+
+      return this.jiraSvc.getReleaseStats(a.product,a.release).pipe(
+        map( v => {
+          return {
+            product: a.product,
+            type: ReleaseStatsActionTypes.FetchDone,
+            payload: v
+
+  }}));}));
 
   @Effect()
   loadReleases$ = this.actions$.pipe(

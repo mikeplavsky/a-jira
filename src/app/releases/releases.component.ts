@@ -26,6 +26,7 @@ export class ReleasesComponent implements OnInit {
     private route: ActivatedRoute) {}
 
   sorted(v:[any]){
+    if (!v) return v;
     return v.sort((a,b) => {
 
       let a_release = a.value.releaseDate;

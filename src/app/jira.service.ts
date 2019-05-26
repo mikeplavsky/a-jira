@@ -9,11 +9,15 @@ export class JiraService {
   constructor(private http: HttpClient) { }
 
   getVersions(product: string){
-    return this.http.get(`api/product/${product}/versions`);
+    return this.http.get(`api/products/${product}/versions`);
   }
 
   getVelocity(product: string){
-    return this.http.get(`api/product/${product}/features/done`);
+    return this.http.get(`api/products/${product}/features/done`);
+  }
+
+  getReleaseStats(product, release) {
+    return this.http.get(`api/products/${product}/releases/${release}`);
   }
   
 }
