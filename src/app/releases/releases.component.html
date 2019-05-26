@@ -1,6 +1,2 @@
-<mat-nav-list>
-  <mat-list-item *ngFor="let release of releases$ | async | keyvalue" (click)='openBottomSheet(release)'>
-    <mat-icon mat-list-icon>build</mat-icon>
-    <span mat-line>{{release.key}}</span>
-  </mat-list-item>
-</mat-nav-list>
+<app-release [release]=release [product]=product *ngFor="let release of releases$ | async | keyvalue" (click)='openBottomSheet(release)'>
+</app-release>

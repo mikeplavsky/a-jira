@@ -18,6 +18,7 @@ import { FetchReleases } from '../product-reducer'
 export class ReleasesComponent implements OnInit {
 
   releases$:any;
+  product:any;
 
   constructor(private store: Store<{}>,
     private router: Router,
@@ -27,6 +28,7 @@ export class ReleasesComponent implements OnInit {
   ngOnInit() {
 
     const product = this.route.snapshot.paramMap.get("id");
+    this.product = product;
 
     this.store.dispatch(
       new FetchReleases(product));

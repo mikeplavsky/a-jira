@@ -22,7 +22,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects'
 import { productReducer } from './product-reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
+import { ReleaseComponent } from './release/release.component'
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { environment } from '../environments/environment'
     ReleasesComponent,
     ProductsComponent,
     ReleaseActionsComponent,
-    ProductComponent
+    ProductComponent,
+    ReleaseComponent
   ],
   entryComponents: [
     ProductActionsComponent,
