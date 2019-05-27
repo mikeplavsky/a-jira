@@ -17,38 +17,43 @@ export class AppEffects {
     private actions$: Actions,
     private jiraSvc: JiraService) {}
 
-  @Effect()
-  loadReleaseStats$ = this.actions$.pipe(
-    ofType(ReleaseStatsActionTypes.Fetch),
-    mergeMap((a:FetchReleaseStats)=>{
+  pipe(action,srv){
+    return this.actions$.pipe(
+      ofType(action),
+      mergeMap(srv));
+  }
 
+  @Effect()
+  loadReleaseStats$ = this.pipe(
+    ReleaseStatsActionTypes.Fetch,
+    (a:FetchReleaseStats)=>{
       return this.jiraSvc.getReleaseStats(a.product,a.release).pipe(
-        map( v => {
+        map(v => {
           return {
             product: a.product,
             type: ReleaseStatsActionTypes.FetchDone,
             payload: v
 
-  }}));}));
+  }}));});
 
   @Effect()
-  loadReleases$ = this.actions$.pipe(
-    ofType(ReleasesActionTypes.Fetch),
-    mergeMap((a:FetchReleases)=>{
-
+  loadReleases$ = this.pipe(
+    ReleasesActionTypes.Fetch,
+    (a:FetchReleases)=>{
       return this.jiraSvc.getVersions(a.product).pipe(
-        map( v => {
+        map(v => {
           return {
             product: a.product,
             type: ReleasesActionTypes.FetchDone,
             payload: v
 
-  }}));}));
+  }}));});
+
 
   @Effect()
-  loadProduct$ = this.actions$.pipe( 
-    ofType(ProductActionTypes.Fetch),
-    mergeMap((a:FetchProduct) => {
+  loadProduct$ = this.pipe( 
+    ProductActionTypes.Fetch,
+    (a:FetchProduct) => {
       return this.jiraSvc.getVelocity(a.product).pipe(
         map(v => { 
           return {
@@ -56,6 +61,6 @@ export class AppEffects {
             type: ProductActionTypes.FetchDone, 
             payload: v
 
-  }}))}));
+  }}))});
 
 }
