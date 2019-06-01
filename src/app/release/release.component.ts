@@ -16,6 +16,7 @@ export class ReleaseComponent implements OnInit {
   constructor(private store: Store<{}>){};
 
   ngOnInit() {
+    return
 
     this.store.dispatch(
       new FetchReleaseStats(

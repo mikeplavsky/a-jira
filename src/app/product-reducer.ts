@@ -42,11 +42,7 @@ export class FetchReleaseStatsDone implements Action {
     type: string = ReleaseStatsActionTypes.FetchDone;
 }
 
-export const initialState = {
-    releases: {}
-}
-
-export function productReducer(state=initialState, action){
+export function productReducer(state={releases:{}}, action){
 
     if (action.type == ProductActionTypes.FetchDone) {
         return { 
@@ -62,6 +58,22 @@ export function productReducer(state=initialState, action){
                     a[v.name] = v;
                     return a;
                 },{})}};}
+
+    return state;            
+
+}
+
+export function releaseStatsReducer(state={}, action){
+
+    if (action.type == ReleaseStatsActionTypes.FetchDone) {
+       return {
+            ...state,
+            [action.product]: {
+                ...state[action.product],
+                [action.release]: action.payload
+            }
+        };
+    }
 
     return state;
 

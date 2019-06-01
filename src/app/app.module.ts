@@ -11,6 +11,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { ProductActionsComponent } from './product-actions/product-actions.component';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { ReleasesComponent } from './releases/releases.component';
+import { ReleaseComponent } from './release/release.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProductsComponent } from './products/products.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,10 +21,9 @@ import {MatCardModule} from '@angular/material/card';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects'
-import { productReducer } from './product-reducer';
+import { productReducer, releaseStatsReducer } from './product-reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { ReleaseComponent } from './release/release.component'
+import { environment } from '../environments/environment'
 
 @NgModule({
   declarations: [
@@ -50,7 +50,7 @@ import { ReleaseComponent } from './release/release.component'
     AppRoutingModule,
     HttpClientModule,
     MatCardModule,
-    StoreModule.forRoot({products:productReducer}),
+    StoreModule.forRoot({products:productReducer, releases:releaseStatsReducer}),
     EffectsModule.forRoot([AppEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],

@@ -1,4 +1,5 @@
-<app-release [release]=release 
+<app-release 
+[release]=release 
 [product]=product 
 *ngFor="let release of sorted(releases$ | async | keyvalue)" (click)='openBottomSheet(release)'>
 

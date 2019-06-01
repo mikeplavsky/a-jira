@@ -31,6 +31,7 @@ export class AppEffects {
         map(v => {
           return {
             product: a.product,
+            release: a.release,
             type: ReleaseStatsActionTypes.FetchDone,
             payload: v
 
