@@ -16,14 +16,18 @@ export class ReleaseComponent implements OnInit {
   releaseStats$;
   constructor(private store: Store<{}>){};
 
-  days(){
+  days(all=false){
+  
+    let end:any = new Date( this.release.releaseDate);
+    let start:any = new Date( this.release.startDate);
 
-    return 12;
+    let now = new Date();
+    if (now < end && !all) {
+      end = now;
+    }
 
-    let release = new Date( this.release.value.releaseDate);
-    let start = new Date( this.release.value.releaseDate);
-
-    return 11;
+    let days = (end - start) / 1000 / 60 / 60 / 24; 
+    return Math.floor(days);
   }
 
   ngOnInit() {
