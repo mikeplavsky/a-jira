@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import {Store, select, createSelector} from '@ngrx/store'
 import { FetchReleaseStats } from '../product-reducer'
-import { release } from 'os';
 
 @Component({
   selector: 'app-release',

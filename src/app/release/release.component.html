@@ -5,6 +5,8 @@
       {{release.key}}
     </mat-card-title>
 
+    <br>
+
     <mat-card-subtitle mat-line>
       {{ release.value.startDate | date: 'mediumDate'}}
     </mat-card-subtitle>
@@ -13,11 +15,32 @@
       {{ release.value.releaseDate | date: 'mediumDate'}}
     </mat-card-subtitle>
 
-    <mat-card-subtitle mat-line>
-      {{(releaseStats$ | async)?.points}}
-    </mat-card-subtitle>
+    <mat-card-subtitle *ngIf="releaseStats$ | async">
 
-    <mat-card-subtitle mat-line>
+      <br>
+
+      <mat-card-subtitle>
+        {{(releaseStats$ | async)?.done_points}} of
+        {{(releaseStats$ | async)?.points}} ps.
+      </mat-card-subtitle>
+
+      <mat-card-subtitle>
+        {{(releaseStats$ | async)?.done_features}} of
+        {{(releaseStats$ | async)?.features}} fs.
+      </mat-card-subtitle>
+
+     <br>
+
+      <mat-card-subtitle>
+        {{(releaseStats$ | async)?.points -
+        (releaseStats$ | async)?.done_points}} ps.
+      </mat-card-subtitle>
+
+      <mat-card-subtitle>
+        {{(releaseStats$ | async)?.features -
+        (releaseStats$ | async)?.done_features}} fs.
+      </mat-card-subtitle>
+
     </mat-card-subtitle>
 
   </mat-card-header>
