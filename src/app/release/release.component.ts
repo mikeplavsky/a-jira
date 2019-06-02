@@ -12,7 +12,13 @@ export class ReleaseComponent implements OnInit {
 
   @Input() release:any;
   @Input() product:any;
-  releaseStats$: any;
+
+  releaseStats$;
+
+  points$;
+  done_points$;
+  features$;
+  done_features$;
 
   constructor(private store: Store<{}>){};
 
@@ -29,13 +35,30 @@ export class ReleaseComponent implements OnInit {
         return p ? p[props.release] : null;
       });
 
-    this.releaseStats$ = this.store.pipe(
-      select(
-        getReleaseStats,
-        {
-          product: this.product, 
-          release: this.release.key
-        }));
+    let getPoints = createSelector(
+      getReleaseStats, state => state.points);
+
+    let getDonePoints = createSelector(
+      getReleaseStats, state => state.done_points);
+
+    let getFeatures = createSelector(
+      getReleaseStats, state => state.features);
+
+    let getDoneFeatures = createSelector(
+      getReleaseStats, state => state.done_features);
+
+    let product = this.product;
+    let release = this.release.key;
+
+    let selector = (x) => this.store.select(x,{product,release});
+
+    this.points$ = selector(getPoints);
+    this.done_points$ = selector(getDonePoints);
+    this.features$ = selector(getFeatures);
+    this.done_features$ = selector(getDoneFeatures);
+
+    this.releaseStats$ = this.store.select(
+        getReleaseStats,{product, release });
 
   }
 }

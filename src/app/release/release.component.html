@@ -20,25 +20,23 @@
       <br>
 
       <mat-card-subtitle>
-        {{(releaseStats$ | async)?.done_points}} of
-        {{(releaseStats$ | async)?.points}} ps.
+        {{ done_points$ | async}} of
+        {{ points$ | async}} ps.
       </mat-card-subtitle>
 
       <mat-card-subtitle>
-        {{(releaseStats$ | async)?.done_features}} of
-        {{(releaseStats$ | async)?.features}} fs.
+        {{ done_features$ | async }} of
+        {{ features$ | async }} fs.
       </mat-card-subtitle>
 
      <br>
 
       <mat-card-subtitle>
-        {{(releaseStats$ | async)?.points -
-        (releaseStats$ | async)?.done_points}} ps.
+        {{(points$ | async) - (done_points$ | async)}} ps.
       </mat-card-subtitle>
 
       <mat-card-subtitle>
-        {{(releaseStats$ | async)?.features -
-        (releaseStats$ | async)?.done_features}} fs.
+        {{(features$ | async) - (done_features$ | async)}} fs.
       </mat-card-subtitle>
 
     </mat-card-subtitle>
