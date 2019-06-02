@@ -16,12 +16,22 @@ export class ReleaseComponent implements OnInit {
   releaseStats$;
   constructor(private store: Store<{}>){};
 
+  days(){
+
+    return 12;
+
+    let release = new Date( this.release.value.releaseDate);
+    let start = new Date( this.release.value.releaseDate);
+
+    return 11;
+  }
+
   ngOnInit() {
 
     this.store.dispatch(
       new FetchReleaseStats(
         this.product,
-        this.release.key));
+        this.release.name));
     
     let getReleaseStats = createSelector(
       (state: {releases},props:{product,release}) => {
@@ -30,7 +40,7 @@ export class ReleaseComponent implements OnInit {
       });
 
     let product = this.product;
-    let release = this.release.key;
+    let release = this.release.name;
 
     this.releaseStats$ = this.store.select(
         getReleaseStats,{product, release });

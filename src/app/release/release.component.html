@@ -3,22 +3,22 @@
   <mat-card-header>
 
     <mat-card-title>
-      {{release.key}}
+      {{release.name}}
     </mat-card-title>
 
     <mat-card-subtitle mat-line>
-      {{ release.value.startDate | date: 'mediumDate'}}
+      {{ release.startDate | date: 'mediumDate'}}
     </mat-card-subtitle>
 
     <mat-card-subtitle mat-line>
-      {{ release.value.releaseDate | date: 'mediumDate'}}
+      {{ release.releaseDate | date: 'mediumDate'}}
     </mat-card-subtitle>
 
     <mat-card-subtitle *ngIf="releaseStats$ | async as stats">
 
       <br>
 
-      <mat-card-subtitle *ngIf="!release.value.released;else releasedPoints">
+      <mat-card-subtitle *ngIf="!release.released;else releasedPoints">
         {{ stats.done_points}} of
         {{ stats.points}} ps.
       </mat-card-subtitle>
@@ -29,7 +29,7 @@
         </mat-card-subtitle>
       </ng-template>
 
-      <mat-card-subtitle *ngIf="!release.value.released; else releasedFeatures">
+      <mat-card-subtitle *ngIf="!release.released; else releasedFeatures">
         {{ stats.done_features }} of
         {{ stats.features }} fs.
       </mat-card-subtitle>
@@ -40,7 +40,11 @@
         </mat-card-subtitle>
       </ng-template>
 
-      <ng-container *ngIf="!release.value.released">
+      <mat-card-subtitle>
+        {{ days() }}
+      </mat-card-subtitle>
+
+      <ng-container *ngIf="!release.released">
 
         <br>
 

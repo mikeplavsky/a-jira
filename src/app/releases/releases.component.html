@@ -1,5 +1,5 @@
 <app-release 
-[release]=release 
+[release]=release.value
 [product]=product 
 *ngFor="let release of sorted(releases$ | async | keyvalue)" (click)='openBottomSheet(release)'>
 
