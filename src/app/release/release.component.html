@@ -15,28 +15,28 @@
       {{ release.value.releaseDate | date: 'mediumDate'}}
     </mat-card-subtitle>
 
-    <mat-card-subtitle *ngIf="releaseStats$ | async">
+    <mat-card-subtitle *ngIf="releaseStats$ | async as stats">
 
       <br>
 
       <mat-card-subtitle>
-        {{ done_points$ | async}} of
-        {{ points$ | async}} ps.
+        {{ stats.done_points}} of
+        {{ stats.points}} ps.
       </mat-card-subtitle>
 
       <mat-card-subtitle>
-        {{ done_features$ | async }} of
-        {{ features$ | async }} fs.
+        {{ stats.done_features }} of
+        {{ stats.features }} fs.
       </mat-card-subtitle>
 
      <br>
 
       <mat-card-subtitle>
-        {{(points$ | async) - (done_points$ | async)}} ps.
+        {{ stats.points - stats.done_points }} ps.
       </mat-card-subtitle>
 
       <mat-card-subtitle>
-        {{(features$ | async) - (done_features$ | async)}} fs.
+        {{ stats.features - stats.done_features }} fs.
       </mat-card-subtitle>
 
     </mat-card-subtitle>
