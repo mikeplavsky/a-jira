@@ -22,17 +22,6 @@
 
       <br>
 
-      <mat-card-subtitle *ngIf="!release.released;else releasedPoints">
-        {{ stats.done_points}} of
-        {{ stats.points}} ps.
-      </mat-card-subtitle>
-
-      <ng-template #releasedPoints>
-        <mat-card-subtitle>
-          {{ stats.points }} ps.
-        </mat-card-subtitle>
-      </ng-template>
-
       <mat-card-subtitle *ngIf="!release.released; else releasedFeatures">
         {{ stats.done_features }} of
         {{ stats.features }} fs.
@@ -44,20 +33,37 @@
         </mat-card-subtitle>
       </ng-template>
 
+      <mat-card-subtitle *ngIf="!release.released;else releasedPoints">
+        {{ stats.done_points}} of
+        {{ stats.points}} ps.
+      </mat-card-subtitle>
+
+      <ng-template #releasedPoints>
+        <mat-card-subtitle>
+          {{ stats.points }} ps.
+        </mat-card-subtitle>
+      </ng-template>
 
       <ng-container *ngIf="!release.released">
 
         <br>
 
         <mat-card-subtitle>
-          {{ stats.points - stats.done_points }} ps.
-        </mat-card-subtitle>
-
-        <mat-card-subtitle>
           {{ stats.features - stats.done_features }} fs.
         </mat-card-subtitle>
 
+        <mat-card-subtitle>
+          {{ stats.points - stats.done_points }} ps.
+        </mat-card-subtitle>
+
       </ng-container>
+
+      <mat-card-subtitle>
+        {{ velocity(stats) }} ps./sprint
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        {{ prediction(stats) }} sprint(s)
+      </mat-card-subtitle>
 
     </mat-card-subtitle>
   </mat-card-header>
