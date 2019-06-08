@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductActionsComponent } from './product-actions.component';
+import { RouterTestingModule } from "@angular/router/testing";
+
+import { MaterialModule } from '../material.module';
+import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet'
 
 describe('ProductActionsComponent', () => {
   let component: ProductActionsComponent;
@@ -8,7 +12,12 @@ describe('ProductActionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductActionsComponent ]
+      declarations: [ ProductActionsComponent ],
+      providers: [{
+        provide: MAT_BOTTOM_SHEET_DATA,
+        useValue: {}
+      }],
+      imports: [ RouterTestingModule, MaterialModule ]
     })
     .compileComponents();
   }));
