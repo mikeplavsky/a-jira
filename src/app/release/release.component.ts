@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import {Store, select, createSelector} from '@ngrx/store'
 import { FetchReleaseStats } from '../product-reducer'
-import { release } from 'os';
 
 @Component({
   selector: 'app-release',
@@ -18,9 +17,13 @@ export class ReleaseComponent implements OnInit {
   constructor(private store: Store<{}>){};
 
   prediction(stat) {
+
     let v = this.velocity(stat);
+    if (!v) return 0;
+
     let left = stat.points - stat.done_points;
     return Math.ceil(left / v);
+
   }
 
   velocity(stat) {
@@ -42,7 +45,7 @@ export class ReleaseComponent implements OnInit {
     let start:any = new Date( this.release.startDate);
 
     let now = new Date();
-    if (now < end && !all) {
+    if (start < now && now < end && !all) {
       end = now;
     }
 
