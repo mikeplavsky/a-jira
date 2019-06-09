@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReleaseComponent } from './release.component';
 
 import { MaterialModule } from "../material.module";
+import { StoreModule } from '@ngrx/store';
 
 describe('ReleaseComponent', () => {
   let component: ReleaseComponent;
@@ -10,7 +11,7 @@ describe('ReleaseComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ReleaseComponent ],
-      imports: [ MaterialModule]
+      imports: [ MaterialModule, StoreModule.forRoot( {} )]
     })
     .compileComponents();
   }));
@@ -18,6 +19,9 @@ describe('ReleaseComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ReleaseComponent);
     component = fixture.componentInstance;
+
+    component.release = {name: '8.1'};
+
     fixture.detectChanges();
   });
 
