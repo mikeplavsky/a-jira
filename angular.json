@@ -59,11 +59,13 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "a-jira:build"
+            "browserTarget": "a-jira:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "a-jira:build:production"
+              "browserTarget": "a-jira:build:production",
+              "proxyConfig": "proxy.conf.json"
             }
           }
         },
