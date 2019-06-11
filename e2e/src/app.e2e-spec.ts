@@ -20,22 +20,39 @@ describe('products page', () => {
     browser.get( browser.baseUrl );
     let hs = $$('.mat-card-header');
 
-    let ps = await hs.map( (elm, idx) => {
+    let ps: {product,velocity}[] = await hs.map( async (elm, idx) => {
 
       let product = elm.element(
         by.css('.mat-card-title')).getText();
 
-      let velocity = elm.element(
+      let velocity_txt = await elm.element(
         by.css('.mat-card-subtitle')).getText();
-
+      
+      let velocity = parseFloat(velocity_txt);
       return {product,velocity};
 
     });
-
-    expect(ps[0]).toEqual({product: "RMADFE", velocity: '36'});
-    expect(ps[1]).toEqual({product: "RMAZ", velocity: '12.3'});
-    expect(ps[2]).toEqual({product: "QMMP", velocity: '6.7'});
     
+    let compare = (
+      idx: number, 
+      product: string, 
+      velocity_low: number,
+      velocity_high: number) => {
+
+      expect(ps[idx].product).toEqual( product );
+      expect(ps[idx].velocity).toBeGreaterThan( velocity_low );
+      expect(ps[idx].velocity).toBeLessThan( velocity_high );
+
+    };
+
+    let check: [string,number, number][]= [
+      ["RMADFE", 30, 40], 
+      ["RMAZ", 10, 20], 
+      ["QMMP", 5, 10]];
+
+    check.forEach(
+      (v,idx) => compare(idx, ...v));
+
   });
 
   afterEach(async () => {
