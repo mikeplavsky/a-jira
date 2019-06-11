@@ -1,14 +1,34 @@
 import { browser, $$, element, by, logging } from 'protractor';
+import { go, click } from 'blue-harvest';
 
 describe('products page', () => {
+
+  beforeAll( async () => {
+    await go( browser.baseUrl );
+  });
 
   beforeEach(() => {
   });
 
-  it('should display products', () => {
+  it('should display menu', async () => {
 
-    browser.get( browser.baseUrl );
-    let es = element.all(by.css('.mat-card-title'));
+    let hs = await $$('.mat-card-header');
+    await hs[0].click();
+
+    await browser.waitForAngular();
+
+    let actions = await $$('.mat-list-item .mat-line').map(
+      (el,idx) => {
+        return el.getText()
+    });
+
+    expect(actions).toEqual(["Sprint", "Epics", "Releases"]);
+
+  });
+
+  it('should display products', async () => {
+
+    let es = $$('.mat-card-title');
 
     expect(es.getText()).toEqual( [
       'RMADFE', 'RMAZ', 'QMMP']);
@@ -17,9 +37,7 @@ describe('products page', () => {
 
   it('should get product velocity', async () => {
 
-    browser.get( browser.baseUrl );
     let hs = $$('.mat-card-header');
-
     let ps: {product,velocity}[] = await hs.map( async (elm, idx) => {
 
       let product = elm.element(
