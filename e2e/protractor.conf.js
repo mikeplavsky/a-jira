@@ -10,9 +10,8 @@ exports.config = {
   ],
   capabilities: {
     'browserName': 'chrome',
-    "seleniumAddress": 'http://127.0.0.1:9515/',
   },
-  directConnect: false,
+  directConnect: true,
   baseUrl: 'http://localhost:4200/',
   SELENIUM_PROMISE_MANAGER: false,
   framework: 'jasmine',
