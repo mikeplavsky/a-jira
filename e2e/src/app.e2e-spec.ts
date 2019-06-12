@@ -1,5 +1,6 @@
 import { browser, $$, element, by, logging } from 'protractor';
 import { go, click } from 'blue-harvest';
+import { protractor } from 'protractor/built/ptor';
 
 describe('products page', () => {
 
@@ -12,14 +13,19 @@ describe('products page', () => {
 
   it('should display menu', async () => {
 
+    let EC = new protractor.ProtractorExpectedConditions();
+
     let hs = await $$('.mat-card-header');
     await hs[0].click();
 
-    await browser.waitForAngular();
-
     let actions = await $$('.mat-list-item .mat-line').map(
-      (el,idx) => {
+      async (el,idx) => {
+
+        await browser.wait(
+          EC.elementToBeClickable(el));
+
         return el.getText()
+
     });
 
     expect(actions).toEqual(["Sprint", "Epics", "Releases"]);

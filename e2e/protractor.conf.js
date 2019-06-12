@@ -9,9 +9,10 @@ exports.config = {
     './src/**/*.e2e-spec.ts'
   ],
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    "seleniumAddress": 'http://127.0.0.1:9515/',
   },
-  directConnect: true,
+  directConnect: false,
   baseUrl: 'http://localhost:4200/',
   SELENIUM_PROMISE_MANAGER: false,
   framework: 'jasmine',
