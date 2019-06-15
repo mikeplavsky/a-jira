@@ -1,4 +1,4 @@
 docker build -t wdio .
-docker run -ti --rm -v $(pwd):/wdio/tests \
+docker run -ti --rm -v $(pwd):/wdio \
 -host \
--w /wdio/tests wdio bash
+-w /wdio wdio bash
