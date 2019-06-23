@@ -13,12 +13,12 @@ describe('products page', () => {
 
   it('should display menu', async () => {
 
-    let EC = new protractor.ProtractorExpectedConditions();
+    const EC = new protractor.ProtractorExpectedConditions();
 
-    let hs = await $$('.mat-card-header');
+    const hs = await $$('.mat-card-header');
     await hs[0].click();
 
-    let actions = await $$('.mat-list-item .mat-line').map(
+    const actions = await $$('.mat-list-item .mat-line').map(
       async (el,idx) => {
 
         await browser.wait(
@@ -71,8 +71,8 @@ describe('products page', () => {
 
     let check: [string,number, number][]= [
       ["RMADFE", 30, 40], 
-      ["RMAZ", 10, 20], 
-      ["QMMP", 5, 10]];
+      ["RMAZ", 9, 20], 
+      ["QMMP", 2, 10]];
 
     check.forEach(
       (v,idx) => compare(idx, ...v));

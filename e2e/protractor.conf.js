@@ -10,8 +10,9 @@ exports.config = {
   ],
   capabilities: {
     'browserName': 'chrome',
+    'seleniumAddress': 'http://host.docker.internal:9515'
   },
-  directConnect: true,
+  directConnect: false,
   baseUrl: 'http://localhost:4200/',
   SELENIUM_PROMISE_MANAGER: false,
   framework: 'jasmine',
