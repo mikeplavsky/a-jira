@@ -6,10 +6,11 @@ import { Injectable } from '@angular/core';
 export class ProductsService {
 
   products = [
-    {id:1,name:"RMADFE"},
-    {id:2,name:"RMAZ"},
-    {id:3,name:"QMMP"}
-  ]  
+    {id: 1, name: 'RMADFE'},
+    {id: 2, name: 'RMAZ'},
+    {id: 3, name: 'QMMP'},
+    {id: 4, name: 'ODRT'}
+  ];
 
   constructor() {}
   
