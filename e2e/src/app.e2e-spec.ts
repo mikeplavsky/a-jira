@@ -28,7 +28,7 @@ describe('products page', () => {
 
     });
 
-    expect(actions).toEqual(["Sprint", "Epics", "Releases"]);
+    expect(actions).toEqual(['Sprint', 'Epics', 'Releases']);
 
   });
 
@@ -70,9 +70,9 @@ describe('products page', () => {
     };
 
     let check: [string,number, number][]= [
-      ["RMADFE", 30, 40], 
-      ["RMAZ", 9, 20], 
-      ["QMMP", 2, 10]];
+      ['RMADFE', 30, 45], 
+      ['RMAZ', 9, 20], 
+      ['QMMP', 2, 10]];
 
     check.forEach(
       (v,idx) => compare(idx, ...v));
