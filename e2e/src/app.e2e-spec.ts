@@ -1,36 +1,21 @@
-import { browser, $$, element, by, logging } from 'protractor';
-import { go, click, inside, rightOf } from 'blue-harvest';
+import { browser, $$, by, logging } from 'protractor';
+import { go, click, see } from 'blue-harvest';
 import { protractor } from 'protractor/built/ptor';
-import { debug } from 'util';
 
 describe('releases page', () => {
 
   beforeAll( async () => {
 
     await go( browser.baseUrl );
-
-    const hs = await $$('.mat-card-header');
-    await hs[0].click();
-
-    const EC = new protractor.ProtractorExpectedConditions();
-
-    const actions = await $$('.mat-list-item .mat-line');
-    await browser.wait(EC.elementToBeClickable(actions[2]));
-
-    await actions[2].click();
+    await click('RMADFE');
+    await click('Releases');
 
   });
 
   it ('should show releases', async () => {
 
-    const hs = $$('.mat-card-header');
-
-    const releases = await hs.map( async (elm) => {
-       return  elm.element(
-        by.css('.mat-card-title')).getText(); });
-
-    expect(releases.slice(0, 2)).toEqual(
-      ['10.1', '10.0.1']);
+    await see('10.1');
+    await see('10.0');
 
   });
 
