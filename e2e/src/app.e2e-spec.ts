@@ -1,6 +1,40 @@
 import { browser, $$, element, by, logging } from 'protractor';
-import { go, click } from 'blue-harvest';
+import { go, click, inside, rightOf } from 'blue-harvest';
 import { protractor } from 'protractor/built/ptor';
+import { debug } from 'util';
+
+describe('releases page', () => {
+
+  beforeAll( async () => {
+
+    await go( browser.baseUrl );
+
+    const hs = await $$('.mat-card-header');
+    await hs[0].click();
+
+    const EC = new protractor.ProtractorExpectedConditions();
+
+    const actions = await $$('.mat-list-item .mat-line');
+    await browser.wait(EC.elementToBeClickable(actions[2]));
+
+    await actions[2].click();
+
+  });
+
+  it ('should show releases', async () => {
+
+    const hs = $$('.mat-card-header');
+
+    const releases = await hs.map( async (elm) => {
+       return  elm.element(
+        by.css('.mat-card-title')).getText(); });
+
+    expect(releases.slice(0, 2)).toEqual(
+      ['10.1', '10.0.1']);
+
+  });
+
+});
 
 describe('products page', () => {
 
@@ -19,12 +53,11 @@ describe('products page', () => {
     await hs[0].click();
 
     const actions = await $$('.mat-list-item .mat-line').map(
-      async (el,idx) => {
+      async (el) => {
 
         await browser.wait(
           EC.elementToBeClickable(el));
-
-        return el.getText()
+        return el.getText();
 
     });
 
@@ -34,48 +67,48 @@ describe('products page', () => {
 
   it('should display products', async () => {
 
-    let es = $$('.mat-card-title');
+    const es = $$('.mat-card-title');
 
-    expect(es.getText()).toEqual( [
+    expect(es.getText()).toEqual([
       'RMADFE', 'RMAZ', 'QMMP']);
 
   });
 
   it('should get product velocity', async () => {
 
-    let hs = $$('.mat-card-header');
-    let ps: {product,velocity}[] = await hs.map( async (elm, idx) => {
+    const hs = $$('.mat-card-header');
+    const ps: {product,velocity}[] = await hs.map( async (elm, idx) => {
 
-      let product = elm.element(
+      const product = elm.element(
         by.css('.mat-card-title')).getText();
 
-      let velocity_txt = await elm.element(
+      const velocityTxt = await elm.element(
         by.css('.mat-card-subtitle')).getText();
-      
-      let velocity = parseFloat(velocity_txt);
+
+      const velocity = parseFloat(velocityTxt);
       return {product,velocity};
 
     });
-    
-    let compare = (
-      idx: number, 
-      product: string, 
-      velocity_low: number,
-      velocity_high: number) => {
 
-      expect(ps[idx].product).toEqual( product );
-      expect(ps[idx].velocity).toBeGreaterThan( velocity_low );
-      expect(ps[idx].velocity).toBeLessThan( velocity_high );
+    const compare = (
+      idx: number,
+      product: string, 
+      velocityLow: number,
+      velocityHigh: number) => {
+
+    expect(ps[idx].product).toEqual( product );
+    expect(ps[idx].velocity).toBeGreaterThan( velocityLow );
+    expect(ps[idx].velocity).toBeLessThan( velocityHigh );
 
     };
 
-    let check: [string,number, number][]= [
-      ['RMADFE', 30, 45], 
-      ['RMAZ', 9, 20], 
+    const check: [string, number, number][] = [
+      ['RMADFE', 30, 45],
+      ['RMAZ', 7, 20],
       ['QMMP', 2, 10]];
 
     check.forEach(
-      (v,idx) => compare(idx, ...v));
+      (v, idx) => compare(idx, ...v));
 
   });
 

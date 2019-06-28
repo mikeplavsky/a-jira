@@ -13,7 +13,7 @@ export class ProductsService {
   ];
 
   constructor() {}
-  
+
   getProducts(){
     return this.products;
   }
