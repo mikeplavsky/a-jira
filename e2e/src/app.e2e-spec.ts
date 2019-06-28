@@ -1,6 +1,5 @@
 import { browser, $$, by, logging } from 'protractor';
-import { go, click, see } from 'blue-harvest';
-import { protractor } from 'protractor/built/ptor';
+import { go, click, see, not, find} from 'blue-harvest';
 
 describe('releases page', () => {
 
@@ -30,32 +29,27 @@ describe('products page', () => {
   beforeEach(() => {
   });
 
-  it('should display menu', async () => {
+  it('should display and hide menu', async () => {
 
-    const EC = new protractor.ProtractorExpectedConditions();
+    await click('RMADFE');
 
-    const hs = await $$('.mat-card-header');
-    await hs[0].click();
+    await see('Sprint');
+    await see('Epics');
+    await see('Releases');
 
-    const actions = await $$('.mat-list-item .mat-line').map(
-      async (el) => {
+    await click(by.css('.cdk-overlay-backdrop'));
 
-        await browser.wait(
-          EC.elementToBeClickable(el));
-        return el.getText();
-
-    });
-
-    expect(actions).toEqual(['Sprint', 'Epics', 'Releases']);
+    await not.see('Sprint');
+    await not.see('Epics');
+    await not.see('Releases');
 
   });
 
   it('should display products', async () => {
 
-    const es = $$('.mat-card-title');
-
-    expect(es.getText()).toEqual([
-      'RMADFE', 'RMAZ', 'QMMP']);
+    await see('RMADFE');
+    await see('QMMP');
+    await see('RMAZ');
 
   });
 
