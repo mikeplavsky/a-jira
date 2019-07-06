@@ -1,5 +1,5 @@
-import { browser, $$, by, logging } from 'protractor';
-import { go, click, see, not, find} from 'blue-harvest';
+import { browser, by, logging } from 'protractor';
+import { go, click, see, not, below, under} from 'blue-harvest';
 
 describe('releases page', () => {
 
@@ -15,6 +15,46 @@ describe('releases page', () => {
 
     await see('10.1');
     await see('10.0');
+
+  });
+  
+  it ('should show dates', async () => {
+
+    await see(by.css("[id='10.1'] .startDate"));
+    await see(by.css("[id='10.1'] .releaseDate"));
+
+  });
+
+  it ('should show in progress stats', async () => {
+
+    await see(by.css("[id='10.1'] .days"));
+
+    await see(by.css("[id='10.1'] .of-points"));
+    await see(by.css("[id='10.1'] .of-features"));
+
+    await see(by.css("[id='10.1'] .left-points"));
+    await see(by.css("[id='10.1'] .left-features"));
+
+    await see(by.css("[id='10.1'] .velocity"));
+    await see(by.css("[id='10.1'] .left-sprints"));
+
+  });
+
+  it ('should show done release stats', async () => {
+
+    await see(by.css("[id='10.0'] .days"));
+
+    await see(by.css("[id='10.0'] .points"));
+    await see(by.css("[id='10.0'] .features"));
+
+    await not.see(by.css("[id='10.0'] .of-points"));
+    await not.see(by.css("[id='10.0'] .of-features"));
+
+    await not.see(by.css("[id='10.0'] .left-points"));
+    await not.see(by.css("[id='10.0'] .left-features"));
+
+    await see(by.css("[id='10.0'] .velocity"));
+    await see(by.css("[id='10.0'] .left-sprints"));
 
   });
 
@@ -53,41 +93,19 @@ describe('products page', () => {
 
   });
 
-  it('should get product velocity', async () => {
+  it ('should show product velocity', async () => {
 
-    const hs = $$('.mat-card-header');
-    const ps: {product,velocity}[] = await hs.map( async (elm, idx) => {
+    await under('RMADFE').see(by.id(
+      "RMADFE_velocity"
+    ));
 
-      const product = elm.element(
-        by.css('.mat-card-title')).getText();
+    await below('RMAZ').not.see(by.id(
+      "RMADFE_velocity"
+    ));
 
-      const velocityTxt = await elm.element(
-        by.css('.mat-card-subtitle')).getText();
-
-      const velocity = parseFloat(velocityTxt);
-      return {product,velocity};
-
-    });
-
-    const compare = (
-      idx: number,
-      product: string, 
-      velocityLow: number,
-      velocityHigh: number) => {
-
-    expect(ps[idx].product).toEqual( product );
-    expect(ps[idx].velocity).toBeGreaterThan( velocityLow );
-    expect(ps[idx].velocity).toBeLessThan( velocityHigh );
-
-    };
-
-    const check: [string, number, number][] = [
-      ['RMADFE', 30, 45],
-      ['RMAZ', 7, 20],
-      ['QMMP', 2, 10]];
-
-    check.forEach(
-      (v, idx) => compare(idx, ...v));
+    await below('RMAZ').see(by.id(
+      "RMAZ_velocity"
+    ));
 
   });
 
