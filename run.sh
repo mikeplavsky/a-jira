@@ -5,5 +5,6 @@ docker run -ti -d \
     -v /a-jira/node_modules \
     -p 4200:4200 \
     -p 9229:9229 \
+    -p 9876:9876 \
     -w /a-jira a-jira \
     bash ./server.sh
