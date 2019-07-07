@@ -3,6 +3,42 @@ import { Component, OnInit, Input } from '@angular/core';
 import {Store, select, createSelector} from '@ngrx/store'
 import { FetchReleaseStats } from '../product-reducer'
 
+export function velocity (stat, days) {
+
+  if (days == 0) {
+    return 0
+  }
+
+  let vs = stat.done_points / days * 10;
+  return Math.floor(vs);
+
+}
+
+export function prediction_of_sprints(stat, days) {
+
+  let v = velocity(stat, days);
+  if (!v) return 0;
+
+  let left = stat.points - stat.done_points;
+  return Math.ceil(left / v);
+
+}
+
+export function days(release, all=false){
+
+  let end:any = new Date(release.releaseDate);
+  let start:any = new Date(release.startDate);
+
+  let now = new Date();
+  if (start < now && now < end && !all) {
+    end = now;
+  }
+
+  let days = (end - start) / 1000 / 60 / 60 / 24; 
+  return Math.floor(days);
+
+}
+
 @Component({
   selector: 'app-release',
   templateUrl: './release.component.html',
@@ -18,39 +54,22 @@ export class ReleaseComponent implements OnInit {
 
   prediction(stat) {
 
-    let v = this.velocity(stat);
-    if (!v) return 0;
-
-    let left = stat.points - stat.done_points;
-    return Math.ceil(left / v);
+    return prediction_of_sprints(
+      stat,
+      this.days());
 
   }
 
   velocity(stat) {
 
-    let ds = this.days();
-
-    if (ds == 0) {
-      return 0
-    }
-
-    let vs = stat.done_points / ds * 10;
-    return Math.floor(vs);
+    return velocity(
+      {done_points:stat.done_points}, 
+      this.days());
 
   }
 
   days(all=false){
-  
-    let end:any = new Date( this.release.releaseDate);
-    let start:any = new Date( this.release.startDate);
-
-    let now = new Date();
-    if (start < now && now < end && !all) {
-      end = now;
-    }
-
-    let days = (end - start) / 1000 / 60 / 60 / 24; 
-    return Math.floor(days);
+    return days(this.release,all);
   }
 
   ngOnInit() {

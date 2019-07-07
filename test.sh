@@ -1,1 +1,1 @@
-./node_modules/.bin/ng test
+./node_modules/.bin/ng test $1
