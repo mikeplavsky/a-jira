@@ -2,11 +2,18 @@
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 module.exports = function (config) {
+
+  var webDriverConfig = {
+    hostname:'host.docker.internal',
+    port: '9515' 
+  };
+
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
+      require('karma-webdriver-launcher'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
@@ -25,7 +32,14 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: [],
+    customLaunchers: {
+      WD: {
+        base: 'WebDriver',
+        browserName: 'chrome',
+        config: webDriverConfig,
+        name: 'Karma'}
+    },
+    browsers: ['WD'],
     singleRun: false,
     restartOnFileChange: true
   });

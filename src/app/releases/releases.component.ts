@@ -61,11 +61,11 @@ export class ReleasesComponent implements OnInit {
 
   }
 
-  openBottomSheet(release:any){
+  openBottomSheet(product, release){
 
     let ref = this.sheet.open(
       ReleaseActionsComponent,
-      {data: {...release}});
+      {data: {product,release}});
 
     this.router.events.pipe(
       filter(e => e instanceof NavigationEnd)).subscribe(

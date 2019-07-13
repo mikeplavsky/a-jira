@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet'
 
 @Component({
   selector: 'app-release-actions',
@@ -11,12 +12,16 @@ export class ReleaseActionsComponent implements OnInit {
    {name:"Stories", icon: "build"},
    {name:"Epics", icon: "track_changes"}]
 
-  constructor() {}
+  constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data) {}
 
   ngOnInit() {
   }
 
   getActions(){
-    return this.actions; 
+    return this.actions.map( x => {
+      return {...x,
+        product:this.data.product,
+        release:this.data.release}
+    }); 
   }
 }
