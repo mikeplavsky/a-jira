@@ -6,6 +6,32 @@
     <mat-card-title>
       {{epic}}
     </mat-card-title>
+
+    <mat-card-subtitle *ngIf="epicStats$ | async as stats">
+
+      <br>
+
+      <mat-card-subtitle [ngClass]="'of-features'">
+        {{ stats.done_features }} of
+        {{ stats.features }} fs.
+      </mat-card-subtitle>
+
+      <mat-card-subtitle [ngClass]="'of-points'">
+        {{ stats.done_points}} of
+        {{ stats.points}} ps.
+      </mat-card-subtitle>
+
+      <br>
+
+      <mat-card-subtitle [ngClass]="'left-features'">
+        {{ stats.features - stats.done_features }} fs.
+      </mat-card-subtitle>
+
+      <mat-card-subtitle [ngClass]="'left-points'">
+        {{ stats.points - stats.done_points }} ps.
+      </mat-card-subtitle>
+
+    </mat-card-subtitle>
   
   </mat-card-header>
 
