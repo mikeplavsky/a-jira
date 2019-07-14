@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import {Store, createSelector} from '@ngrx/store'
-import { FetchEpicStats } from '../product-reducer'
+import {FetchEpicStats} from '../product-reducer'
 
 @Component({
   selector: 'app-epic',
@@ -15,6 +15,7 @@ export class EpicComponent implements OnInit {
   @Input() epic;
 
   epicStats$;
+  releaseStats$;
 
   constructor(private store: Store<{}>){};
 
@@ -43,8 +44,4 @@ export class EpicComponent implements OnInit {
     let epic = this.epic;
 
     this.epicStats$ = this.store.select(
-      getEpicStats, {product,release,epic});
-
-  }
-
-}
+      getEpicStats, {product,release,epic});}}

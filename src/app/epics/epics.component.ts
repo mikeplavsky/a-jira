@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
-import {Store, select, createSelector} from '@ngrx/store'
+import {Store, createSelector} from '@ngrx/store'
 import { FetchEpics } from '../product-reducer';
 
 @Component({
