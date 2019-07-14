@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import {Store, createSelector} from '@ngrx/store'
+import { FetchEpicStats } from '../product-reducer'
+
 @Component({
   selector: 'app-epic',
   templateUrl: './epic.component.html',
@@ -11,9 +14,14 @@ export class EpicComponent implements OnInit {
   @Input() product;
   @Input() epic;
 
-  constructor() { }
+  constructor(private store: Store<{}>){};
 
   ngOnInit() {
+    this.store.dispatch(
+      new FetchEpicStats(
+        this.product,
+        this.release,
+        this.epic))
   }
 
 }

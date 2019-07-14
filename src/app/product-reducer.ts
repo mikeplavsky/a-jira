@@ -55,6 +55,21 @@ export class FetchEpics implements Action {
 export class FetchEpicsDone implements Action {
     type: string = EpicsActionTypes.FetchDone;
 }
+
+export enum EpicStatsActionTypes {
+    Fetch = "Fetch Epic Stats",
+    FetchDone = "Fetch Epic Stats Done"    
+}
+
+export class FetchEpicStats implements Action {
+    type: string = EpicStatsActionTypes.Fetch;
+    constructor(public product, public release, public epic){}
+}
+
+export class FetchEpicStatsDone implements Action {
+    type: string = EpicStatsActionTypes.FetchDone;
+}
+
 export function productReducer(state={releases:{}}, action){
 
     if (action.type == ProductActionTypes.FetchDone) {
@@ -97,6 +112,28 @@ export function epicsReducer(state={}, action){
             [action.product]: {
                 ...state[action.product],
                 [action.release]: action.payload
+            }
+        };
+    }
+    return state;
+}
+
+export function epicStatsReducer(state={}, action){
+
+    if (action.type == EpicStatsActionTypes.FetchDone) {
+       
+       let get = (product,release) => {
+            return state[product] ? state[product][release]: null;  
+       }; 
+        
+       return {
+            ...state,
+            [action.product]: {
+                ...state[action.product],
+                [action.release]: { 
+                    ...get(action.product,action.release),
+                    [action.epic]: action.payload
+                }
             }
         };
     }

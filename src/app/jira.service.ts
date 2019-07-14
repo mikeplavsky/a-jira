@@ -8,6 +8,11 @@ export class JiraService {
 
   constructor(private http: HttpClient) { }
 
+  getEpicStats(product,release, epic){
+    return this.http.get(
+      `api/products/${product}/releases/${release}/epics/${epic}`);
+  }
+
   getReleaseEpics(product,release){
     return this.http.get(
       `api/products/${product}/releases/${release}/epics`);
