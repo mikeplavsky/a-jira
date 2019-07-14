@@ -12,17 +12,27 @@ export class EpicsComponent implements OnInit {
 
   product:any;
   release: any;
+  epics$;
 
   constructor(private store: Store<{}>,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
 
-    this.product = this.route.snapshot.paramMap.get("p");
-    this.release = this.route.snapshot.paramMap.get("r");
+    let product = this.product = this.route.snapshot.paramMap.get("p");
+    let release = this.release = this.route.snapshot.paramMap.get("r");
 
     this.store.dispatch(
       new FetchEpics(this.product,this.release));
+
+    let getEpics = createSelector(
+      (state:{epics},props:{product,release}) => {
+        let p = state.epics[props.product];
+        return p ? p[props.release]: null;
+    }); 
+
+    this.epics$ = this.store.select(
+      getEpics,{product,release}); 
 
   }
 
