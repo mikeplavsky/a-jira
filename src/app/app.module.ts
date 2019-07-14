@@ -19,7 +19,8 @@ import { productReducer, releaseStatsReducer, epicsReducer } from './product-red
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './material.module';
-import { EpicsComponent } from './epics/epics.component'
+import { EpicsComponent } from './epics/epics.component';
+import { EpicComponent } from './epic/epic.component'
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { EpicsComponent } from './epics/epics.component'
     ReleaseActionsComponent,
     ProductComponent,
     ReleaseComponent,
-    EpicsComponent
+    EpicsComponent,
+    EpicComponent
   ],
   entryComponents: [
     ProductActionsComponent,
