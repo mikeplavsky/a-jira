@@ -10,7 +10,7 @@ export class JiraService {
 
   getReleaseEpics(product,release){
     return this.http.get(
-      'api/products/${product}/releases/${release}/epics');
+      `api/products/${product}/releases/${release}/epics`);
   }
 
   getVersions(product: string){

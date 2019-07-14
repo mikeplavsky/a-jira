@@ -15,10 +15,11 @@ import { ProductComponent } from './product/product.component'
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects'
-import { productReducer, releaseStatsReducer } from './product-reducer';
+import { productReducer, releaseStatsReducer, epicsReducer } from './product-reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { MaterialModule } from './material.module'
+import { MaterialModule } from './material.module';
+import { EpicsComponent } from './epics/epics.component'
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MaterialModule } from './material.module'
     ProductsComponent,
     ReleaseActionsComponent,
     ProductComponent,
-    ReleaseComponent
+    ReleaseComponent,
+    EpicsComponent
   ],
   entryComponents: [
     ProductActionsComponent,
@@ -39,8 +41,14 @@ import { MaterialModule } from './material.module'
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({products:productReducer, releases:releaseStatsReducer}),
+
+    StoreModule.forRoot({
+      products:productReducer, 
+      releases:releaseStatsReducer,
+      epics:epicsReducer}),
+
     EffectsModule.forRoot([AppEffects]),
+
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     MaterialModule
   ],
