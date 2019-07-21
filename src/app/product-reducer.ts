@@ -70,6 +70,20 @@ export class FetchEpicStatsDone implements Action {
     type: string = EpicStatsActionTypes.FetchDone;
 }
 
+export enum StoriesActionTypes {
+    Fetch = "Fetch Stories",
+    FetchDone = "Fetch Stories Done"    
+}
+
+export class FetchStories implements Action {
+    type: string = StoriesActionTypes.Fetch;
+    constructor(public product, public release, public epic){}
+}
+
+export class FetchStoriesDone implements Action {
+    type: string = StoriesActionTypes.FetchDone;
+}
+
 export function productReducer(state={releases:{}}, action){
 
     if (action.type == ProductActionTypes.FetchDone) {

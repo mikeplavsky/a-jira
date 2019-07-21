@@ -21,7 +21,8 @@ import { environment } from '../environments/environment';
 import { MaterialModule } from './material.module';
 import { EpicsComponent } from './epics/epics.component';
 import { EpicComponent } from './epic/epic.component';
-import { EpicActionsComponent } from './epic-actions/epic-actions.component'
+import { EpicActionsComponent } from './epic-actions/epic-actions.component';
+import { StoriesComponent } from './stories/stories.component'
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { EpicActionsComponent } from './epic-actions/epic-actions.component'
     ReleaseComponent,
     EpicsComponent,
     EpicComponent,
-    EpicActionsComponent
+    EpicActionsComponent,
+    StoriesComponent
   ],
   entryComponents: [
     ProductActionsComponent,

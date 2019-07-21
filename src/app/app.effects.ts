@@ -10,7 +10,9 @@ import { ProductActionTypes,
   EpicsActionTypes,
   FetchEpics,
   EpicStatsActionTypes,
-  FetchEpicStats} from './product-reducer'
+  FetchEpicStats,
+  StoriesActionTypes,
+  FetchStories} from './product-reducer'
 import {map, mergeMap} from 'rxjs/operators'
 import {JiraService} from './jira.service'
 
@@ -26,6 +28,20 @@ export class AppEffects {
       ofType(action),
       mergeMap(srv));
   }
+
+  @Effect()
+  loadStories$ = this.pipe(
+    StoriesActionTypes.Fetch,
+    (a:FetchStories)=>{
+      return this.jiraSvc.getEpicStories(a.product,a.release,a.epic).pipe(
+        map(v => {
+          return {
+            product: a.product,
+            release: a.release,
+            epic: a.epic,
+            type: StoriesActionTypes.FetchDone,
+            payload: v
+  }}));});
 
   @Effect()
   loadEpicStats$ = this.pipe(
