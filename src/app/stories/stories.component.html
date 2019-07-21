@@ -1,3 +1,7 @@
-<p>
-  stories works!
-</p>
+<app-story 
+  [product]=product
+  [release]=release
+  [epic]=epic
+  [story]=story
+  *ngFor="let story of (stories$ | async)">
+</app-story>
