@@ -9,7 +9,7 @@ export class ProductsService {
     {id: 1, name: 'RMADFE'},
     {id: 2, name: 'RMAZ'},
     {id: 3, name: 'QMMP'},
-    {id: 4, name: 'ODRT'}
+    {id: 4, name: 'AIRGAP'}
   ];
 
   constructor() {}
