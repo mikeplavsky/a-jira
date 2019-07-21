@@ -153,3 +153,26 @@ export function epicStatsReducer(state={}, action){
     }
     return state;
 }
+
+export function storiesReducer(state={}, action){
+
+    if (action.type == StoriesActionTypes.FetchDone) {
+       
+       let get = (product,release) => {
+            return state[product] ? state[product][release]: null;  
+       }; 
+        
+       return {
+            ...state,
+            [action.product]: {
+                ...state[action.product],
+                [action.release]: { 
+                    ...get(action.product,action.release),
+                    [action.epic]: action.payload['issues']
+                }
+            }
+        };
+    }
+    return state;
+    
+}

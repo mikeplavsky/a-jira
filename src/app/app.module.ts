@@ -15,7 +15,7 @@ import { ProductComponent } from './product/product.component'
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects'
-import { productReducer, releaseStatsReducer, epicsReducer, epicStatsReducer } from './product-reducer';
+import { productReducer, releaseStatsReducer, epicsReducer, epicStatsReducer, storiesReducer } from './product-reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './material.module';
@@ -54,6 +54,7 @@ import { StoriesComponent } from './stories/stories.component'
       products:productReducer, 
       releases:releaseStatsReducer,
       epics:epicsReducer,
+      stories:storiesReducer,
       epicStats:epicStatsReducer}),
 
     EffectsModule.forRoot([AppEffects]),
