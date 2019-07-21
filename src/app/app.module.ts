@@ -20,7 +20,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './material.module';
 import { EpicsComponent } from './epics/epics.component';
-import { EpicComponent } from './epic/epic.component'
+import { EpicComponent } from './epic/epic.component';
+import { EpicActionsComponent } from './epic-actions/epic-actions.component'
 
 @NgModule({
   declarations: [
@@ -32,11 +33,14 @@ import { EpicComponent } from './epic/epic.component'
     ProductComponent,
     ReleaseComponent,
     EpicsComponent,
-    EpicComponent
+    EpicComponent,
+    EpicActionsComponent
   ],
   entryComponents: [
     ProductActionsComponent,
-    ReleaseActionsComponent
+    ReleaseActionsComponent,
+    EpicActionsComponent
+
   ],
   imports: [
     BrowserModule,

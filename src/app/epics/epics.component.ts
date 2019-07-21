@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'
 import {Store, createSelector} from '@ngrx/store'
 import { FetchEpics } from '../product-reducer';
+import { MatBottomSheet } from '@angular/material';
+import { EpicActionsComponent } from '../epic-actions/epic-actions.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-epics',
@@ -15,6 +18,8 @@ export class EpicsComponent implements OnInit {
   epics$;
 
   constructor(private store: Store<{}>,
+    private sheet: MatBottomSheet,
+    private router: Router,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -33,6 +38,18 @@ export class EpicsComponent implements OnInit {
 
     this.epics$ = this.store.select(
       getEpics,{product,release}); 
+
+  }
+
+  openBottomSheet(product, release, epic){
+
+    let ref = this.sheet.open(
+      EpicActionsComponent,
+      {data: {product,release,epic}});
+
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd)).subscribe(
+        e => ref.dismiss());
 
   }
 

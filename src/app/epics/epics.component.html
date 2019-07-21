@@ -2,5 +2,6 @@
   [product]=product
   [release]=release
   [epic]=epic
-  *ngFor="let epic of (epics$ | async)">
+  *ngFor="let epic of (epics$ | async)"
+  (click)='openBottomSheet(product, release, epic)'>
 </app-epic>
