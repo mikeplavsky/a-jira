@@ -15,7 +15,6 @@ describe('releases page', () => {
 
     await see('10.1');
     await see('10.0');
-    debugger;
 
   });
   

@@ -10,9 +10,7 @@ export class StoryComponent implements OnInit {
 
   jira_url = "https://jira.labs.quest.com/browse";
 
-  @Input() release;
   @Input() product;
-  @Input() epic;
   @Input() story;
   
   constructor() { }

@@ -84,6 +84,30 @@ export class FetchStoriesDone implements Action {
     type: string = StoriesActionTypes.FetchDone;
 }
 
+export enum SprintActionTypes {
+    Fetch = "Fetch Sprint",
+    FetchDone = "Fetch Sprint Done"    
+}
+
+export class FetchSprint implements Action {
+    type: string = SprintActionTypes.Fetch;
+    constructor(public product){}
+}
+
+export class FetchSprintDone implements Action {
+    type: string = SprintActionTypes.FetchDone;
+}
+
+export function sprintsReducer(state={sprint:{}}, action){
+
+    if (action.type == SprintActionTypes.FetchDone) {
+        return { 
+            ...state, 
+            [action.product]: action.payload['issues']};}
+
+    return state;            
+}
+
 export function productReducer(state={releases:{}}, action){
 
     if (action.type == ProductActionTypes.FetchDone) {

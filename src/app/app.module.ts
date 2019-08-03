@@ -15,7 +15,7 @@ import { ProductComponent } from './product/product.component'
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects'
-import { productReducer, releaseStatsReducer, epicsReducer, epicStatsReducer, storiesReducer } from './product-reducer';
+import { productReducer, releaseStatsReducer, epicsReducer, epicStatsReducer, storiesReducer, sprintsReducer } from './product-reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './material.module';
@@ -23,7 +23,8 @@ import { EpicsComponent } from './epics/epics.component';
 import { EpicComponent } from './epic/epic.component';
 import { EpicActionsComponent } from './epic-actions/epic-actions.component';
 import { StoriesComponent } from './stories/stories.component';
-import { StoryComponent } from './story/story.component'
+import { StoryComponent } from './story/story.component';
+import { SprintComponent } from './sprint/sprint.component'
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { StoryComponent } from './story/story.component'
     EpicComponent,
     EpicActionsComponent,
     StoriesComponent,
-    StoryComponent
+    StoryComponent,
+    SprintComponent
   ],
   entryComponents: [
     ProductActionsComponent,
@@ -57,6 +59,7 @@ import { StoryComponent } from './story/story.component'
       releases:releaseStatsReducer,
       epics:epicsReducer,
       stories:storiesReducer,
+      sprints:sprintsReducer,
       epicStats:epicStatsReducer}),
 
     EffectsModule.forRoot([AppEffects]),

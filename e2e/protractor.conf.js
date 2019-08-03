@@ -10,7 +10,7 @@ exports.config = {
   ],
   capabilities: {
     'browserName': 'chrome',
-    'seleniumAddress': 'http://host.docker.internal:9515'
+    'seleniumAddress': 'http://host.docker.internal:9515/wd/hub'
   },
   directConnect: false,
   baseUrl: 'http://localhost:4200/',

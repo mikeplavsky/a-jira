@@ -5,10 +5,12 @@ import {ReleasesComponent} from './releases/releases.component';
 import {ProductsComponent} from './products/products.component';
 import {EpicsComponent} from './epics/epics.component';
 import { StoriesComponent } from './stories/stories.component';
+import { SprintComponent } from './sprint/sprint.component';
 
 const routes: Routes = [
   {path: "",redirectTo:"products", pathMatch: 'full'},
-  {path: "product/:id/releases", component: ReleasesComponent},
+  {path: "products/:id/releases", component: ReleasesComponent},
+  {path: "products/:p/sprint", component: SprintComponent},
   {path: "products/:p/releases/:r/epics", component: EpicsComponent},
   {path: "products/:p/releases/:r/epics/:e/stories", component: StoriesComponent},
   {path: "products", component: ProductsComponent},
