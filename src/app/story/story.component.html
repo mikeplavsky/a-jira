@@ -7,6 +7,16 @@
       {{story['fields']['summary']}}
     </mat-card-title>
 
+    <mat-card-subtitle>
+      <a href="{{jira_url}}/{{story['key']}}">
+        {{story['key']}}
+      </a>
+    </mat-card-subtitle>
+
+    <mat-card-subtitle>
+      {{story['fields']['status']['name']}}
+    </mat-card-subtitle>
+
   </mat-card-header>
 
 </mat-card>
