@@ -1,4 +1,4 @@
-import { browser, by, logging } from 'protractor';
+import { browser, by, logging, element } from 'protractor';
 import { go, click, see, not, below, under} from 'blue-harvest';
 
 describe('releases page', () => {
@@ -55,6 +55,24 @@ describe('releases page', () => {
 
     await see(by.css("[id='10.0'] .velocity"));
     await see(by.css("[id='10.0'] .left-sprints"));
+
+  });
+
+});
+
+describe('sprint page', () => {
+
+  beforeAll( async () => {
+    await go( `${browser.baseUrl}products/RMADFE/sprint` );
+  });
+
+  it('should display stories for sprint', async () => {
+
+    const res = await element.all(
+      by.css("[id='RMADFE'] app-story"));
+
+    expect(res.length).toBeGreaterThan(3);
+    expect(res.length).toBeLessThan(100);
 
   });
 
