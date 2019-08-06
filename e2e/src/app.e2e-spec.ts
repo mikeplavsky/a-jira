@@ -92,13 +92,11 @@ describe('products page', () => {
     await click('RMADFE');
 
     await see('Sprint');
-    await see('Epics');
     await see('Releases');
 
     await click(by.css('.cdk-overlay-backdrop'));
 
     await not.see('Sprint');
-    await not.see('Epics');
     await not.see('Releases');
 
   });

@@ -10,7 +10,7 @@ export class ProductActionsComponent implements OnInit {
 
   actions = [
    {name:"Sprint", icon: "rowing"},
-   {name:"Epics", icon: "track_changes"},
+   //{name:"Epics", icon: "track_changes"},
    {name:"Releases", icon: "build"}]
 
   constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {}
