@@ -18,14 +18,24 @@ export class StoryComponent implements OnInit {
   sprints(){
 
     let s = this.story['fields']['customfield_12004']
-    let res = s.map(v => v.match(/Sprint ([\d]*)/i)[1])
+    
+    if (!s) {
+      return "no sprints";
+    }
 
+    let res = s.map(v => v.match(/Sprint ([\d]*)/i)[1])
     return res.join(",");
 
   }
 
   versions() {
+
     let vs = this.story['fields']['fixVersions'];
+
+    if (!vs) {
+      return "no releases";
+    }
+    
     return vs.map((v) => v["name"]).join(",");
   }
 
