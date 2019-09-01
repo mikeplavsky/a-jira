@@ -14,6 +14,20 @@ export class StoryComponent implements OnInit {
   @Input() story;
   
   constructor() { }
+  
+  sprints(){
+
+    let s = this.story['fields']['customfield_12004']
+    let res = s.map(v => v.match(/Sprint ([\d]*)/i)[1])
+
+    return res.join(",");
+
+  }
+
+  versions() {
+    let vs = this.story['fields']['fixVersions'];
+    return vs.map((v) => v["name"]).join(",");
+  }
 
   points() {
     
