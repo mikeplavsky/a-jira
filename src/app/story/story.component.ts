@@ -15,6 +15,21 @@ export class StoryComponent implements OnInit {
   
   constructor() { }
 
+  points() {
+    
+    let ps = this.story['fields']['customfield_10303']
+    
+    let n = parseInt(ps);
+    let pts = "points"; 
+    
+    if (n == 1) { 
+      pts = "point"; 
+    }
+
+    return `${n} ${pts}` 
+
+  } 
+
   ngOnInit() {
   }
 

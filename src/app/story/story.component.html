@@ -11,6 +11,10 @@
       {{story['fields']['status']['name']}}
     </mat-card-subtitle>
 
+    <mat-card-subtitle>
+      {{points()}}
+    </mat-card-subtitle>
+
   </mat-card-header>
 
   <a mat-button color="primary" href="{{jira_url}}/{{story['key']}}">
