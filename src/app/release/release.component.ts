@@ -60,6 +60,13 @@ export class ReleaseComponent implements OnInit {
 
   }
 
+  predicted_date(stat) {
+
+    return new Date(
+      Date.now() + this.prediction(stat) * 10 * 24 * 60 * 60 * 1000);
+
+  }
+
   velocity(stat) {
 
     return velocity(
