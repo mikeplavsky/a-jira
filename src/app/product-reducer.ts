@@ -98,6 +98,45 @@ export class FetchSprintDone implements Action {
     type: string = SprintActionTypes.FetchDone;
 }
 
+export enum QueryActionTypes {
+    Fetch = "Fetch Query",
+    FetchDone = "Fetch Query Done",    
+    ClearQuery = "Clear Query"    
+}
+
+export class FetchQuery implements Action {
+    type: string = QueryActionTypes.Fetch;
+    constructor(public product, public query){}
+}
+
+export class FetchQueryDone implements Action {
+    type: string = QueryActionTypes.FetchDone;
+}
+
+export class ClearQuery implements Action {
+    type: string = QueryActionTypes.ClearQuery;
+    constructor(public product){}
+}
+
+export function queriesReducer(state={}, action){
+
+    if (action.type == QueryActionTypes.FetchDone) {
+        return { 
+            ...state, 
+            [action.product]: {
+                done: true,
+                stories:action.payload['issues']}};}
+
+    if (action.type == QueryActionTypes.ClearQuery) {
+        return { 
+            ...state, 
+            [action.product]: {
+                done: false,
+                stories:[]}};}
+
+    return state;            
+}
+
 export function sprintsReducer(state={sprint:{}}, action){
 
     if (action.type == SprintActionTypes.FetchDone) {
