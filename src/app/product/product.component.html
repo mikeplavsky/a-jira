@@ -5,7 +5,11 @@
       {{product.name}}
     </mat-card-title>
     
-    <mat-card-subtitle id="{{product.name + '_velocity'}}" mat-line>{{(product$ | async)?.velocity}}</mat-card-subtitle>
+    <mat-card-subtitle 
+      matTooltip="The velocity per sprint measured for the last 30 days" 
+      id="{{product.name + '_velocity'}}" 
+      mat-line>{{(product$ | async)?.velocity}}
+    </mat-card-subtitle>
 
   </mat-card-header>
 
