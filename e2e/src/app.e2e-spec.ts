@@ -54,7 +54,6 @@ describe('releases page', () => {
     await not.see(by.css("[id='10.0'] .left-features"));
 
     await see(by.css("[id='10.0'] .velocity"));
-    await see(by.css("[id='10.0'] .left-sprints"));
 
   });
 
