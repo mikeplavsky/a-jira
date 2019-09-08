@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import {MatBottomSheet} from '@angular/material';
 import {ProductActionsComponent} from '../product-actions/product-actions.component';
-import {ProductsService} from '../products.service';
 
 import {Router, NavigationEnd} from '@angular/router';
 import {filter} from 'rxjs/operators';
+import { JiraService } from '../jira.service';
 
 @Component({
   selector: 'app-products',
@@ -14,12 +14,12 @@ import {filter} from 'rxjs/operators';
 })
 export class ProductsComponent implements OnInit {
 
-  products: any[];
+  products;
 
   constructor(
     private router: Router,
     private sheet: MatBottomSheet,
-    private productsSvc: ProductsService){}
+    public svc: JiraService){}
 
   openBottomSheet(product:any){
 
@@ -34,7 +34,9 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.products = this.productsSvc.getProducts();
+    this.svc.getProducts().subscribe(data => {
+      this.products = data;
+    });
   }
 
 }

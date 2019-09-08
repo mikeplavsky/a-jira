@@ -10,7 +10,7 @@ export function velocity (stat, days) {
   }
 
   let vs = stat.done_points / days * 10;
-  return Math.floor(vs);
+  return Math.ceil(vs);
 
 }
 

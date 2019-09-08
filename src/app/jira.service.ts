@@ -8,6 +8,11 @@ export class JiraService {
 
   constructor(private http: HttpClient) { }
 
+  getProducts(){
+    return this.http.get(
+      `api/products`);
+  }
+
   getQuery(product,query){
     return this.http.post(
       `api/query`,
