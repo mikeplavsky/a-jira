@@ -10,7 +10,12 @@ export class EpicActionsComponent implements OnInit {
 
   actions = [{name:"Stories", icon: "build"}]
 
-  constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data) {}
+  constructor(
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data) {}
+
+  encode(s) {
+    return encodeURIComponent(s);
+  }
   
   ngOnInit() {
   }

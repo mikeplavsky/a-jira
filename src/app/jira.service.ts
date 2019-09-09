@@ -24,7 +24,8 @@ export class JiraService {
       `api/products/${product}/sprint`);
   }
 
-  getEpicStories(product,release,epic){
+  getEpicStories(product,release,e){
+    let epic = decodeURIComponent(e);
     return this.http.post(
       `api/stories`,
       {product,release,epic});
