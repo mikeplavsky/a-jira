@@ -3,13 +3,14 @@
 const { 
     intercept, openBrowser, write, 
     closeBrowser, goto, press, text, 
-    below, focus, inputField, toRightOf } = require('taiko');
+    below, focus, inputField, toRightOf,
+    client } = require('taiko');
 
 const assert = require("assert");
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
 
 beforeSuite(async () => {
-    await openBrowser({ headless: headless })
+    await openBrowser({ headless: headless });
 });
 
 afterSuite(async () => {
@@ -22,13 +23,14 @@ step("Products are <products>", async (products) => {
         return {name:p}; });
 
     await intercept(
-        "/api/products", 
-        {body: JSON.stringify(body)});
+        "/api/products$", 
+        {body});
 
 });
 
 step("Goto products page", async () => {
     await goto('localhost:4200');
+    debugger;
 });
 
 step("Page contains <content>", async (content) => {

@@ -1,8 +1,9 @@
 # Products Page
 
+* Products are "RMADFE,ODM,RMAZ" 
+
 ## Check Products 
 
-* Products are "RMADFE, ODM, RMAZ" 
 * Goto products page 
 * Page contains "ODM"
 * Page contains "RMAZ"
@@ -11,5 +12,7 @@
 ## Check Velocity
 
 * "RMADFE" has the velocity "27" ps/sprint
+* "ODM" has the velocity "34" ps/sprint
 * Goto products page 
-* "RMADFE" got the velocity "27" ps/sprint
+"RMADFE" got the velocity "27" ps/sprint
+* "ODM" got the velocity "34" ps/sprint
