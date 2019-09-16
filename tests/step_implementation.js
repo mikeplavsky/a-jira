@@ -6,6 +6,9 @@ const {
     below, focus, inputField, toRightOf,
     client } = require('taiko');
 
+const networkHandler = require(
+    '../node_modules/taiko/lib/networkHandler.js');
+
 const assert = require("assert");
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
 
@@ -15,6 +18,10 @@ beforeSuite(async () => {
 
 afterSuite(async () => {
     await closeBrowser();
+});
+
+beforeScenario( async () => {
+    networkHandler.resetInterceptors();
 });
 
 step("Products are <products>", async (products) => {
