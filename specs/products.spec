@@ -14,5 +14,5 @@
 * "RMADFE" has the velocity "27" ps/sprint
 * "ODM" has the velocity "34" ps/sprint
 * Goto products page 
-"RMADFE" got the velocity "27" ps/sprint
+* "RMADFE" got the velocity "27" ps/sprint
 * "ODM" got the velocity "34" ps/sprint
