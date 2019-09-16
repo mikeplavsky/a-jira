@@ -1,4 +1,15 @@
-const { intercept, openBrowser, goto, below, text, above, closeBrowser } = require('taiko');
+const { 
+    intercept, 
+    openBrowser,
+    goto, 
+    below, 
+    text, 
+    above, 
+    closeBrowser, 
+    client} = require('taiko'); 
+
+const nH = require('./node_modules/taiko/lib/networkHandler.js');
+
 (async () => {
     try {
 
@@ -7,6 +18,8 @@ const { intercept, openBrowser, goto, below, text, above, closeBrowser } = requi
         await intercept("/api/products/RMADFE/features/done", {body: '{"velocity":29}'});
         await intercept("/api/products/RMAZ/features/done", {body: '{"velocity":70}'});
         await intercept("/api/products/QMMP/features/done", {body: '{"velocity":30}'});
+
+        nH.resetInterceptors();
 
         await goto("http://localhost:4200");
 

@@ -30,7 +30,6 @@ step("Products are <products>", async (products) => {
 
 step("Goto products page", async () => {
     await goto('localhost:4200');
-    debugger;
 });
 
 step("Page contains <content>", async (content) => {
