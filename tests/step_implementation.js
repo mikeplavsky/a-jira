@@ -3,7 +3,7 @@
 const { 
     intercept, openBrowser, write, 
     closeBrowser, goto, press, text, 
-    below, focus, inputField, toRightOf} = require('taiko');
+    below, focus,textBox} = require('taiko');
 
 const networkHandler = require(
     '../node_modules/taiko/lib/networkHandler.js');
@@ -18,7 +18,7 @@ beforeSuite(async () => {
 });
 
 afterSuite(async () => {
-    await closeBrowser();
+    //await closeBrowser();
 });
 
 beforeScenario( async () => {
@@ -58,5 +58,52 @@ step("<product> got the velocity <velocity> ps/sprint",
 
     assert.ok(
         await text(`${velocity}`, below(`${product}`)).exists());
+
+});
+
+step("<product> has <query> stories", async function(product,query) {
+
+    await intercept("/api/query",(request) => {
+
+        let data = JSON.parse(
+            request.request.postData);
+
+        if (data.query == query && 
+            data.product == product &&
+            request.request.method == "POST") {
+
+            const res = {issues:[
+                {key: `${product}-1`,
+                 fields:{
+                    summary:`${product} 1`,
+                    status:{name:"Open"}}}
+            ]};
+
+            request.respond({body:res});
+            return;
+
+        }
+        
+        request.respond({body:[]});
+    })
+
+});
+
+step("Go to <product> search page", async function(product) {
+    await goto(`localhost:4200/products/${product}/search`);
+});
+
+step("Search for <query>", async function(query) {
+
+    await focus(textBox(below("products")));
+    await write(query);
+    await press("Enter");
+    
+});
+
+step("<title> story found and it is <status>", async function(title, status) {
+
+    assert.ok( await text(title).exists() );
+    assert.ok( await text(status).exists() );
 
 });
