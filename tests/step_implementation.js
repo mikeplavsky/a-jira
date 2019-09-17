@@ -3,8 +3,7 @@
 const { 
     intercept, openBrowser, write, 
     closeBrowser, goto, press, text, 
-    below, focus, inputField, toRightOf,
-    client } = require('taiko');
+    below, focus, inputField, toRightOf} = require('taiko');
 
 const networkHandler = require(
     '../node_modules/taiko/lib/networkHandler.js');
@@ -13,7 +12,9 @@ const assert = require("assert");
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
 
 beforeSuite(async () => {
-    await openBrowser({ headless: headless });
+    await openBrowser({
+        headless: headless,
+        args: ['--auto-open-devtools-for-tabs'] });
 });
 
 afterSuite(async () => {
