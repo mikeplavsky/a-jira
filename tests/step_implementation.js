@@ -3,7 +3,7 @@
 const { 
     intercept, openBrowser, write, 
     closeBrowser, goto, press, text, 
-    below, focus,textBox} = require('taiko');
+    below, focus,textBox, click} = require('taiko');
 
 const networkHandler = require(
     '../node_modules/taiko/lib/networkHandler.js');
@@ -110,4 +110,39 @@ step("<title> story found and it is <status>", async function(title, status) {
 
 step("Nothing has been found", async function() {
     assert.ok( await text("nothing").exists() );
+});
+
+step("Go to <product> releases page", async function(product) {
+    await click( `${product}` );
+    await click( "Releases" );
+});
+
+step("<product> has releases <rs>", async function(product, rs) {
+
+    let releases = rs.split(",");
+
+    let body = releases.map(r => {
+        return {
+            name:r}; 
+    });
+
+    await intercept(
+        `api/products/${product}/versions$`, 
+        {body});
+
+    releases.forEach(async r => {
+
+        let body = {
+            done_features:10,
+            done_points: 50,
+            features:25,
+            points: 125    
+        };
+
+        await intercept(
+            `api/products/${product}/releases/${r}$`, 
+            {body});
+        
+    });
+
 });
