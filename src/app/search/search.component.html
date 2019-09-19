@@ -18,6 +18,17 @@
         mode="indeterminate">
 </mat-progress-spinner>
 
+<mat-card *ngIf=
+  "(query$ | async) && (query$ | async).done && ((query$ | async)?.stories.length == 0)">
+
+    <mat-card-header>
+      <mat-card-subtitle>
+        Found nothing :( 
+      </mat-card-subtitle>
+    </mat-card-header>
+
+</mat-card>
+
 <app-story 
   [product]=product
   [story]=story

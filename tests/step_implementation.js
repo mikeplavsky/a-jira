@@ -84,7 +84,7 @@ step("<product> has <query> stories", async function(product,query) {
 
         }
         
-        request.respond({body:[]});
+        request.respond({body:{issues:[]}});
     })
 
 });
@@ -106,4 +106,8 @@ step("<title> story found and it is <status>", async function(title, status) {
     assert.ok( await text(title).exists() );
     assert.ok( await text(status).exists() );
 
+});
+
+step("Nothing has been found", async function() {
+    assert.ok( await text("nothing").exists() );
 });
