@@ -117,30 +117,37 @@ step("Go to <product> releases page", async function(product) {
     await click( "Releases" );
 });
 
-step("<product> has releases <rs>", async function(product, rs) {
+step("<product> has releases <table>", async function(product, table) {
 
-    let releases = rs.split(",");
-
-    let body = releases.map(r => {
+    let releases = table.rows.map( r => {
         return {
-            name:r}; 
+            name: r.cells[0],
+            features: r.cells[1],
+            points: r.cells[2],
+            startDate: '2019-01-09',
+            releaseDate: '2019-12-01'};
     });
 
     await intercept(
         `api/products/${product}/versions$`, 
-        {body});
+        {body:releases});
 
     releases.forEach(async r => {
 
         let body = {
-            done_features:10,
+            done_features: 10,
             done_points: 50,
-            features:25,
-            points: 125    
+            features: r.features,
+            points: r.points    
         };
 
+        let url = `api/products/${product}/releases/${r.name}$`;
+
+        console.log(url);
+        console.log(body);
+
         await intercept(
-            `api/products/${product}/releases/${r}$`, 
+            url, 
             {body});
         
     });
