@@ -18,7 +18,7 @@ beforeSuite(async () => {
 });
 
 afterSuite(async () => {
-    //await closeBrowser();
+    await closeBrowser();
 });
 
 beforeScenario( async () => {
@@ -117,6 +117,10 @@ step("Go to <product> releases page", async function(product) {
     await click( "Releases" );
 });
 
+let releases_spec = {
+    releases:{}
+};
+
 step("<product> has releases <table>", async function(product, table) {
 
     let releases = table.rows.map( r => {
@@ -127,6 +131,8 @@ step("<product> has releases <table>", async function(product, table) {
             startDate: '2019-01-09',
             releaseDate: '2019-12-01'};
     });
+
+    releases_spec.releases[product] = releases;
 
     await intercept(
         `api/products/${product}/versions$`, 
@@ -143,13 +149,19 @@ step("<product> has releases <table>", async function(product, table) {
 
         let url = `api/products/${product}/releases/${r.name}$`;
 
-        console.log(url);
-        console.log(body);
-
         await intercept(
             url, 
             {body});
         
     });
+
+});
+
+step("See <product> releases there", async function(product) {
+
+    let releases = releases_spec.releases[product];
+
+    assert.ok( 
+        await text(`${releases[0].name}`, below('products')).exists() );
 
 });
