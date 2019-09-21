@@ -157,11 +157,16 @@ step("<product> has releases <table>", async function(product, table) {
 
 });
 
-step("See <product> releases there", async function(product) {
+step("See <product> releases are there", async function(product) {
 
     let releases = releases_spec.releases[product];
 
     assert.ok( 
-        await text(`${releases[0].name}`, below('products')).exists() );
+        await text(`${releases[0].name}`, 
+        below('products')).exists());
+
+    assert.ok( 
+        await text(`${releases[0].features}`, 
+        below(`${releases[0].name}`)).exists());
 
 });

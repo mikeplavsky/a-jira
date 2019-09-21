@@ -42,7 +42,6 @@
         matTooltip="Done features"
         [ngClass]="'of-features'" *ngIf="!release.released; else releasedFeatures">
         {{ stats.done_features }} of
-        {{ stats.features }} fs.
       </mat-card-subtitle>
 
       <ng-template #releasedFeatures>

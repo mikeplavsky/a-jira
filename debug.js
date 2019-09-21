@@ -17,12 +17,15 @@ step = (n,f) => {
     funcs[n]=f;
 };
 
-require('./step_implementation.js');
+let steps = require('./tests/step_implementation.js');
 console.log(funcs);
 
 (async () => {
+        
+    steps.releases_spec.releases["RMADFE"] = [{name:"RMADFE"}];
+
     await funcs.beforeSuite(); 
-    await funcs["<product> has <query> stories"]("RMADFE","BMR");
-    await funcs["Go to <product> search page"]("RMADFE");
-    //await funcs["Search for <query>"]("BMR");
+    await funcs["Goto products page"]();
+    await funcs["Go to <product> releases page"]("RMADFE");
+    await funcs["See <product> releases are there"]("RMADFE");
 })();
