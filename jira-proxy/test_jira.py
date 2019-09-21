@@ -52,8 +52,8 @@ def test_get_versions_names():
     assert "10.1" in set(res)
 
 @pytest.mark.parametrize("all, status",[
-    (False, set(["In Progress","Reopened"])),
-    (True, set(["Deployed"]))])
+    (False, set(["In Progress","Reopened","Open"])),
+    (True, set(["Deployed","Open"]))])
 def test_search_stories(all, status):
     res = jira.search_stories("QMMP", "UI", all)    
     i = res["issues"][0]
@@ -72,7 +72,7 @@ def test_query():
     res = jira.query("project = RMADFE AND fixVersion = latestReleasedVersion()")
     assert res['total'] > 100
 
-def test_create_issue():
+def _test_create_issue():
 
     data = dict(
             project='QMMP',
