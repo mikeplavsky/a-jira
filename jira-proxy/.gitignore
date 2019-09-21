@@ -1,0 +1,9 @@
+static
+Pythonista
+.coverage
+htmlcov
+__pycache__
+*.swp
+config.py
+.pytest_cache
+.vscode
