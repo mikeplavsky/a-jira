@@ -50,6 +50,18 @@ Jest:
 ./node_modules/.bin/jest jest-tests
 ```
 
+Deployment:
+```
+docker exec -ti a-jira bash
+./compile.sh
+exit
+cd jira-proxy
+./build.sh version 
+# check with
+./a-run.sh jira account
+```
+If it works, then proper docker image version has to be set in Azure portal 
+
 
 
 
