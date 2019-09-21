@@ -1,27 +1,72 @@
-# AJira
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+Firstly run back-end jira-proxy by:
 
-## Development server
+```
+cd jira-proxy
+./run.sh jira account 
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Then start front end:
+```
+cd ..
+./run.sh
+```
 
-## Code scaffolding
+Now app should be served from http://localhost:4200
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+For tests: 
 
-## Build
+Back-end:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```
+docker exec -ti jira-proxy sh
+pytest -n 5
+```
 
-## Running unit tests
+Quick front-end: 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+# working directory a-jira
+docker exec -ti a-jira bash
+./test.sh
+```
 
-## Running end-to-end tests
+Protractor: 
+```
+cd e2e
+./chromedriver.sh
+docker exec -ti a-jira bash 
+cd e2e
+./run.sh
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Gauge: 
+```
+./node_modules/.bin/gauge run specs
+```
 
-## Further help
+Jest:
+```
+./node_modules/.bin/jest jest-tests
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Deployment:
+```
+docker exec -ti a-jira bash
+./compile.sh
+exit
+cd jira-proxy
+./build.sh version 
+# check with
+./a-run.sh jira account
+```
+If it works, then proper docker image version has to be set in Azure portal 
+
+
+
+
+
+
+
+
+
