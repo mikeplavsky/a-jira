@@ -15,3 +15,4 @@
 * Goto products page 
 * Go to "RMADFE" releases page
 * See "RMADFE" releases are there
+* See "RMADFE" features are there

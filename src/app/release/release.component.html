@@ -41,7 +41,7 @@
       <mat-card-subtitle 
         matTooltip="Done features"
         [ngClass]="'of-features'" *ngIf="!release.released; else releasedFeatures">
-        {{ stats.done_features }} of
+        {{ stats.done_features }} of {{ stats.features }}
       </mat-card-subtitle>
 
       <ng-template #releasedFeatures>
