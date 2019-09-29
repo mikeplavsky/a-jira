@@ -13,7 +13,7 @@ exports.config = {
     'seleniumAddress': 'http://host.docker.internal:9515/wd/hub'
   },
   directConnect: false,
-  baseUrl: 'http://localhost:8080/',
+  baseUrl: 'http://localhost:4200/',
   SELENIUM_PROMISE_MANAGER: false,
   framework: 'jasmine',
   jasmineNodeOpts: {
