@@ -10,6 +10,7 @@ const networkHandler = require(
 
 const assert = require("assert");
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
+const JIRA_APP = process.env.JIRA_APP || 'localhost:4200';
 
 beforeSuite(async () => {
     await openBrowser({
@@ -37,7 +38,7 @@ step("Products are <products>", async (products) => {
 });
 
 step("Goto products page", async () => {
-    await goto('localhost:4200');
+    await goto(JIRA_APP);
 });
 
 step("Page contains <content>", async (content) => {
@@ -90,7 +91,7 @@ step("<product> has <query> stories", async function(product,query) {
 });
 
 step("Go to <product> search page", async function(product) {
-    await goto(`localhost:4200/products/${product}/search`);
+    await goto(`${JIRA_APP}/products/${product}/search`);
 });
 
 step("Search for <query>", async function(query) {
