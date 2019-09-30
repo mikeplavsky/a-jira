@@ -3,7 +3,7 @@
 const { 
     intercept, openBrowser, write, 
     closeBrowser, goto, press, text, 
-    below, focus,textBox, click} = require('taiko');
+    below, focus,textBox, click, waitFor} = require('taiko');
 
 const networkHandler = require(
     '../node_modules/taiko/lib/networkHandler.js');
@@ -15,7 +15,9 @@ const JIRA_APP = process.env.JIRA_APP || 'localhost:4200';
 beforeSuite(async () => {
     await openBrowser({
         headless: headless,
-        args: ['--auto-open-devtools-for-tabs'] });
+        args: [
+            '--auto-open-devtools-for-tabs',
+            '--window-size=1440,900']});
 });
 
 afterSuite(async () => {
@@ -122,6 +124,21 @@ let releases_spec = {
     releases:{}
 };
 
+step("<product> release <release> has stories <stories>", 
+    async (product, release, stories) => {
+
+    let res = stories.rows.map( r => {
+        return {fields:{
+            summary: r.cells[0],
+            status: {name: r.cells[1]}}}
+    });
+
+    await intercept(
+        `api/products/${product}/releases/${release}/stories`, 
+        {body:{issues:res}});
+
+});
+
 step("<product> has releases <table>", async function(product, table) {
 
     let releases = table.rows.map( r => {
@@ -176,4 +193,19 @@ step("See <product> features are there", async function(product) {
         await text(`${releases[0].features}`, 
             below(`${releases[0].name}`)).exists());
 
+});
+
+step("Go to release <release> stories page", async(release) => {
+    await click( `${release}` );
+    await click( "Stories" );
+});
+
+step("Navigate to <product> releases page", async function(product) {
+    await goto(`${JIRA_APP}/products/${product}/releases`);
+});
+
+step("See <release> release in <status> status", async function(release, status) {
+    assert.ok( await text( release ).exists() );
+    assert.ok( await text( 
+        status, below(release)).exists() );
 });

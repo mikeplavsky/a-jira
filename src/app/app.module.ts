@@ -15,7 +15,7 @@ import { ProductComponent } from './product/product.component'
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects'
-import { productReducer, releaseStatsReducer, epicsReducer, epicStatsReducer, storiesReducer, sprintsReducer, queriesReducer } from './product-reducer';
+import { productReducer, releaseStatsReducer, epicsReducer, epicStatsReducer, storiesReducer, sprintsReducer, queriesReducer, releaseStoriesReducer } from './product-reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './material.module';
@@ -25,7 +25,8 @@ import { EpicActionsComponent } from './epic-actions/epic-actions.component';
 import { StoriesComponent } from './stories/stories.component';
 import { StoryComponent } from './story/story.component';
 import { SprintComponent } from './sprint/sprint.component';
-import { SearchComponent } from './search/search.component'
+import { SearchComponent } from './search/search.component';
+import { ReleaseStoriesComponent } from './release-stories/release-stories.component'
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { SearchComponent } from './search/search.component'
     StoriesComponent,
     StoryComponent,
     SprintComponent,
-    SearchComponent
+    SearchComponent,
+    ReleaseStoriesComponent
   ],
   entryComponents: [
     ProductActionsComponent,
@@ -61,6 +63,7 @@ import { SearchComponent } from './search/search.component'
       releases:releaseStatsReducer,
       epics:epicsReducer,
       stories:storiesReducer,
+      releaseStories:releaseStoriesReducer,
       sprints:sprintsReducer,
       queries:queriesReducer,
       epicStats:epicStatsReducer}),

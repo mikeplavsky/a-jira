@@ -7,6 +7,7 @@ import {EpicsComponent} from './epics/epics.component';
 import { StoriesComponent } from './stories/stories.component';
 import { SprintComponent } from './sprint/sprint.component';
 import { SearchComponent } from './search/search.component';
+import { ReleaseStoriesComponent } from './release-stories/release-stories.component';
 
 const routes: Routes = [
   {path: "",redirectTo:"products", pathMatch: 'full'},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: "products/:p/sprint", component: SprintComponent},
   {path: "products/:p/search", component: SearchComponent},
   {path: "products/:p/releases/:r/epics", component: EpicsComponent},
+  {path: "products/:p/releases/:r/stories", component: ReleaseStoriesComponent},
   {path: "products/:p/releases/:r/epics/:e/stories", component: StoriesComponent},
   {path: "products", component: ProductsComponent},
   {path: "**",redirectTo:"products"},

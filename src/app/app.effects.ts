@@ -16,7 +16,9 @@ import { ProductActionTypes,
   SprintActionTypes,
   FetchSprint,
   QueryActionTypes,
-  FetchQuery} from './product-reducer'
+  FetchQuery,
+  ReleaseStoriesActionTypes,
+  FetchReleaseStories} from './product-reducer'
 import {map, mergeMap} from 'rxjs/operators'
 import {JiraService} from './jira.service'
 
@@ -55,6 +57,19 @@ export class AppEffects {
           return {
             product: a.product,
             type: SprintActionTypes.FetchDone,
+            payload: v
+  }}));});
+
+  @Effect()
+  loadReleaseStories$ = this.pipe(
+    ReleaseStoriesActionTypes.Fetch,
+    (a:FetchReleaseStories)=>{
+      return this.jiraSvc.getReleaseStories(a.product,a.release).pipe(
+        map(v => {
+          return {
+            product: a.product,
+            release: a.release,
+            type: ReleaseStoriesActionTypes.FetchDone,
             payload: v
   }}));});
 

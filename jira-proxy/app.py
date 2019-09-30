@@ -38,6 +38,14 @@ def query():
     
     return response(stories)
 
+@app.route('/api/products/<product>/releases/<release>/stories')
+def release_stories(product,release):
+
+    stories = jira.get_release_issues(
+        product, release)
+    
+    return response(stories)
+
 @app.route('/api/stories', methods=['POST'])
 def stories():
 

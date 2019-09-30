@@ -9,8 +9,9 @@ import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet'
 export class ReleaseActionsComponent implements OnInit {
 
   actions = [
-   //{name:"Stories", icon: "build"},
-   {name:"Epics", icon: "track_changes"}]
+   {name:"Epics", icon: "track_changes"},
+   {name:"Stories", icon: "build"}
+  ]
 
   constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data) {}
 

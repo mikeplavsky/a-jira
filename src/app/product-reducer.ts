@@ -84,6 +84,20 @@ export class FetchStoriesDone implements Action {
     type: string = StoriesActionTypes.FetchDone;
 }
 
+export enum ReleaseStoriesActionTypes {
+    Fetch = "Fetch ReleaseStories",
+    FetchDone = "Fetch ReleaseStories Done"    
+}
+
+export class FetchReleaseStories implements Action {
+    type: string = ReleaseStoriesActionTypes.Fetch;
+    constructor(public product, public release){}
+}
+
+export class FetchReleaseStoriesDone implements Action {
+    type: string = ReleaseStoriesActionTypes.FetchDone;
+}
+
 export enum SprintActionTypes {
     Fetch = "Fetch Sprint",
     FetchDone = "Fetch Sprint Done"    
@@ -116,6 +130,22 @@ export class FetchQueryDone implements Action {
 export class ClearQuery implements Action {
     type: string = QueryActionTypes.ClearQuery;
     constructor(public product){}
+}
+
+export function releaseStoriesReducer(state={}, action){
+
+    if (action.type == ReleaseStoriesActionTypes.FetchDone) {
+        
+       return {
+            ...state,
+            [action.product]: {
+                ...state[action.product],
+                [action.release]: action.payload['issues']
+                }
+            }
+        };
+        
+    return state;
 }
 
 export function queriesReducer(state={}, action){
