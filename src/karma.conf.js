@@ -40,7 +40,7 @@ module.exports = function (config) {
         name: 'Karma'}
     },
     browsers: ['WD'],
-    singleRun: true,
+    singleRun: false,
     restartOnFileChange: true
   });
 };
