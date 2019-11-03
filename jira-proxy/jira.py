@@ -103,7 +103,10 @@ def sprint_stories(project):
         "resolution DESC" )
     return query(q)
 
-done = lambda x: status(x) == 'Closed'
+
+statuses = lambda: (
+    "Closed", "Done", "Accepted", "Rejected", "Finished")
+done = lambda x: status(x) in statuses()
 ps = lambda x: int(points(x)) if points(x) else 0
 
 def get_features(res):
@@ -133,14 +136,14 @@ def enum_stories(data):
 
 def search_stories(project, text, all):
 
-    not_closed = "" if all else "AND resolution = Unresolved AND status != Closed"
+    not_closed = "" if all else f"AND resolution = Unresolved AND status in {statuses()}"
 
     jql=(
         f"project=\"{project}\" {not_closed} AND "
         f"(summary ~ '{text}' OR "
         f"description ~ '{text}' OR "
         f"issue in linkedIssuesFromQuery(\"'Epic Name' ~ '{text}'\")) ORDER BY "
-        f"resolution DESC")
+        f"status ASC")
     return query(jql, max_results=200)
 
 def search_for_stories(data):
@@ -182,9 +185,9 @@ def get_done_issues(project, days):
     jql =  (
         f'project = "{project}" AND '
         f'issuetype in standardIssueTypes() AND '
-        f'status = Closed AND '
-        f'status changed to closed AFTER -{days}d ' 
-        f'ORDER BY resolution DESC'
+        f'status in {statuses()} AND '
+        f'status changed to {statuses()} AFTER -{days}d ' 
+        f'ORDER BY status ASC'
     )
     return query(jql)
 
@@ -193,7 +196,7 @@ def get_release_issues(project,version):
     jql =  (
         f'project = "{project}" AND '
         f'fixVersion = "{version}" ORDER BY '
-        f'resolution DESC'
+        f'status ASC'
     )
     return query(jql)
 
@@ -206,7 +209,7 @@ def get_epic_issues(project,version,epic):
     if version:
         jql += f' AND fixVersion = "{version}" ' 
         
-    jql += 'ORDER BY resolution DESC'
+    jql += 'ORDER BY status ASC'
     return query(jql)
 
 def delete_issue(key):
