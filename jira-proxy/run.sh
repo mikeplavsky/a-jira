@@ -14,7 +14,7 @@ docker run -d -ti \
     -e JIRA_USER=$JIRA_USER \
     -e JIRA_PWD=$JIRA_PWD \
     -e JIRA_HOST=jira.labs.quest.com \
-    -e JIRA_PRODUCTS="RMADFE,RMAZ,QMMP,IN,ODME,AIRGAP" \
+    -e JIRA_PRODUCTS="RMADFE,RMAZ,QMMP,IN,IS,ODME,AIRGAP" \
     -p 8080:8080 \
     -w /jira-proxy \
     -v "$(pwd)":/jira-proxy \

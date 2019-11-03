@@ -105,7 +105,13 @@ def sprint_stories(project):
 
 
 statuses = lambda: (
-    "Closed", "Done", "Accepted", "Rejected", "Finished")
+    "Closed", 
+    "Done", 
+    "Accepted", 
+    "Rejected", 
+    "Finished",
+    "Resolved")
+
 done = lambda x: status(x) in statuses()
 ps = lambda x: int(points(x)) if points(x) else 0
 
