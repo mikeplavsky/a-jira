@@ -41,16 +41,20 @@ def test_get_features():
             status=dict(name=s)))
 
     given = dict(issues=[
+        feature(2, 'Accepted'),
+        feature(1, 'Finished'),
+        feature(3, 'Resolved'),
         feature(10, 'Closed'),
         feature(2, 'In Progress'),
         feature(None, 'Closed'),
         feature('', 'In Progress'),
         feature(1, 'Unresolved'),
-        feature(7, 'Closed'),
+        feature(9, 'Done'), 
+        feature(1, 'Accepted'), 
         feature(3, 'Rejected')])
 
     res = jira.get_features(given)
-    assert res == (7,3,23,17)
+    assert res == (11,7,32,26)
 
 @pytest.mark.parametrize("versions, exp",[
     ([],"no releases"),

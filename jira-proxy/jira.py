@@ -108,7 +108,6 @@ statuses = lambda: (
     "Closed", 
     "Done", 
     "Accepted", 
-    "Rejected", 
     "Finished",
     "Resolved")
 
@@ -142,7 +141,7 @@ def enum_stories(data):
 
 def search_stories(project, text, all):
 
-    not_closed = "" if all else f"AND resolution = Unresolved AND status in {statuses()}"
+    not_closed = "" if all else f"AND resolution = Unresolved AND status not in {statuses()}"
 
     jql=(
         f"project=\"{project}\" {not_closed} AND "
@@ -150,6 +149,7 @@ def search_stories(project, text, all):
         f"description ~ '{text}' OR "
         f"issue in linkedIssuesFromQuery(\"'Epic Name' ~ '{text}'\")) ORDER BY "
         f"status ASC")
+
     return query(jql, max_results=200)
 
 def search_for_stories(data):
