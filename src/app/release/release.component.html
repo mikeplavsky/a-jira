@@ -13,13 +13,13 @@
       <mat-card-subtitle 
         matTooltip="The start data set in Jira"
         [ngClass]="'startDate'" mat-line>
-        {{ (release.startDate | date: 'mediumDate') || "no start date" }}
+        {{ (release.startDate | date: 'mediumDate') || "? start date" }}
       </mat-card-subtitle>
 
       <mat-card-subtitle 
         matTooltip="The release data set in Jira"
         [ngClass]="'releaseDate'" mat-line>
-        {{ (release.releaseDate | date: 'mediumDate') || "no realese date" }}
+        {{ (release.releaseDate | date: 'mediumDate') || "? realese date" }}
       </mat-card-subtitle>
 
     </mat-card-subtitle>
@@ -35,7 +35,7 @@
       </mat-card-subtitle>
 
       <mat-card-subtitle [ngClass]="'days'" *ngIf="release.released">
-        {{ days(true) }} days
+        {{ days(true) || "?" }} days
       </mat-card-subtitle>
 
       <mat-card-subtitle 
@@ -98,7 +98,7 @@
         <mat-card-subtitle 
           matTooltip="The predicted number of sprints left"
           [ngClass]="'left-sprints'">
-          {{ prediction(stats) || "?" }} sprint(s)
+          {{ prediction(stats) | i18nPlural: sprintsMapping }}
         </mat-card-subtitle>
 
         <mat-card-subtitle 

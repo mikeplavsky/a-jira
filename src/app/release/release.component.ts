@@ -46,6 +46,12 @@ export function days(release, all=false){
 })
 export class ReleaseComponent implements OnInit {
 
+  sprintsMapping = {
+    "=NaN": "? sprints",
+    "=0": "? sprints",
+    "=1" : "# sprint",
+    "other": "# sprints"};
+
   @Input() release:any;
   @Input() product:any;
 
