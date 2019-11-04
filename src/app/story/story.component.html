@@ -16,18 +16,18 @@
 
     <mat-card-subtitle>
       <span matTooltip="Release(s)">
-        {{versions()}}
+        {{versions() || "? releases" }}
       </span>
     </mat-card-subtitle>
 
     <mat-card-subtitle >
       <span matTooltip="Sprint(s)">
-        {{sprints()}}
+        {{sprints() || "? sprints" }}
       </span>
     </mat-card-subtitle>
 
     <mat-card-subtitle>
-      {{points()}}
+      {{points() | i18nPlural: pointsMapping }}
     </mat-card-subtitle>
 
     </mat-card-subtitle>

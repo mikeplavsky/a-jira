@@ -8,6 +8,11 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export class StoryComponent implements OnInit {
 
+  pointsMapping = {
+    "=NaN": "? points",
+    "=1" : "# point",
+    "other": "# points"};
+
   jira_url = "https://jira.labs.quest.com/browse";
 
   @Input() product;
@@ -20,11 +25,11 @@ export class StoryComponent implements OnInit {
     let s = this.story['fields']['customfield_12004']
     
     if (!s) {
-      return "no sprints";
+      return s;
     }
 
     let res = s.map(v => v.match(/Sprint ([\d]*)/i)[1])
-    return res.join(",");
+    return res.join(", ");
 
   }
 
@@ -36,21 +41,13 @@ export class StoryComponent implements OnInit {
       return "no releases";
     }
     
-    return vs.map((v) => v["name"]).join(",");
+    return vs.map((v) => v["name"]).join(", ");
   }
 
   points() {
     
     let ps = this.story['fields']['customfield_10303']
-    
-    let n = parseInt(ps);
-    let pts = "points"; 
-    
-    if (n == 1) { 
-      pts = "point"; 
-    }
-
-    return `${n} ${pts}` 
+    return parseInt(ps);
 
   } 
 
