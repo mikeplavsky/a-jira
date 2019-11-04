@@ -14,6 +14,6 @@ docker run -d -ti \
     -e JIRA_USER=$JIRA_USER \
     -e JIRA_PWD=$JIRA_PWD \
     -e JIRA_HOST=jira.labs.quest.com \
-    -e JIRA_PRODUCTS="RMADFE,RMAZ,QMMP,IN,AIRGAP" \
+    -e JIRA_PRODUCTS="RMADFE,RMAZ,QMMP,IS,IN,ODME,MMAD,AIRGAP" \
     -p 4200:8000 \
     jira-proxy  

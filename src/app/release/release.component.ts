@@ -62,8 +62,11 @@ export class ReleaseComponent implements OnInit {
 
   predicted_date(stat) {
 
+    let p = this.prediction(stat);
+    if (!p) { return null};
+
     return new Date(
-      Date.now() + this.prediction(stat) * 10 * 24 * 60 * 60 * 1000);
+      Date.now() + p * 10 * 24 * 60 * 60 * 1000);
 
   }
 
