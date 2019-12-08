@@ -21,7 +21,7 @@ beforeSuite(async () => {
 });
 
 afterSuite(async () => {
-    await closeBrowser();
+    //await closeBrowser();
 });
 
 beforeScenario( async () => {
@@ -137,6 +137,26 @@ step("<product> release <release> has stories <stories>",
         `api/products/${product}/releases/${release}/stories`, 
         {body:{issues:res}});
 
+});
+
+step("Version <version> of <product> has epics <table>", 
+    async (version,product,table) => {
+
+    let epics = table.rows.map(r => r.cells[0])
+
+    await intercept(
+        `api/products/${product}/releases/${version}/epics$`, 
+        {body:epics});
+
+});
+
+step("Navigate to epics page for version <version> of <product>", 
+    async (version, product) => {
+    await goto(`${JIRA_APP}/products/${product}/releases/${version}/epics`);
+});
+
+step("Epics should be sorted like this <epics>", async function(epics) {
+	throw 'Unimplemented Step';
 });
 
 step("<product> has releases <table>", async function(product, table) {
