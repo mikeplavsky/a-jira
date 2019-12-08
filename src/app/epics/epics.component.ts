@@ -23,9 +23,14 @@ export class EpicsComponent implements OnInit {
     private route: ActivatedRoute) {
     }
 
-  ngOnInit() { 
+  sorted(v:[any]){
+    if (!v) return v;
+    return v.sort((a,b) => {
+      return b.value.points - a.value.points; 
+    });
+  }
 
-    console.log("Here");
+  ngOnInit() { 
 
     let product = this.product = this.route.snapshot.paramMap.get("p");
     let release = this.release = this.route.snapshot.paramMap.get("r");

@@ -2,6 +2,6 @@
   [product]=product
   [release]=release
   [epic]=epic.key
-  *ngFor="let epic of (epics$ | async | keyvalue)"
+  *ngFor="let epic of sorted(epics$ | async | keyvalue)"
   (click)='openBottomSheet(product, release, epic)'>
 </app-epic>

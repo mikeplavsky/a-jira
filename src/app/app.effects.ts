@@ -19,7 +19,7 @@ import { ProductActionTypes,
   FetchQuery,
   ReleaseStoriesActionTypes,
   FetchReleaseStories} from './product-reducer'
-import {map, mergeMap} from 'rxjs/operators'
+import {map, mergeMap, concatMap} from 'rxjs/operators'
 import {JiraService} from './jira.service'
 
 @Injectable()
@@ -78,14 +78,14 @@ export class AppEffects {
     StoriesActionTypes.Fetch,
     (a:FetchStories)=>{
       return this.jiraSvc.getEpicStories(a.product,a.release,a.epic).pipe(
-        map(v => {
+        map(v => { 
           return {
             product: a.product,
             release: a.release,
             epic: a.epic,
             type: StoriesActionTypes.FetchDone,
-            payload: v
-  }}));});
+            payload: v}
+        }))});
 
   @Effect()
   loadEpicStats$ = this.pipe(
@@ -107,13 +107,21 @@ export class AppEffects {
     EpicsActionTypes.Fetch,
     (a:FetchEpics)=>{
       return this.jiraSvc.getReleaseEpics(a.product,a.release).pipe(
-        map(v => {
-          return {
+        concatMap(v => {
+          
+          let epics = v.map(e => new FetchEpicStats(
+            a.product,a.release,e
+          ));
+
+          return [{
             product: a.product,
             release: a.release,
             type: EpicsActionTypes.FetchDone,
             payload: v
-  }}));});
+          },
+          ...epics];
+
+      }))});
 
   @Effect()
   loadReleaseStats$ = this.pipe(

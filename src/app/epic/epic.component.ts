@@ -21,13 +21,13 @@ export class EpicComponent implements OnInit {
 
   ngOnInit() {
 
-    this.store.dispatch(
+    /*this.store.dispatch(
       new FetchEpicStats(
         this.product,
         this.release,
         this.epic))
 
-    let getEpicStats = createSelector(
+      let getEpicStats = createSelector(
 
       (state:{epicStats},props:{product,release,epic}) => {
         
@@ -44,4 +44,7 @@ export class EpicComponent implements OnInit {
     let epic = this.epic;
 
     this.epicStats$ = this.store.select(
-      getEpicStats, {product,release,epic});}}
+      getEpicStats, {product,release,epic});*/
+
+  }
+}

@@ -226,7 +226,7 @@ export function epicsReducer(state={}, action){
         };
     }
 
-    if (action.type == 1111 /*EpicStatsActionTypes.FetchDone*/ ) {
+    if (action.type == EpicStatsActionTypes.FetchDone ) {
         return {
             ...state,
             [action.product]: {
@@ -243,6 +243,8 @@ export function epicsReducer(state={}, action){
 }
 
 export function epicStatsReducer(state={}, action){
+
+    return;
 
     if (action.type == EpicStatsActionTypes.FetchDone) {
        
