@@ -6,6 +6,13 @@ import { MatBottomSheet } from '@angular/material';
 import { EpicActionsComponent } from '../epic-actions/epic-actions.component';
 import { filter } from 'rxjs/operators';
 
+export function sorted_impl(v){
+  if (!v) return v;
+  return v.sort((a,b) => {
+    return b.value.points - a.value.points; 
+  });
+}
+
 @Component({
   selector: 'app-epics',
   templateUrl: './epics.component.html',
@@ -24,10 +31,7 @@ export class EpicsComponent implements OnInit {
     }
 
   sorted(v:[any]){
-    if (!v) return v;
-    return v.sort((a,b) => {
-      return b.value.points - a.value.points; 
-    });
+    return sorted_impl(v);
   }
 
   ngOnInit() { 

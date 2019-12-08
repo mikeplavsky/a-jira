@@ -19,6 +19,12 @@ pytest -n 5
 Quick front-end: 
 
 ```
+cd e2e
+./chromedriver.sh
+```
+
+```
+cd ..
 # working directory a-jira
 docker exec -ti a-jira bash
 ./test.sh
@@ -51,7 +57,7 @@ exit
 cd jira-proxy
 ./build.sh version 
 # check with
-./a-run.sh jira account
+./a-run.sh jira-svc-rm
 ```
 If it works, then proper docker image version has to be set in Azure portal 
 

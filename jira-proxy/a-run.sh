@@ -1,5 +1,3 @@
-./build.sh
-
 if [ -z $1 ]; then
     echo "Jira account is needed."
     exit 1

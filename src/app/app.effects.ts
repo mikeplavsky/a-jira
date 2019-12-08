@@ -107,7 +107,7 @@ export class AppEffects {
     EpicsActionTypes.Fetch,
     (a:FetchEpics)=>{
       return this.jiraSvc.getReleaseEpics(a.product,a.release).pipe(
-        concatMap(v => {
+        concatMap((v:[any]) => {
           
           let epics = v.map(e => new FetchEpicStats(
             a.product,a.release,e

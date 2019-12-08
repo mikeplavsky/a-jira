@@ -15,7 +15,7 @@ import { ProductComponent } from './product/product.component'
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects'
-import { productReducer, releaseStatsReducer, epicsReducer, epicStatsReducer, storiesReducer, sprintsReducer, queriesReducer, releaseStoriesReducer } from './product-reducer';
+import { productReducer, releaseStatsReducer, epicsReducer, storiesReducer, sprintsReducer, queriesReducer, releaseStoriesReducer } from './product-reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { MaterialModule } from './material.module';
