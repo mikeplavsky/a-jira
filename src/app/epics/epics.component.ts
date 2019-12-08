@@ -20,9 +20,12 @@ export class EpicsComponent implements OnInit {
   constructor(private store: Store<{}>,
     private sheet: MatBottomSheet,
     private router: Router,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute) {
+    }
 
-  ngOnInit() {
+  ngOnInit() { 
+
+    console.log("Here");
 
     let product = this.product = this.route.snapshot.paramMap.get("p");
     let release = this.release = this.route.snapshot.paramMap.get("r");

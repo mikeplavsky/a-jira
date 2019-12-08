@@ -1,7 +1,7 @@
 <app-epic 
   [product]=product
   [release]=release
-  [epic]=epic
-  *ngFor="let epic of (epics$ | async)"
+  [epic]=epic.key
+  *ngFor="let epic of (epics$ | async | keyvalue)"
   (click)='openBottomSheet(product, release, epic)'>
 </app-epic>

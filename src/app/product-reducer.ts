@@ -218,10 +218,27 @@ export function epicsReducer(state={}, action){
             ...state,
             [action.product]: {
                 ...state[action.product],
-                [action.release]: action.payload
+                [action.release]: action.payload.reduce(
+                    (res,k) => {res[k]={stats:null};return res},
+                    {}
+                )
             }
         };
     }
+
+    if (action.type == 1111 /*EpicStatsActionTypes.FetchDone*/ ) {
+        return {
+            ...state,
+            [action.product]: {
+                ...state[action.product],
+                [action.release]: {
+                    ...state[action.product][action.release],
+                    [action.epic]: action.payload
+                }
+            }
+        };
+    }
+
     return state;
 }
 
