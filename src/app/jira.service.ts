@@ -42,7 +42,6 @@ export class JiraService {
   }
 
   getReleaseEpics(product,release){
-    debugger;
     return this.http.get(
       `api/products/${product}/releases/${release}/epics`);
   }

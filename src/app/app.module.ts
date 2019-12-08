@@ -65,8 +65,7 @@ import { ReleaseStoriesComponent } from './release-stories/release-stories.compo
       stories:storiesReducer,
       releaseStories:releaseStoriesReducer,
       sprints:sprintsReducer,
-      queries:queriesReducer,
-      epicStats:epicStatsReducer}),
+      queries:queriesReducer}),
 
     EffectsModule.forRoot([AppEffects]),
 
