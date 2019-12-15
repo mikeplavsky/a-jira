@@ -148,6 +148,25 @@ step("Version <version> of <product> has epics <table>",
         `api/products/${product}/releases/${version}/epics$`, 
         {body:epics});
 
+    let epics_stats = table.rows.map(r => {
+        return {
+            epic: r.cells[0],
+            features: r.cells[1],
+            points: r.cells[2],
+            done_features: r.cells[3], 
+            done_points: r.cells[4] 
+        }});
+
+    epics_stats.forEach( async (e) => {
+
+        let body = e;
+
+        await intercept(
+            `api/products/${product}/releases/${version}/epics/${e.epic}`,
+            {body}
+        );
+        });
+
 });
 
 step("Navigate to epics page for version <version> of <product>", 
@@ -155,8 +174,21 @@ step("Navigate to epics page for version <version> of <product>",
     await goto(`${JIRA_APP}/products/${product}/releases/${version}/epics`);
 });
 
-step("Epics should be sorted like this <epics>", async function(epics) {
-	throw 'Unimplemented Step';
+step("Epics should be sorted like this <table>", async function(table) {
+
+    let epics = table.rows.map(r => r.cells[0])
+
+    for (let i = 0; i < epics.length - 1; ++i) {
+
+        let a = epics[i];
+        let b = epics[i + 1];
+
+        assert.ok( 
+            await text(`${b}`, 
+            below(`${a}`)).exists());
+
+    }
+
 });
 
 step("<product> has releases <table>", async function(product, table) {
