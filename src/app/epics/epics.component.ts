@@ -57,7 +57,7 @@ export class EpicsComponent implements OnInit {
 
     let ref = this.sheet.open(
       EpicActionsComponent,
-      {data: {product,release,epic}});
+      {data: {product,release,epic:epic.key}});
 
     this.router.events.pipe(
       filter(e => e instanceof NavigationEnd)).subscribe(
