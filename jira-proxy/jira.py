@@ -201,6 +201,7 @@ def get_release_issues(project,version):
 
     jql =  (
         f'project = "{project}" AND '
+        f'type not in subTaskIssueTypes() AND '
         f'fixVersion = "{version}" ORDER BY '
         f'status ASC'
     )
