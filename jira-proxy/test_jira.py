@@ -70,7 +70,7 @@ def test_search():
 
 def test_query():
     res = jira.query("project = RMADFE AND fixVersion = latestReleasedVersion()")
-    assert res['total'] > 100
+    assert res['total'] > 10
 
 def _test_create_issue():
 
@@ -123,6 +123,10 @@ def test_epic_issues(version, epic, num):
 def test_release_issues(version, count):
     res = jira.get_release_issues("RMADFE", version)
     assert len(res['issues']) > count
+
+def test_release_has_no_subtasks():
+    res = jira.get_release_issues("RMADFE", "10.0.1 HF1")
+    assert len(res['issues']) == 26
 
 def test_done_release():
 
