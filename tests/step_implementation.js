@@ -124,6 +124,55 @@ let releases_spec = {
     releases:{}
 };
 
+step("<product> epic <epic> in <release> has stories <table>", 
+    async function(
+        product, epic, release, table) {
+
+    let stories = table.rows.map(r => r.cells[0]);
+
+    await intercept("/api/stories",(request) => {
+
+        let data = JSON.parse(
+            request.request.postData);
+
+        if (data.epic == epic && 
+            data.product == product &&
+            data.release == release &&
+            request.request.method == "POST") {
+
+            let issues = stories.map( s => {
+                return {fields: {
+                    summary: s,
+                    status: {name: "Open"}
+                }};
+            });
+
+            let body = {issues};
+            request.respond({body});
+
+            return;
+        }
+
+        request.respond({body:{issues:[]}});
+    })
+
+});
+
+step("Go to <epic> stories page", async function(epic) {
+    await click(epic);
+    await click("Stories");
+});
+
+step("Stories should be those <table>", async function(table) {
+    
+    let stories = table.rows.map(r => r.cells[0]);
+
+    for (let i = 0; i < stories.length; ++i) {
+        assert.ok(await text(stories[i]).exists());
+    }
+
+});
+
 step("<product> release <release> has stories <stories>", 
     async (product, release, stories) => {
 
