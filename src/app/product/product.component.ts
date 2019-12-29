@@ -21,8 +21,9 @@ export class ProductComponent implements OnInit {
       new FetchProduct(this.product.name));
     
     let getProduct = createSelector(
-      (state: {products},props: {name}) => {
-        return state.products[props.name];});
+      (state: {products}) => state.products,
+      (products,props: {name}) => {
+        return products[props.name];});
 
     this.product$ = this.store.pipe(
       select(getProduct,{name: this.product.name}));

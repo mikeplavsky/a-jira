@@ -28,8 +28,9 @@ export class StoriesComponent implements OnInit {
       new FetchStories(this.product,this.release,this.epic));
 
     let getStories = createSelector(
-      (state:{stories},props:{product,release,epic}) => {
-        let p = state.stories[props.product];
+      (state:{stories}) => state.stories,
+      (stories,props:{product,release,epic}) => {
+        let p = stories[props.product];
         let r = p ? p[props.release]: null;
         return r ? r[props.epic]: null;
     }); 

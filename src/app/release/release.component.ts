@@ -96,8 +96,9 @@ export class ReleaseComponent implements OnInit {
         this.release.name));
     
     let getReleaseStats = createSelector(
-      (state: {releases},props:{product,release}) => {
-        let p = state.releases[props.product];
+      (state: {releases}) => state.releases,
+      (releases,props:{product,release}) => {
+        let p = releases[props.product];
         return p ? p[props.release] : null;
       });
 

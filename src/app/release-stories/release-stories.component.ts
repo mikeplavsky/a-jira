@@ -27,8 +27,9 @@ export class ReleaseStoriesComponent implements OnInit {
       new FetchReleaseStories(this.product,this.release));
 
     let getStories = createSelector(
-      (state:{releaseStories},props:{product,release}) => {
-        let p = state.releaseStories[props.product];
+      (state:{releaseStories}) => state.releaseStories,
+      (releaseStories,props:{product,release}) => {
+        let p = releaseStories[props.product];
         return p ? p[props.release]: null;
     }); 
 

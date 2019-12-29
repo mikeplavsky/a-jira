@@ -32,8 +32,9 @@ export class SearchComponent implements OnInit {
     let product = this.product = this.route.snapshot.paramMap.get("p");
 
     let getStories = createSelector(
-      (state:{queries},props:{product}) => {
-        return state.queries[props.product];
+      (state:{queries}) => state.queries,
+      (queries,props:{product}) => {
+        return queries[props.product];
     }); 
 
     this.query$ = this.store.select(
