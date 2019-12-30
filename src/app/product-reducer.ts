@@ -1,18 +1,12 @@
-import {Action} from '@ngrx/store'
+import {createAction, props, Action} from '@ngrx/store'
 
-export enum ProductActionTypes {
-    Fetch = "Fetch Product",
-    FetchDone = "Fetch Product Done"    
-}
+export const FetchProduct = createAction(
+    "Fetch Product",
+    props<{product:string}>()
+); 
 
-export class FetchProduct implements Action {
-    type: string = ProductActionTypes.Fetch;
-    constructor(public product:string){}
-}
-
-export class FetchProductDone implements Action {
-    type: string = ProductActionTypes.FetchDone;
-}
+export const FetchProductDone = createAction(
+     "Fetch Product Done");
 
 export enum ReleasesActionTypes {
     Fetch = "Fetch Releases",
@@ -179,7 +173,7 @@ export function sprintsReducer(state={sprint:{}}, action){
 
 export function productReducer(state={releases:{}}, action){
 
-    if (action.type == ProductActionTypes.FetchDone) {
+    if (action.type == FetchProductDone.type) {
         return { 
             ...state, 
             [action.product]: action.payload};}

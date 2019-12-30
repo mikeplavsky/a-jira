@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 
-import { ProductActionTypes, 
+import { 
   FetchProduct, 
+  FetchProductDone, 
   ReleasesActionTypes,
   FetchReleases,
   ReleaseStatsActionTypes,
@@ -38,12 +39,12 @@ export class AppEffects {
   @Effect()
   loadQuery$ = this.pipe(
     QueryActionTypes.Fetch,
-    (a:FetchQuery)=>{
-      return this.jiraSvc.getQuery(a.product,a.query).pipe(
+    ({product,query})=>{
+      return this.jiraSvc.getQuery(product,query).pipe(
         map(v => {
           return {
-            product: a.product,
-            query: a.query,
+            product,
+            query,
             type: QueryActionTypes.FetchDone,
             payload: v
   }}));});
@@ -51,11 +52,11 @@ export class AppEffects {
   @Effect()
   loadSprint$ = this.pipe(
     SprintActionTypes.Fetch,
-    (a:FetchSprint)=>{
-      return this.jiraSvc.getSprint(a.product).pipe(
+    ({product})=>{
+      return this.jiraSvc.getSprint(product).pipe(
         map(v => {
           return {
-            product: a.product,
+            product,
             type: SprintActionTypes.FetchDone,
             payload: v
   }}));});
@@ -63,12 +64,12 @@ export class AppEffects {
   @Effect()
   loadReleaseStories$ = this.pipe(
     ReleaseStoriesActionTypes.Fetch,
-    (a:FetchReleaseStories)=>{
-      return this.jiraSvc.getReleaseStories(a.product,a.release).pipe(
+    ({product,release})=>{
+      return this.jiraSvc.getReleaseStories(product,release).pipe(
         map(v => {
           return {
-            product: a.product,
-            release: a.release,
+            product,
+            release,
             type: ReleaseStoriesActionTypes.FetchDone,
             payload: v
   }}));});
@@ -76,13 +77,16 @@ export class AppEffects {
   @Effect()
   loadStories$ = this.pipe(
     StoriesActionTypes.Fetch,
-    (a:FetchStories)=>{
-      return this.jiraSvc.getEpicStories(a.product,a.release,a.epic).pipe(
+    ({product,release,epic})=>{
+      return this.jiraSvc.getEpicStories(
+        product,
+        release,
+        epic).pipe(
         map(v => { 
           return {
-            product: a.product,
-            release: a.release,
-            epic: a.epic,
+            product,
+            release,
+            epic,
             type: StoriesActionTypes.FetchDone,
             payload: v}
         }))});
@@ -90,14 +94,14 @@ export class AppEffects {
   @Effect()
   loadEpicStats$ = this.pipe(
     EpicStatsActionTypes.Fetch,
-    (a:FetchEpicStats)=>{
+    ({product,release,epic})=>{
       return this.jiraSvc.getEpicStats(
-        a.product,a.release,a.epic).pipe(
+        product,release,epic).pipe(
         map(v => {
           return {
-            product: a.product,
-            release: a.release,
-            epic: a.epic,
+            product,
+            release,
+            epic,
             type: EpicStatsActionTypes.FetchDone,
             payload: v
   }}));});
@@ -105,17 +109,17 @@ export class AppEffects {
   @Effect()
   loadEpics$ = this.pipe(
     EpicsActionTypes.Fetch,
-    (a:FetchEpics)=>{
-      return this.jiraSvc.getReleaseEpics(a.product,a.release).pipe(
+    ({product,release})=>{
+      return this.jiraSvc.getReleaseEpics(product,release).pipe(
         concatMap((v:[any]) => {
           
           let epics = v.map(e => new FetchEpicStats(
-            a.product,a.release,e
+            product,release,e
           ));
 
           return [{
-            product: a.product,
-            release: a.release,
+            product,
+            release,
             type: EpicsActionTypes.FetchDone,
             payload: v
           },
@@ -126,12 +130,12 @@ export class AppEffects {
   @Effect()
   loadReleaseStats$ = this.pipe(
     ReleaseStatsActionTypes.Fetch,
-    (a:FetchReleaseStats)=>{
-      return this.jiraSvc.getReleaseStats(a.product,a.release).pipe(
+    ({product,release})=>{
+      return this.jiraSvc.getReleaseStats(product,release).pipe(
         map(v => {
           return {
-            product: a.product,
-            release: a.release,
+            product,
+            release,
             type: ReleaseStatsActionTypes.FetchDone,
             payload: v
   }}));});
@@ -139,24 +143,24 @@ export class AppEffects {
   @Effect()
   loadReleases$ = this.pipe(
     ReleasesActionTypes.Fetch,
-    (a:FetchReleases)=>{
-      return this.jiraSvc.getVersions(a.product).pipe(
+    ({product})=>{
+      return this.jiraSvc.getVersions(product).pipe(
         map(v => {
           return {
-            product: a.product,
+            product: product,
             type: ReleasesActionTypes.FetchDone,
             payload: v
   }}));});
 
   @Effect()
   loadProduct$ = this.pipe( 
-    ProductActionTypes.Fetch,
-    (a:FetchProduct) => {
-      return this.jiraSvc.getVelocity(a.product).pipe(
+    FetchProduct,
+    ({product}) => {
+      return this.jiraSvc.getVelocity(product).pipe(
         map(v => { 
           return {
-            product: a.product,
-            type: ProductActionTypes.FetchDone, 
+            product: product,
+            type: FetchProductDone.type, 
             payload: v
   }}))});
 

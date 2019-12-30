@@ -18,7 +18,7 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
 
     this.store.dispatch(
-      new FetchProduct(this.product.name));
+      FetchProduct({product:this.product.name}));
     
     let getProduct = createSelector(
       (state: {products}) => state.products,
