@@ -99,7 +99,7 @@ export class AppEffects {
     ofType(EpicsActionTypes.Fetch),
     switchMap(({product,release}) =>
       this.jiraSvc.getReleaseEpics(product,release).pipe(
-        concatMap(v => {
+        concatMap((v:[any]) => {
           
           let epics = v.map(e => new FetchEpicStats(
             product,release,e
