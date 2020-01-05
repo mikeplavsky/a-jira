@@ -53,9 +53,8 @@ export class ReleasesComponent implements OnInit {
       new FetchReleases(product));
 
     let getReleases = createSelector(
-      (state: {products:{releases}}) => state.products.releases,
-      (releases,props:{name}) => {
-        return releases[props.name];});
+      ({products:{releases}}) => releases,
+      (releases,{name}) => releases[name]);
 
     this.releases$ = this.store.pipe(
       select(getReleases,{name: product}));

@@ -24,10 +24,8 @@ export class SprintComponent implements OnInit {
       new FetchSprint(this.product));
 
     let getStories = createSelector(
-      (state:{sprints}) => state.sprints,
-      (sprints,props:{product}) => {
-        return sprints[props.product];
-    }); 
+      ({sprints}) => sprints,
+      (sprints,{product}) => sprints[product]); 
 
     this.stories$ = this.store.select(
       getStories,{product}); 
