@@ -44,11 +44,11 @@ export class EpicsComponent implements OnInit {
 
     let getEpics = createSelector(
 
-      (state:{epics}) => state.epics,
+      ({epics}) => epics,
 
-      (epics,props:{product,release}) => {
-        let p = epics[props.product];
-        return p ? p[props.release]: null;
+      (epics,{product,release}) => {
+        let p = epics[product];
+        return p ? p[release]: null;
 
     }); 
 

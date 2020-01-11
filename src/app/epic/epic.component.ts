@@ -22,17 +22,17 @@ export class EpicComponent implements OnInit {
 
     let getEpicStats = createSelector(
 
-      (state:{epics}) => state.epics,
+      ({epics}) => epics,
 
-      (epics,props:{product,release,epic}) => {
+      (epics,{product,release,epic}) => {
         
-        let p = epics[props.product];
+        let p = epics[product];
         if (!p) {return null;}
 
-        let r = p[props.release];
+        let r = p[release];
         if (!r) {return null;}
 
-        return r[props.epic];});
+        return r[epic];});
 
     let product = this.product;
     let release = this.release;
