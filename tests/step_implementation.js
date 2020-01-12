@@ -174,13 +174,14 @@ step("Stories should be those <table>", async function(table) {
 });
 
 step("<product> release <release> has stories <stories>", 
+
     async (product, release, stories) => {
 
-    let res = stories.rows.map( r => {
-        return {fields:{
+    let res = stories.rows.map( r => ({
+        fields:{
             summary: r.cells[0],
-            status: {name: r.cells[1]}}}
-    });
+            status: {name: r.cells[1]
+    }}}));
 
     await intercept(
         `api/products/${product}/releases/${release}/stories`, 
@@ -197,14 +198,13 @@ step("Version <version> of <product> has epics <table>",
         `api/products/${product}/releases/${version}/epics$`, 
         {body:epics});
 
-    let epics_stats = table.rows.map(r => {
-        return {
+    let epics_stats = table.rows.map(r => ({
             epic: r.cells[0],
             features: r.cells[1],
             points: r.cells[2],
             done_features: r.cells[3], 
             done_points: r.cells[4] 
-        }});
+        }));
 
     epics_stats.forEach( async (e) => {
 
@@ -214,7 +214,7 @@ step("Version <version> of <product> has epics <table>",
             `api/products/${product}/releases/${version}/epics/${e.epic}`,
             {body}
         );
-        });
+    });
 
 });
 
@@ -242,14 +242,13 @@ step("Epics should be sorted like this <table>", async function(table) {
 
 step("<product> has releases <table>", async function(product, table) {
 
-    let releases = table.rows.map( r => {
-        return {
+    let releases = table.rows.map( r => ({
             name: r.cells[0],
             features: r.cells[1],
             points: r.cells[2],
             startDate: '2019-01-09',
-            releaseDate: '2019-12-01'};
-    });
+            releaseDate: '2019-12-01'
+        }));
 
     releases_spec.releases[product] = releases;
 
