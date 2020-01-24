@@ -6,7 +6,7 @@ describe ('Number of done days', () => {
 
         const d = days({
             startDate:"Jun 24, 2019", 
-            releaseDate:"Dec 24, 2019"},
+            releaseDate:"Dec 20, 2019"},
             false)
         
         expect(d).toBeLessThan(183);
