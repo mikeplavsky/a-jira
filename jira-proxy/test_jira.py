@@ -70,7 +70,7 @@ def test_search():
 
 def test_query():
     res = jira.query("project = RMADFE AND fixVersion = latestReleasedVersion()")
-    assert res['total'] > 10
+    assert res['total'] > 3
 
 def _test_create_issue():
 
