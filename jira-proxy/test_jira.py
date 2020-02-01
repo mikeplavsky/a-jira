@@ -99,6 +99,14 @@ def test_epic():
             all=False))
     assert len(res) > 2
 
+@pytest.mark.parametrize("version, label, num",[
+    ("10.1", "audi", 0),
+    ("10.1", "bmw", 10)])
+def test_label_issues(version, label, num):
+
+    res = jira.get_label_issues("RMADFE", version, label)
+    assert len(res['issues']) == num
+
 def test_get_labels():
     res = jira.get_labels("RMADFE", "10.1")
 

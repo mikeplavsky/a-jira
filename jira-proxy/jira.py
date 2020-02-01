@@ -176,6 +176,18 @@ def get_versions_names(data):
     res = get_versions(data['project'])
     return [r['name'] for r in res]
 
+def get_label_issues(project, version, label):
+
+    q = (
+        f'project = "{project}" AND '
+        f'fixVersion = "{version}" AND '
+        f'labels = "{label}" AND '
+        f'issuetype in standardIssueTypes() '
+        f'ORDER BY priority DESC, updated DESC'
+    )
+
+    return query(q)
+
 def get_labels(project, version):
 
     q = (
