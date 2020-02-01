@@ -99,6 +99,10 @@ def test_epic():
             all=False))
     assert len(res) > 2
 
+def test_get_labels():
+    res = jira.get_labels("RMADFE", "10.1")
+    assert set(["bmw","ci"]).issubset(res)
+
 def test_get_all_epics():
     res = jira.get_epics("RMADFE")
     assert len(res) > 30
