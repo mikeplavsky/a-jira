@@ -187,9 +187,11 @@ def get_labels(project, version):
     )
     res = query(q)
 
-    return set(sum(
+    return set(
+            map(lambda x: x.lower(),
+            sum(
             [x['fields']['labels'] for x in res['issues']],
-            []))
+            [])))
 
 def get_epics(project,version=None):
 

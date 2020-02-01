@@ -101,7 +101,9 @@ def test_epic():
 
 def test_get_labels():
     res = jira.get_labels("RMADFE", "10.1")
+
     assert set(["bmw","ci"]).issubset(res)
+    assert "BMW" not in res
 
 def test_get_all_epics():
     res = jira.get_epics("RMADFE")
