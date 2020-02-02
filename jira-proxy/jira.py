@@ -178,6 +178,9 @@ def get_versions_names(data):
 
 def get_label_issues(project, version, label):
 
+    if " " in label: 
+        return None
+
     q = (
         f'project = "{project}" AND '
         f'fixVersion = "{version}" AND '
@@ -199,11 +202,12 @@ def get_labels(project, version):
     )
     res = query(q)
 
-    return set(
-            map(lambda x: x.lower(),
-            sum(
-            [x['fields']['labels'] for x in res['issues']],
-            [])))
+    return [x for x in 
+                set(
+                map(lambda x: x.lower(),
+                    sum(
+                    [x['fields']['labels'] for x in res['issues']],
+                    [])))]
 
 def get_epics(project,version=None):
 

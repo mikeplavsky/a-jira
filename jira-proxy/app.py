@@ -51,12 +51,16 @@ def stories():
 
     data = json.loads(request.data)
 
-    stories = jira.get_epic_issues(
-        data['product'],
-        data['release'],
-        data['epic'])
+    product = data['product']
+    release = data['release']
+    epic = data['epic']
     
-    return response(stories)
+    labels = jira.get_labels(product, release)
+    get_issues = jira.get_label_issues if epic in labels else jira.get_epic_issues
+
+    issues = get_issues(product, release, epic)  
+    
+    return response(issues)
 
 @app.route('/api/products')
 def products():
@@ -73,10 +77,10 @@ def sprint(product):
 @app.route('/api/products/<product>/releases/<release>/epics')
 def release_epics(product,release):
 
-    epics = jira.get_epics(
-        product, release)
+    epics = jira.get_epics(product, release)
+    labels = jira.get_labels(product, release)
     
-    return response(epics)
+    return response(epics + labels)
 
 @app.route('/api/products/<product>/releases/<release>/epics/<path:epic>')
 def epic_stats(product,release,epic):
@@ -85,8 +89,10 @@ def epic_stats(product,release,epic):
     print(release)
     print(epic)
 
-    issues = jira.get_epic_issues(
-        product, release, epic)
+    labels = jira.get_labels(product, release)
+    get_issues = jira.get_label_issues if epic in labels else jira.get_epic_issues
+
+    issues = get_issues(product, release, epic)  
 
     res = jira.get_features(issues)
 
