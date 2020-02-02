@@ -13,7 +13,7 @@ Back-end:
 
 ```
 docker exec -ti jira-proxy sh
-pytest -n 5
+pytest -n 7
 ```
 
 Quick front-end: 
