@@ -7,4 +7,5 @@ docker run -ti -d \
     -p 9229:9229 \
     -p 9876:9876 \
     -w /a-jira a-jira \
-    ./server.sh
+    bash
+#    ./server.sh
