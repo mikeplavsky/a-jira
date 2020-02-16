@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {MatBottomSheet} from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import {ProductActionsComponent} from '../product-actions/product-actions.component';
 
 import {Router, NavigationEnd} from '@angular/router';

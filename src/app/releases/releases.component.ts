@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router'
 import {Router, NavigationEnd} from '@angular/router';
 import {filter} from 'rxjs/operators';
 
-import {MatBottomSheet} from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import {ReleaseActionsComponent} from '../release-actions/release-actions.component';
 
 import {Store, select, createSelector} from '@ngrx/store'

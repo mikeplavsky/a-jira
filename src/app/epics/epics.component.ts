@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'
 import {Store, createSelector} from '@ngrx/store'
 import { FetchEpics, epicsReducer } from '../product-reducer';
-import { MatBottomSheet } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { EpicActionsComponent } from '../epic-actions/epic-actions.component';
 import { filter } from 'rxjs/operators';
 
