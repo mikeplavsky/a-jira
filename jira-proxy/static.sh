@@ -1,2 +1,2 @@
-rm -rf statis
+rm -rf static
 cp -rf ../dist/a-jira/ static
