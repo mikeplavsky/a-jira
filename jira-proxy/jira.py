@@ -186,7 +186,7 @@ def get_label_issues(project, version, label):
         f'fixVersion = "{version}" AND '
         f'labels = "{label}" AND '
         f'issuetype in standardIssueTypes() '
-        f'ORDER BY priority DESC, updated DESC'
+        f'ORDER BY status ASC'
     )
 
     return query(q)
@@ -198,10 +198,9 @@ def get_labels(project, version):
         f'fixVersion = "{version}" AND '
         f'labels is not EMPTY AND '
         f'issuetype in standardIssueTypes()'
-        f'ORDER BY priority DESC, updated DESC'
     )
-    res = query(q)
 
+    res = query(q)
     return [x for x in 
                 set(
                 map(lambda x: x.lower(),
