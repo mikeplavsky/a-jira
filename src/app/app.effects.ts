@@ -31,7 +31,7 @@ export class AppEffects {
   constructor(
     private actions$: Actions,
     private jiraSvc: JiraService,
-    private store$: Store<{}>) {}
+    private store$: Store<{epics,products,releases}>) {}
 
   @Effect()
   loadQuery$ = this.actions$.pipe(
@@ -130,7 +130,16 @@ export class AppEffects {
   @Effect()
   loadReleaseStats$ = this.actions$.pipe(
     ofType(ReleaseStatsActionTypes.Fetch),
-    mergeMap(({product,release}) =>
+    withLatestFrom(this.store$),
+    filter(([{product,release},{releases}]) => {
+        
+        let p = releases[product];
+        let res = p ? p[release] : null;
+        
+        return p == null;
+
+    }),
+    mergeMap(([{product,release},store]) =>
       this.jiraSvc.getReleaseStats(product,release).pipe(
         map(v => ({
             product,
@@ -142,7 +151,11 @@ export class AppEffects {
   @Effect()
   loadReleases$ = this.actions$.pipe(
     ofType(ReleasesActionTypes.Fetch),
-    switchMap(({product}) => 
+    withLatestFrom(this.store$),
+    filter(([{product},{products}]) => {
+      return products.releases[product] == null;
+    }),
+    switchMap(([{product},store]) => 
       this.jiraSvc.getVersions(product).pipe(
         map(v => ({
             product: product,
