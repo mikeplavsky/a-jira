@@ -10,7 +10,7 @@ import { SearchComponent } from './search/search.component';
 import { ReleaseStoriesComponent } from './release-stories/release-stories.component';
 
 const routes: Routes = [
-  {path: "",redirectTo:"products", pathMatch: 'full'},
+  {path: "", component: ProductsComponent, pathMatch: 'full'},
   {path: "products/:id/releases", component: ReleasesComponent},
   {path: "products/:p/sprint", component: SprintComponent},
   {path: "products/:p/search", component: SearchComponent},
@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: "products/:p/releases/:r/stories", component: ReleaseStoriesComponent},
   {path: "products/:p/releases/:r/epics/:e/stories", component: StoriesComponent},
   {path: "products", component: ProductsComponent},
-  {path: "**",redirectTo:"products"},
+  {path: "**", component: ProductsComponent},
 ]
 
 @NgModule({
