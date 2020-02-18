@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import {Store} from '@ngrx/store';
+import {withLatestFrom, filter} from 'rxjs/operators';
 
 import { 
   FetchProduct, 
@@ -28,7 +30,8 @@ export class AppEffects {
 
   constructor(
     private actions$: Actions,
-    private jiraSvc: JiraService) {}
+    private jiraSvc: JiraService,
+    private store$: Store<{}>) {}
 
   @Effect()
   loadQuery$ = this.actions$.pipe(
@@ -97,7 +100,16 @@ export class AppEffects {
   @Effect()
   loadEpics$ = this.actions$.pipe(
     ofType(EpicsActionTypes.Fetch),
-    switchMap(({product,release}) =>
+    withLatestFrom(this.store$),
+    filter(([{product,release}, {epics}]) => {
+
+        let p = epics[product];
+        let res = p ? p[release]: null;
+
+        return res == null;
+
+    }),
+    switchMap(([{product,release}, store]) =>
       this.jiraSvc.getReleaseEpics(product,release).pipe(
         concatMap((v:[any]) => {
           

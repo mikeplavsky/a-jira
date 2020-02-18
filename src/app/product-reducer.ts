@@ -213,7 +213,7 @@ export function epicsReducer(state={}, action){
             [action.product]: {
                 ...state[action.product],
                 [action.release]: action.payload.reduce(
-                    (res,k) => {res[k]={stats:null};return res},
+                    (res,epic) => {res[epic]={stats:null};return res},
                     {}
                 )
             }
