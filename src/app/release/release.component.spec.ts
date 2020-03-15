@@ -54,7 +54,7 @@ describe ( 'Number of left sprints prediction', () => {
             done_points: 20},
             10);
 
-        expect(p).toEqual(4);
+        expect(p).toEqual(3);
 
     });
 
@@ -72,7 +72,7 @@ describe ('10 days velocity', () => {
     it ('should be right if there are done points', () => {
 
         const v = velocity({done_points:20}, 10);
-        expect(v).toEqual(20);
+        expect(v).toEqual(28);
 
     });
 

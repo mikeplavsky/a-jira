@@ -3,13 +3,15 @@ import { Component, OnInit, Input } from '@angular/core';
 import {Store, createSelector} from '@ngrx/store'
 import { FetchReleaseStats } from '../product-reducer'
 
+const sprint = 14;
+
 export function velocity (stat, days) {
 
   if (days == 0) {
-    return 0
+    return 0;
   }
 
-  let vs = stat.done_points / days * 10;
+  let vs = stat.done_points / days * sprint;
   return Math.ceil(vs);
 
 }
@@ -72,7 +74,7 @@ export class ReleaseComponent implements OnInit {
     if (!p) { return null};
 
     return new Date(
-      Date.now() + p * 10 * 24 * 60 * 60 * 1000);
+      Date.now() + p * sprint * 24 * 60 * 60 * 1000);
 
   }
 

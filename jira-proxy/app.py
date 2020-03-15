@@ -123,11 +123,12 @@ def release_stats(product,release):
 def done_stats(product):
     
     days = 30
+    sprint = 14
 
     issues = jira.get_done_issues(product, days)
     res = jira.get_features(issues)
 
-    velocity = round(res[2] / days * 10,1)
+    velocity = round(res[2] / days * sprint,1)
 
     return response(
         dict(velocity=velocity,
