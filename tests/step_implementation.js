@@ -1,12 +1,10 @@
 /* globals gauge*/
 "use strict";
 const { 
+    clearIntercept,
     intercept, openBrowser, write, 
     closeBrowser, goto, press, text, 
     below, focus,textBox, click, waitFor} = require('taiko');
-
-const networkHandler = require(
-    '../node_modules/taiko/lib/networkHandler.js');
 
 const assert = require("assert");
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
@@ -24,8 +22,8 @@ afterSuite(async () => {
     //await closeBrowser();
 });
 
-beforeScenario( async () => {
-    networkHandler.resetInterceptors();
+beforeScenario( async () => { 
+    clearIntercept();
 });
 
 step("Products are <products>", async (products) => {
