@@ -10,7 +10,7 @@ export class ReleaseActionsComponent implements OnInit {
 
   actions = [
    {name:"Epics", icon: "track_changes"},
-   {name:"Stories", icon: "build"}
+   {name:"Stories", icon: "list"}
   ]
 
   constructor(@Inject(MAT_BOTTOM_SHEET_DATA) public data) {}

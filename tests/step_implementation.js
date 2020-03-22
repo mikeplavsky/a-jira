@@ -101,7 +101,7 @@ step("Go to <product> search page", async function(product) {
 
 step("Search for <query>", async function(query) {
 
-    await focus(textBox(below("products")));
+    await focus(textBox());
     await write(query);
     await press("Enter");
     
@@ -298,9 +298,7 @@ step("See <product> releases are there", async function(product) {
     the_product = product;
     let releases = releases_spec.releases[product];
 
-    assert.ok( 
-        await text(`${releases[0].name}`, 
-        below('products')).exists());
+    await waitFor(`${releases[0].name}`);
 
 });
 
@@ -321,8 +319,8 @@ step("Go to release <release> stories page", async(release) => {
 
     await click( `${release}` );
     
-    await text("Epics");
-    await text("Stories");
+    await waitFor("Epics");
+    await waitFor("Stories");
 
     //await click( "Stories" );
     await goto(`${JIRA_APP}/products/${the_product}/releases/${release}/stories`);

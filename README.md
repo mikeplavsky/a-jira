@@ -13,7 +13,7 @@ Back-end:
 
 ```
 docker exec -ti jira-proxy sh
-pytest -n 7
+pytest -n 11
 ```
 
 Quick front-end: 
@@ -41,12 +41,10 @@ cd e2e
 
 Gauge: 
 ```
-./node_modules/.bin/gauge run specs
-```
-
-Jest:
-```
-./node_modules/.bin/jest jest-tests
+cd specs
+./build.sh
+cd ..
+./gauge.sh gauge
 ```
 
 Deployment:

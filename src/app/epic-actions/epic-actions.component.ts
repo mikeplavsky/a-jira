@@ -8,7 +8,7 @@ import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 })
 export class EpicActionsComponent implements OnInit {
 
-  actions = [{name:"Stories", icon: "build"}]
+  actions = [{name:"Stories", icon: "list"}]
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data) {}
