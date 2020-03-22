@@ -8,7 +8,7 @@ fi
 
 CMD=$1
 
-function ext_gauge() {
+function run_ext() {
 
     docker run -ti \
         -e CHROME_HOST=host.docker.internal \
@@ -23,7 +23,7 @@ function ext_gauge() {
 
 }
 
-function gauge() {
+function run() {
 
     docker run -ti \
         -e headless_chrome=true \
