@@ -7,10 +7,32 @@ describe ('Number of done days', () => {
         const d = days({
             startDate:"Jun 24, 2019", 
             releaseDate:"Dec 20, 2019"},
-            false)
+            false,
+            () => new Date("09 Jul 2019"))
         
-        expect(d).toBeLessThan(183);
-        expect(d).toBeGreaterThan(2);
+        expect(d).toEqual(15);
+    });
+
+    it ( 'in done release', () => {
+
+        const d = days({
+            startDate:"Jun 24, 2019", 
+            releaseDate:"Dec 20, 2019"},
+            false,
+            () => new Date("21 Dec 2019"))
+        
+        expect(d).toEqual(179);
+    });
+
+    it ( 'in future release', () => {
+
+        const d = days({
+            startDate:"Jun 24, 2019", 
+            releaseDate:"Dec 20, 2019"},
+            false,
+            () => new Date("21 Jun 2019"))
+        
+        expect(d).toEqual(0);
     });
 
 });
@@ -21,7 +43,9 @@ describe ('Number of release days', () => {
 
         const d = days({
             startDate:"Feb 20, 2019", 
-            releaseDate:"Jun 24, 2019"})
+            releaseDate:"Jun 24, 2019"},
+            true,
+            () => new Date("01 Jan 2020"))
 
         expect(d).toEqual(124);
     });
@@ -31,7 +55,8 @@ describe ('Number of release days', () => {
         const d = days({
             startDate:"Jun 24, 2019", 
             releaseDate:"Dec 24, 2019"},
-            true)
+            true,
+            () => new Date("01 Aug 2019"))
 
         expect(d).toEqual(183);
     });

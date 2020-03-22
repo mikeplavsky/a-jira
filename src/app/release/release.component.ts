@@ -26,17 +26,23 @@ export function prediction_of_sprints(stat, days) {
 
 }
 
-export function days(release, all=false){
+export function days(release, 
+  all=false, get_now=()=>new Date() ){
 
   let end:any = new Date(release.releaseDate);
   let start:any = new Date(release.startDate);
 
-  let now = new Date();
+  let now = get_now();
   if (start < now && now < end && !all) {
     end = now;
   }
 
   let days = (end - start) / 1000 / 60 / 60 / 24; 
+
+  if (start > now && !all) {
+    days = 0;
+  }
+
   return Math.floor(days);
 
 }
