@@ -9,13 +9,18 @@ const {
 const assert = require("assert");
 const headless = process.env.headless_chrome.toLowerCase() === 'true';
 const JIRA_APP = process.env.JIRA_APP || 'localhost:4200';
+const CHROME_HOST = process.env.CHROME_HOST;
+const CHROME_PORT = process.env.CHROME_PORT;
 
 beforeSuite(async () => {
     await openBrowser({
+        host: CHROME_HOST,
+        port: CHROME_PORT,
         headless: headless,
         args: [
             '--auto-open-devtools-for-tabs',
-            '--window-size=1440,900']});
+            '--window-size=1440,900',
+            '--no-sandbox']});
 });
 
 afterSuite(async () => {
@@ -114,8 +119,13 @@ step("Nothing has been found", async function() {
 });
 
 step("Go to <product> releases page", async function(product) {
+
     await click( `${product}` );
-    await click( "Releases" );
+    await text( "Releases" );
+
+    await goto(
+        `${JIRA_APP}/products/${product}/releases`);
+
 });
 
 let releases_spec = {
@@ -157,8 +167,13 @@ step("<product> epic <epic> in <release> has stories <table>",
 });
 
 step("Go to <epic> stories page", async function(epic) {
+    
     await click(epic);
-    await click("Stories");
+    await text("Stories");
+
+    await goto(
+        `${JIRA_APP}/products/${the_product}/releases/${the_version}/epics/${epic}/stories`);
+
 });
 
 step("Stories should be those <table>", async function(table) {
@@ -218,7 +233,12 @@ step("Version <version> of <product> has epics <table>",
 
 step("Navigate to epics page for version <version> of <product>", 
     async (version, product) => {
-    await goto(`${JIRA_APP}/products/${product}/releases/${version}/epics`);
+
+        the_product = product;
+        the_version = version;
+
+        await goto(`${JIRA_APP}/products/${product}/releases/${version}/epics`);
+
 });
 
 step("Epics should be sorted like this <table>", async function(table) {
@@ -275,6 +295,7 @@ step("<product> has releases <table>", async function(product, table) {
 
 step("See <product> releases are there", async function(product) {
 
+    the_product = product;
     let releases = releases_spec.releases[product];
 
     assert.ok( 
@@ -293,13 +314,26 @@ step("See <product> features are there", async function(product) {
 
 });
 
+let the_product = null;
+let the_version = null;
+
 step("Go to release <release> stories page", async(release) => {
+
     await click( `${release}` );
-    await click( "Stories" );
+    
+    await text("Epics");
+    await text("Stories");
+
+    //await click( "Stories" );
+    await goto(`${JIRA_APP}/products/${the_product}/releases/${release}/stories`);
+
 });
 
 step("Navigate to <product> releases page", async function(product) {
+
+    the_product = product;
     await goto(`${JIRA_APP}/products/${product}/releases`);
+
 });
 
 step("See <release> release in <status> status", async function(release, status) {
