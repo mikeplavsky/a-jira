@@ -44,7 +44,12 @@ Gauge:
 cd specs
 ./build.sh
 cd ..
-./gauge.sh gauge
+./gauge.sh run
+```
+Gauge in the browser:
+```
+./chrome.sh
+./gauge.sh run_ext
 ```
 
 Deployment:
