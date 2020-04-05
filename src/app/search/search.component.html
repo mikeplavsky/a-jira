@@ -32,5 +32,6 @@
 <app-story 
   [product]=product
   [story]=story
-  *ngFor="let story of (query$ | async)?.stories">
+  *ngFor="let story of (query$ | async)?.stories"
+  (click)='openBottomSheet(product, release, epic)'>
 </app-story>

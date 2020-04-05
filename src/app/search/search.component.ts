@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'
 import { Store, createSelector } from '@ngrx/store';
 import { FetchQuery, ClearQuery } from '../product-reducer';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { filter } from 'rxjs/operators';
+import { SearchActionsComponent } from '../search-actions/search-actions.component';
 
 @Component({
   selector: 'app-search',
@@ -15,7 +18,10 @@ export class SearchComponent implements OnInit {
   query$;
 
   constructor(private store: Store<{}>,
-    private route: ActivatedRoute) {}
+    private sheet: MatBottomSheet,
+    private router: Router,
+    private route: ActivatedRoute) {
+    }
 
   applyFilter(){
 
@@ -39,6 +45,18 @@ export class SearchComponent implements OnInit {
 
     this.query$ = this.store.select(
       getStories,{product}); 
+
+  }
+
+  openBottomSheet(product){
+
+    let ref = this.sheet.open(
+      SearchActionsComponent,
+      {data: {product}});
+
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd)).subscribe(
+        e => ref.dismiss());
 
   }
 
