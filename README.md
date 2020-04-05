@@ -48,7 +48,7 @@ cd ..
 ```
 Gauge in the browser:
 ```
-./chrome.sh
+./chromium.sh
 ./gauge.sh run_ext
 ```
 
