@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'
 import { Store, createSelector } from '@ngrx/store';
 import { FetchStories } from '../product-reducer';
+import { StoryActionsComponent } from '../story-actions/story-actions.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-stories',
@@ -16,7 +19,10 @@ export class StoriesComponent implements OnInit {
   stories$;
 
   constructor(private store: Store<{}>,
-    private route: ActivatedRoute) {}
+    private sheet: MatBottomSheet,
+    private router: Router,
+    private route: ActivatedRoute) {
+    }
 
   ngOnInit() {
 
@@ -37,6 +43,18 @@ export class StoriesComponent implements OnInit {
 
     this.stories$ = this.store.select(
       getStories,{product,release,epic}); 
+
+  }
+
+  openBottomSheet(product, release, epic){
+
+    let ref = this.sheet.open(
+      StoryActionsComponent,
+      {data: {product,release,epic}});
+
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd)).subscribe(
+        e => ref.dismiss());
 
   }
 
