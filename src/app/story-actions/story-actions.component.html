@@ -4,6 +4,11 @@
     <span mat-line>Products</span>
     <mat-divider></mat-divider>
   </a>
+  <a mat-list-item routerLink="/products/{{data.product}}/sprint">
+    <mat-icon mat-list-icon>rowing</mat-icon>
+    <span mat-line>Sprint</span>
+    <mat-divider></mat-divider>
+  </a>
   <a mat-list-item routerLink="/products/{{data.product}}/releases">
     <mat-icon mat-list-icon>build</mat-icon>
     <span mat-line>Releases</span>

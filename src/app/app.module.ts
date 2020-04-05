@@ -27,7 +27,8 @@ import { StoryComponent } from './story/story.component';
 import { SprintComponent } from './sprint/sprint.component';
 import { SearchComponent } from './search/search.component';
 import { ReleaseStoriesComponent } from './release-stories/release-stories.component';
-import { StoryActionsComponent } from './story-actions/story-actions.component'
+import { StoryActionsComponent } from './story-actions/story-actions.component';
+import { SprintActionsComponent } from './sprint-actions/sprint-actions.component'
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { StoryActionsComponent } from './story-actions/story-actions.component'
     SprintComponent,
     SearchComponent,
     ReleaseStoriesComponent,
-    StoryActionsComponent
+    StoryActionsComponent,
+    SprintActionsComponent
   ],
   entryComponents: [
     ProductActionsComponent,

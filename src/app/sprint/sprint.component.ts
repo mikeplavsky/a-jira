@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'
 import { Store, createSelector } from '@ngrx/store';
 import { FetchSprint } from '../product-reducer';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { SprintActionsComponent } from "../sprint-actions/sprint-actions.component";
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sprint',
@@ -14,7 +17,10 @@ export class SprintComponent implements OnInit {
   stories$;
 
   constructor(private store: Store<{}>,
-    private route: ActivatedRoute) {}
+    private sheet: MatBottomSheet,
+    private router: Router,
+    private route: ActivatedRoute) {
+    }
 
   ngOnInit() {
 
@@ -29,6 +35,18 @@ export class SprintComponent implements OnInit {
 
     this.stories$ = this.store.select(
       getStories,{product}); 
+  }
+
+  openBottomSheet(product){
+
+    let ref = this.sheet.open(
+      SprintActionsComponent,
+      {data: {product}});
+
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd)).subscribe(
+        e => ref.dismiss());
+
   }
 
 }
