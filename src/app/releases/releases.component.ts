@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router'
-import {Router, NavigationEnd} from '@angular/router';
 import {filter} from 'rxjs/operators';
 
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
@@ -21,7 +20,6 @@ export class ReleasesComponent implements OnInit {
   product:any;
 
   constructor(private store: Store<{}>,
-    private router: Router,
     private sheet: MatBottomSheet,
     private route: ActivatedRoute) {}
 
@@ -66,10 +64,6 @@ export class ReleasesComponent implements OnInit {
     let ref = this.sheet.open(
       StoryActionsComponent,
       {data: {product,release}});
-
-    this.router.events.pipe(
-      filter(e => e instanceof NavigationEnd)).subscribe(
-        e => ref.dismiss());
 
   }
 

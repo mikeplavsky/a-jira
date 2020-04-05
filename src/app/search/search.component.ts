@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'
+import { ActivatedRoute} from '@angular/router'
 import { Store, createSelector } from '@ngrx/store';
 import { FetchQuery, ClearQuery } from '../product-reducer';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
@@ -19,7 +19,6 @@ export class SearchComponent implements OnInit {
 
   constructor(private store: Store<{}>,
     private sheet: MatBottomSheet,
-    private router: Router,
     private route: ActivatedRoute) {
     }
 
@@ -53,10 +52,6 @@ export class SearchComponent implements OnInit {
     let ref = this.sheet.open(
       StoryActionsComponent,
       {data: {product}});
-
-    this.router.events.pipe(
-      filter(e => e instanceof NavigationEnd)).subscribe(
-        e => ref.dismiss());
 
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'
+import { ActivatedRoute} from '@angular/router'
 import { Store, createSelector } from '@ngrx/store';
 import { FetchReleaseStories } from '../product-reducer';
 import { StoryActionsComponent } from '../story-actions/story-actions.component';
@@ -19,7 +19,6 @@ export class ReleaseStoriesComponent implements OnInit {
 
   constructor(private store: Store<{}>,
     private sheet: MatBottomSheet,
-    private router: Router,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -47,10 +46,6 @@ export class ReleaseStoriesComponent implements OnInit {
     let ref = this.sheet.open(
       StoryActionsComponent,
       {data: {product,release}});
-
-    this.router.events.pipe(
-      filter(e => e instanceof NavigationEnd)).subscribe(
-        e => ref.dismiss());
 
   }
 
