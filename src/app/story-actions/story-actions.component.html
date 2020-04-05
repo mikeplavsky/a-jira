@@ -14,9 +14,30 @@
     <span mat-line>Releases</span>
     <mat-divider></mat-divider>
   </a>
-  <a mat-list-item routerLink="/products/{{data.product}}/releases/{{data.release}}/epics">
+  <a mat-list-item routerLink="/products/{{data.product}}/search">
+    <mat-icon mat-list-icon>search</mat-icon>
+    <span mat-line>Search</span>
+    <mat-divider></mat-divider>
+  </a>
+
+  <a mat-list-item *ngIf="data.release" 
+     routerLink="/products/{{data.product}}/releases/{{data.release}}/epics">
     <mat-icon mat-list-icon>track_changes</mat-icon>
     <span mat-line>Epics</span>
+    <mat-divider></mat-divider>
+  </a>
+  
+  <a mat-list-item *ngIf="data.release && !data.epic" 
+     routerLink="/products/{{data.product}}/releases/{{data.release}}/stories">
+    <mat-icon mat-list-icon>list</mat-icon>
+    <span mat-line>Stories</span>
+    <mat-divider></mat-divider>
+  </a>
+
+  <a mat-list-item *ngIf="data.release && data.epic" 
+     routerLink="/products/{{data.product}}/releases/{{data.release}}/epics/{{encode(data.epic)}}/stories">
+    <mat-icon mat-list-icon>list</mat-icon>
+    <span mat-line>Stories</span>
     <mat-divider></mat-divider>
   </a>
 </mat-nav-list>

@@ -50,7 +50,7 @@ export class StoriesComponent implements OnInit {
 
     let ref = this.sheet.open(
       StoryActionsComponent,
-      {data: {product,release,epic}});
+      {data: {product,release,epic:decodeURIComponent(epic)}});
 
     this.router.events.pipe(
       filter(e => e instanceof NavigationEnd)).subscribe(

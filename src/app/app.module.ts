@@ -4,13 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ProductActionsComponent } from './product-actions/product-actions.component';
 import { ReleasesComponent } from './releases/releases.component';
 import { ReleaseComponent } from './release/release.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProductsComponent } from './products/products.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ReleaseActionsComponent } from './release-actions/release-actions.component';
 import { ProductComponent } from './product/product.component'
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -21,42 +19,30 @@ import { environment } from '../environments/environment';
 import { MaterialModule } from './material.module';
 import { EpicsComponent } from './epics/epics.component';
 import { EpicComponent } from './epic/epic.component';
-import { EpicActionsComponent } from './epic-actions/epic-actions.component';
 import { StoriesComponent } from './stories/stories.component';
 import { StoryComponent } from './story/story.component';
 import { SprintComponent } from './sprint/sprint.component';
 import { SearchComponent } from './search/search.component';
 import { ReleaseStoriesComponent } from './release-stories/release-stories.component';
 import { StoryActionsComponent } from './story-actions/story-actions.component';
-import { SprintActionsComponent } from './sprint-actions/sprint-actions.component';
-import { SearchActionsComponent } from './search-actions/search-actions.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductActionsComponent,
     ReleasesComponent,
     ProductsComponent,
-    ReleaseActionsComponent,
     ProductComponent,
     ReleaseComponent,
     EpicsComponent,
     EpicComponent,
-    EpicActionsComponent,
     StoriesComponent,
     StoryComponent,
     SprintComponent,
     SearchComponent,
     ReleaseStoriesComponent,
-    StoryActionsComponent,
-    SprintActionsComponent,
-    SearchActionsComponent
+    StoryActionsComponent
   ],
   entryComponents: [
-    ProductActionsComponent,
-    ReleaseActionsComponent,
-    EpicActionsComponent
-
   ],
   imports: [
     BrowserModule,

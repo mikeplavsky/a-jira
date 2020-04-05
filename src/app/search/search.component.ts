@@ -4,7 +4,7 @@ import { Store, createSelector } from '@ngrx/store';
 import { FetchQuery, ClearQuery } from '../product-reducer';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { filter } from 'rxjs/operators';
-import { SearchActionsComponent } from '../search-actions/search-actions.component';
+import { StoryActionsComponent } from '../story-actions/story-actions.component';
 
 @Component({
   selector: 'app-search',
@@ -51,7 +51,7 @@ export class SearchComponent implements OnInit {
   openBottomSheet(product){
 
     let ref = this.sheet.open(
-      SearchActionsComponent,
+      StoryActionsComponent,
       {data: {product}});
 
     this.router.events.pipe(

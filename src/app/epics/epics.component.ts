@@ -3,8 +3,8 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'
 import {Store, createSelector} from '@ngrx/store'
 import { FetchEpics, epicsReducer } from '../product-reducer';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { EpicActionsComponent } from '../epic-actions/epic-actions.component';
 import { filter } from 'rxjs/operators';
+import { StoryActionsComponent } from '../story-actions/story-actions.component';
 
 export function sorted_impl(v){
   if (!v) return v;
@@ -60,7 +60,7 @@ export class EpicsComponent implements OnInit {
   openBottomSheet(product, release, epic){
 
     let ref = this.sheet.open(
-      EpicActionsComponent,
+      StoryActionsComponent,
       {data: {product,release,epic:epic.key}});
 
     this.router.events.pipe(

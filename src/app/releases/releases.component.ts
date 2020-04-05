@@ -5,7 +5,7 @@ import {Router, NavigationEnd} from '@angular/router';
 import {filter} from 'rxjs/operators';
 
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import {ReleaseActionsComponent} from '../release-actions/release-actions.component';
+import { StoryActionsComponent } from '../story-actions/story-actions.component';
 
 import {Store, select, createSelector} from '@ngrx/store'
 import { FetchReleases } from '../product-reducer'
@@ -64,7 +64,7 @@ export class ReleasesComponent implements OnInit {
   openBottomSheet(product, release){
 
     let ref = this.sheet.open(
-      ReleaseActionsComponent,
+      StoryActionsComponent,
       {data: {product,release}});
 
     this.router.events.pipe(

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import {ProductActionsComponent} from '../product-actions/product-actions.component';
+import { StoryActionsComponent } from '../story-actions/story-actions.component';
 
 import {Router, NavigationEnd} from '@angular/router';
 import {filter} from 'rxjs/operators';
@@ -24,8 +24,8 @@ export class ProductsComponent implements OnInit {
   openBottomSheet(product:any){
 
     let ref = this.sheet.open(
-      ProductActionsComponent,
-      {data: {...product}});
+      StoryActionsComponent,
+      {data: {product}});
 
     this.router.events.pipe(
       filter(e => e instanceof NavigationEnd)).subscribe(

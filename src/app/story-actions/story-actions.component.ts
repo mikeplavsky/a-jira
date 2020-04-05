@@ -11,6 +11,10 @@ export class StoryActionsComponent implements OnInit {
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data) {}
 
+  encode(s) {
+    return encodeURIComponent(s);
+  }
+
   ngOnInit(): void {
   }
 

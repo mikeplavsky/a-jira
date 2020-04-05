@@ -1,4 +1,4 @@
 <app-product [product]=product 
     *ngFor="let product of products" 
-    (click)="openBottomSheet(product)">
+    (click)="openBottomSheet(product.name)">
 </app-product>

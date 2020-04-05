@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'
 import { Store, createSelector } from '@ngrx/store';
 import { FetchSprint } from '../product-reducer';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { SprintActionsComponent } from "../sprint-actions/sprint-actions.component";
+import { StoryActionsComponent } from "../story-actions/story-actions.component";
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -40,7 +40,7 @@ export class SprintComponent implements OnInit {
   openBottomSheet(product){
 
     let ref = this.sheet.open(
-      SprintActionsComponent,
+      StoryActionsComponent,
       {data: {product}});
 
     this.router.events.pipe(
