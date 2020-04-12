@@ -1,6 +1,12 @@
 import {createAction, props, Action} from '@ngrx/store'
 import { act } from '@ngrx/effects';
 
+export const FetchProducts = createAction(
+    "Fetch Products"); 
+
+export const FetchProductsDone = createAction(
+    "Fetch Products Done"); 
+
 export const FetchProduct = createAction(
     "Fetch Product",
     props<{product:string}>()
@@ -172,7 +178,12 @@ export function sprintsReducer(state={sprint:{}}, action){
     return state;            
 }
 
-export function productReducer(state={releases:{}}, action){
+export function productReducer(state={releases:{}, products: {}}, action){
+
+    if (action.type == FetchProductsDone.type) {
+        return { 
+            ...state, 
+            products: action.payload};}
 
     if (action.type == FetchProductDone.type) {
         return { 

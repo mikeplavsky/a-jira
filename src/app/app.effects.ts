@@ -3,6 +3,8 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import {Store} from '@ngrx/store';
 
 import { 
+  FetchProducts, 
+  FetchProductsDone, 
   FetchProduct, 
   FetchProductDone, 
   ReleasesActionTypes,
@@ -148,6 +150,16 @@ export class AppEffects {
         map(v => ({
             product: product,
             type: FetchProductDone.type, 
+            payload: v
+        })))));
+
+  @Effect()
+  loadProducts$ = this.actions$.pipe( 
+    ofType(FetchProducts),
+    mergeMap(() =>
+        this.jiraSvc.getProducts().pipe(
+        map(v => ({
+            type: FetchProductsDone.type, 
             payload: v
         })))));
 
