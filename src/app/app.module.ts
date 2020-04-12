@@ -10,7 +10,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { ProductsComponent } from './products/products.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductComponent } from './product/product.component'
-import { StoreModule } from '@ngrx/store';
+
+import { StoreModule, MetaReducer } from '@ngrx/store';
+import { localStorageSync } from 'ngrx-store-localstorage';
+
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects'
 import { productReducer, releaseStatsReducer, epicsReducer, storiesReducer, sprintsReducer, queriesReducer, releaseStoriesReducer } from './product-reducer';
@@ -25,6 +28,15 @@ import { SprintComponent } from './sprint/sprint.component';
 import { SearchComponent } from './search/search.component';
 import { ReleaseStoriesComponent } from './release-stories/release-stories.component';
 import { StoryActionsComponent } from './story-actions/story-actions.component';
+
+function localStorageSyncReducer(reducer) {
+    return localStorageSync({
+      rehydrate: true,
+      keys:[
+        'products',
+        'releases',
+        'epics']})(reducer);
+};
 
 @NgModule({
   declarations: [
@@ -57,7 +69,8 @@ import { StoryActionsComponent } from './story-actions/story-actions.component';
       stories:storiesReducer,
       releaseStories:releaseStoriesReducer,
       sprints:sprintsReducer,
-      queries:queriesReducer}),
+      queries:queriesReducer},
+      {metaReducers: [localStorageSyncReducer]}),
 
     EffectsModule.forRoot([AppEffects]),
 

@@ -106,7 +106,7 @@ export class AppEffects {
         let p = epics[product];
         let res = p ? p[release]: null;
 
-        return res == null;
+        return true;//res == null;
 
     }),
     switchMap(([{product,release}, store]) =>
@@ -136,7 +136,7 @@ export class AppEffects {
         let p = releases[product];
         let res = p ? p[release] : null;
         
-        return p == null;
+        return true; //p == null;
 
     }),
     mergeMap(([{product,release},store]) =>
@@ -153,7 +153,7 @@ export class AppEffects {
     ofType(ReleasesActionTypes.Fetch),
     withLatestFrom(this.store$),
     filter(([{product},{products}]) => {
-      return products.releases[product] == null;
+      return true; //products.releases[product] == null;
     }),
     switchMap(([{product},store]) => 
       this.jiraSvc.getVersions(product).pipe(

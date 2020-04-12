@@ -1,4 +1,5 @@
 import {createAction, props, Action} from '@ngrx/store'
+import { act } from '@ngrx/effects';
 
 export const FetchProduct = createAction(
     "Fetch Product",
@@ -208,25 +209,35 @@ export function releaseStatsReducer(state={}, action){
 export function epicsReducer(state={}, action){
 
     if (action.type == EpicsActionTypes.FetchDone) {
+
+       let product = state[action.product];
+       let release = product ? product[action.release] : null; 
+
        return {
             ...state,
             [action.product]: {
                 ...state[action.product],
                 [action.release]: action.payload.reduce(
-                    (res,epic) => {res[epic]={stats:null};return res},
-                    {}
-                )
+                    (res,epic) => {
+                        res[epic]=release ? release[epic]: {};
+                        return res;
+                    },
+                    {})
             }
         };
     }
 
     if (action.type == EpicStatsActionTypes.FetchDone ) {
+        
+        let product = state[action.product];
+        let release = product[action.release]; 
+
         return {
             ...state,
             [action.product]: {
                 ...state[action.product],
                 [action.release]: {
-                    ...state[action.product][action.release],
+                    ...release,
                     [action.epic]: action.payload
                 }
             }
