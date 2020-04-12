@@ -1,4 +1,4 @@
-import {createAction, props, Action} from '@ngrx/store'
+import {createAction, props, Action, INIT} from '@ngrx/store'
 import { act } from '@ngrx/effects';
 
 export const FetchProducts = createAction(
@@ -178,7 +178,11 @@ export function sprintsReducer(state={sprint:{}}, action){
     return state;            
 }
 
-export function productReducer(state={releases:{}, products: {}}, action){
+export function productReducer(
+    state={
+        version: "0.2",
+        releases:{}, 
+        products: []}, action){
 
     if (action.type == FetchProductsDone.type) {
         return { 
