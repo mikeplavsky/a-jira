@@ -9,6 +9,7 @@ import { StoryActionsComponent } from '../story-actions/story-actions.component'
 export function sorted_impl(v){
   if (!v) return v;
   return v.sort((a,b) => {
+    if (!b.value || !a.value ) {return 0;}
     return b.value.points - a.value.points; 
   });
 }

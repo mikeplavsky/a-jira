@@ -1,4 +1,4 @@
-import {createAction, props, Action, INIT} from '@ngrx/store'
+import {createAction, props, Action} from '@ngrx/store'
 import { act } from '@ngrx/effects';
 
 export const FetchProducts = createAction(
@@ -180,7 +180,6 @@ export function sprintsReducer(state={sprint:{}}, action){
 
 export function productReducer(
     state={
-        version: "0.2",
         releases:{}, 
         products: []}, action){
 

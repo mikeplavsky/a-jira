@@ -25,3 +25,5 @@ RUN apt-get install -y \
 
 RUN gauge install html-report
 RUN gauge install screenshot
+
+RUN gauge update -a
