@@ -208,11 +208,11 @@ export function releaseStatsReducer(state={}, action){
 
 export function epicsReducer(state={}, action){
 
+    let product = state[action.product];
+
     if (action.type == EpicsActionTypes.FetchDone) {
 
-       let product = state[action.product];
        let release = product ? product[action.release] : null; 
-
        return {
             ...state,
             [action.product]: {
@@ -229,9 +229,7 @@ export function epicsReducer(state={}, action){
 
     if (action.type == EpicStatsActionTypes.FetchDone ) {
         
-        let product = state[action.product];
         let release = product[action.release]; 
-
         return {
             ...state,
             [action.product]: {

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import {Store} from '@ngrx/store';
-import {withLatestFrom, filter} from 'rxjs/operators';
 
 import { 
   FetchProduct, 
@@ -100,16 +99,7 @@ export class AppEffects {
   @Effect()
   loadEpics$ = this.actions$.pipe(
     ofType(EpicsActionTypes.Fetch),
-    withLatestFrom(this.store$),
-    filter(([{product,release}, {epics}]) => {
-
-        let p = epics[product];
-        let res = p ? p[release]: null;
-
-        return true;//res == null;
-
-    }),
-    switchMap(([{product,release}, store]) =>
+    switchMap(({product,release}) =>
       this.jiraSvc.getReleaseEpics(product,release).pipe(
         concatMap((v:[any]) => {
           
@@ -130,16 +120,7 @@ export class AppEffects {
   @Effect()
   loadReleaseStats$ = this.actions$.pipe(
     ofType(ReleaseStatsActionTypes.Fetch),
-    withLatestFrom(this.store$),
-    filter(([{product,release},{releases}]) => {
-        
-        let p = releases[product];
-        let res = p ? p[release] : null;
-        
-        return true; //p == null;
-
-    }),
-    mergeMap(([{product,release},store]) =>
+    mergeMap(({product,release}) =>
       this.jiraSvc.getReleaseStats(product,release).pipe(
         map(v => ({
             product,
@@ -151,11 +132,7 @@ export class AppEffects {
   @Effect()
   loadReleases$ = this.actions$.pipe(
     ofType(ReleasesActionTypes.Fetch),
-    withLatestFrom(this.store$),
-    filter(([{product},{products}]) => {
-      return true; //products.releases[product] == null;
-    }),
-    switchMap(([{product},store]) => 
+    switchMap(({product}) => 
       this.jiraSvc.getVersions(product).pipe(
         map(v => ({
             product: product,
