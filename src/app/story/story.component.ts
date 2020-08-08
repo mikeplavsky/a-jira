@@ -8,6 +8,10 @@ import { Component, OnInit, Input } from '@angular/core';
 
 export class StoryComponent implements OnInit {
 
+  open(e) {
+    e.stopPropagation();
+  }
+
   pointsMapping = {
     "=NaN": "? points",
     "=1" : "# point",

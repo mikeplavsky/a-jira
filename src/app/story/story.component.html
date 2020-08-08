@@ -34,7 +34,9 @@
 
   </mat-card-header>
 
-  <a mat-button color="primary" target="_blank" href="{{jira_url}}/{{story['key']}}">
+  <a (click)="open($event)" 
+     mat-button color="primary" 
+     target="_blank" href="{{jira_url}}/{{story['key']}}">
     {{story['key']}}
   </a>
 
