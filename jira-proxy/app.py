@@ -78,9 +78,7 @@ def sprint(product):
 def release_epics(product,release):
 
     epics = jira.get_epics(product, release)
-    labels = jira.get_labels(product, release)
-    
-    return response(epics + labels)
+    return response(epics)
 
 @app.route('/api/products/<product>/releases/<release>/epics/<path:epic>')
 def epic_stats(product,release,epic):
