@@ -18,7 +18,6 @@ def test_release_epics_and_labels():
         f'{url}/products/{product}/releases/{release}/epics'
         ).json()
 
-    assert "bmw" in res
     assert "Bare Metal Recovery" in res
 
 def test_epic_stats():

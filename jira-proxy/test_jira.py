@@ -126,7 +126,7 @@ def test_get_epics():
     ("10.1", "Bare Metal Recovery", 16),
     (None, "Bare Metal Recovery", 230),
     ("10.1", "Zero Touch 1", 0),
-    ("10.1", "Restore/compare improvements", 1)])
+    ("10.1", "Restore/compare improvements", 0)])
 def test_epic_issues(version, epic, num):
     res = jira.get_epic_issues("RMADFE", version, epic)
     assert len(res['issues']) >= num
@@ -141,7 +141,7 @@ def test_release_issues(version, count):
 
 def test_release_has_no_subtasks():
     res = jira.get_release_issues("RMADFE", "10.0.1 HF1")
-    assert len(res['issues']) == 26
+    assert len(res['issues']) == 25
 
 def test_done_release():
 
