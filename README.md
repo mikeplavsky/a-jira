@@ -30,6 +30,8 @@ docker exec -ti a-jira bash
 ./test.sh
 ```
 
+If it does not work, says something like `unknown command`, try to download the appropriate version for `chromdriver`: https://chromedriver.chromium.org/downloads It should match the installed desktop vertsion. 
+
 Protractor: 
 ```
 cd e2e
