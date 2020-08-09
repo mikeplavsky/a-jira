@@ -41,13 +41,15 @@ cd e2e
 ./run.sh
 ```
 
-Gauge: 
+Gauge in the container: 
 ```
 cd specs
 ./build.sh
 cd ..
 ./gauge.sh run
 ```
+Disclaimer: it is very fragile at the moment ^ 
+
 Gauge in the browser:
 ```
 ./chromium.sh
