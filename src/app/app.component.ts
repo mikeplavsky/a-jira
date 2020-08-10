@@ -6,4 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor(){
+
+    document.addEventListener('click', (event)=>{
+      if (window.getSelection().type == "Range") {
+        event.stopPropagation();
+      }
+    },
+    true);
+
+  }
 }
