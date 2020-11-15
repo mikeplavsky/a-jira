@@ -78,3 +78,18 @@ Percentage of the requests served within a certain time (ms)
   99%  13421
  100%  14901 (longest request)
 ```
+
+ab -n 1000 -c 1000 http://localhost:8080/api/products/RMADFE/features/done
+
+```
+Percentage of the requests served within a certain time (ms)
+  50%  18886
+  66%  23171
+  75%  25553
+  80%  26862
+  90%  28610
+  95%  28853
+  98%  29045
+  99%  29180
+ 100%  30086 (longest request)
+```
