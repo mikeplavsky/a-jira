@@ -31,6 +31,21 @@ Percentage of the requests served within a certain time (ms)
  100%  18983 (longest request)
 ```
 
+ab -n 1000 -c 1000 http://localhost:8080/api/products/RMADFE/features/done
+
+```
+Percentage of the requests served within a certain time (ms)
+  50%  12962
+  66%  18556
+  75%  30071
+  80%  31309
+  90%  57882
+  95%  58793
+  98%  59121
+  99%  59334
+ 100%  59643 (longest request)
+```
+
 Gevent WSGIServer
 
 ab -n 1000 -c 250 http://localhost:8080/api/products 
