@@ -1,13 +1,9 @@
-from gevent import monkey
-monkey.patch_all()
-
 from flask import Flask
 from flask import Response, request
 
 import jira
 import json
 
-from gevent.pywsgi import WSGIServer
 from gevent.pool import Pool 
 
 app = Flask(
@@ -152,10 +148,9 @@ def product(path=''):
     return app.send_static_file('index.html')
 
 if  __name__ == '__main__':
-    #app.run('localhost', 8081, debug=False, use_reloader=False, threaded=True)
-    wsgi = WSGIServer(
-        ('0.0.0.0', 8080),
-        app,
-        spawn=Pool(10_000))
-
-    wsgi.serve_forever()
+    app.run(
+        '0.0.0.0', 
+        8080, 
+        debug=False, 
+        use_reloader=False, 
+        threaded=True)
